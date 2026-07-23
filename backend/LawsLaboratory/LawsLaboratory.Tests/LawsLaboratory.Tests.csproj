@@ -20,4 +20,11 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\LawsLaboratory.Api\LawsLaboratory.Api.csproj" />
+		<ProjectReference Include="..\LawsLaboratory.Application\LawsLaboratory.Application.csproj" />
+		<ProjectReference Include="..\LawsLaboratory.Core\LawsLaboratory.Core.csproj" />
+		<ProjectReference Include="..\LawsLaboratory.Infrastructure\LawsLaboratory.Infrastructure.csproj" />
+	</ItemGroup>
+
 </Project>

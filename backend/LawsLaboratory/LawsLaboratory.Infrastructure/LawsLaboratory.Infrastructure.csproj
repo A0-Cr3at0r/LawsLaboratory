@@ -11,4 +11,9 @@
     <Folder Include="Persistence\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\LawsLaboratory.Application\LawsLaboratory.Application.csproj" />
+		<ProjectReference Include="..\LawsLaboratory.Core\LawsLaboratory.Core.csproj" />
+	</ItemGroup>
+
 </Project>

@@ -10,7 +10,13 @@
     <Folder Include="FormulaCompiler\" />
     <Folder Include="EngineGateway\" />
     <Folder Include="DefaultEngine\" />
+    <Folder Include="Identity\" />
+    <Folder Include="ProjectManagement\" />
     <Folder Include="SimulationService\" />
   </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\LawsLaboratory.Core\LawsLaboratory.Core.csproj" />
+	</ItemGroup>
 
 </Project>

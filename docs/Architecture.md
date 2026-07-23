@@ -95,7 +95,7 @@ LawsLaboratory.Infrastructure
 ```mermaid
 graph TD
 
-subgraph Lawslaboratory.Api
+subgraph LawsLaboratory.Api
     Controllers
     HttpRoutes
     Middleware
@@ -118,13 +118,13 @@ subgraph LawsLaboratory.Core
 end
 
 subgraph Infrastructure
-    DataBase
+    Database
     Persistence
 end
 
-Frontend[FrontReact] 
+Frontend[React Frontend] 
 
-Frontend -->|Https / JSON| Lawslaboratory.Api
+Frontend -->|HTTP / JSON| LawsLaboratory.Api
 
 Middleware --> HttpRoutes
 Middleware --> Controllers
@@ -146,7 +146,7 @@ Simulation -->FormulaCompiler
 Simulation --> EngineGateway
 FormulaCompiler --> Formula
 
-Persistence --> DataBase
+Persistence --> Database
 SimulationService --> Persistence
 Identity --> Persistence
 ProjectManagement --> Persistence
