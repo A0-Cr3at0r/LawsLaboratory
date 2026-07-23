@@ -93,49 +93,66 @@ LawsLaboratory.Infrastructure
 # 4. Backend Package Dependencies
 
 ```mermaid
-flowchart TD
+graph TD
 
-    Frontend[Frontend React]
+subgraph Lawslaboratory.Api
+    Controllers
+    HttpRoutes
+    Middleware
+end
 
-    API[LawsLaboratory.Api]
+subgraph LawsLaboratory.Application
+    DefaultEngine
+    EngineGateway
+    FormulaCompiler
+    Identity
+    ProjectManagement
+    SimulationService
+end
 
-    Frontend -->|HTTP / JSON| API
+subgraph LawsLaboratory.Core
+    Formula
+    Laws
+    Simulation
+    SpatialModel
+end
+
+subgraph Infrastructure
+    DataBase
+    Persistence
+end
+
+Frontend[FrontReact] 
+
+Frontend -->|Https / JSON| Lawslaboratory.Api
+
+Middleware --> HttpRoutes
+Middleware --> Controllers
+
+Controllers --> SimulationService
+Controllers --> Identity
+
+DefaultEngine --> EngineGateway
+EngineGateway --> FormulaCompiler
+ProjectManagement --> SimulationService
+
+SimulationService --> Simulation
+Laws --> Formula
+SpatialModel --> Laws
+Simulation --> SpatialModel
+Simulation --> Laws
+
+Simulation -->FormulaCompiler
+Simulation --> EngineGateway
+FormulaCompiler --> Formula
+
+Persistence --> DataBase
+SimulationService --> Persistence
+Identity --> Persistence
+ProjectManagement --> Persistence
 
 
-    API --> Application[LawsLaboratory.Application]
 
-
-    Application --> SimulationService[Simulation Service]
-
-    Application --> FormulaCompiler[Formula Compiler]
-
-    Application --> EngineGateway[Engine Gateway]
-
-
-    SimulationService --> Core[LawsLaboratory.Core]
-
-
-    Core --> Simulation[Simulation]
-
-    Simulation --> SpatialModel[Spatial Model]
-
-    Simulation --> Laws[Laws]
-
-    Simulation --> Formula[Formula]
-
-
-    FormulaCompiler --> Formula
-
-
-    EngineGateway --> EngineProtocol[Engine Communication Protocol]
-
-
-    Application --> Infrastructure[LawsLaboratory.Infrastructure]
-
-
-    Infrastructure --> Persistence[Persistence]
-
-    Persistence --> Database[(Database)]
 ```
 
 ---
@@ -202,6 +219,20 @@ Responsible for:
 External engines are not part of the project.
 
 They only need to comply with the defined communication protocol.
+
+---
+
+### Identity
+Responsible for:
+- managing user accounts;
+- managing and administering user session;
+- defining roles and permissions;
+
+
+### ProjectManagement
+Responsible for:
+- administering workspace;
+- managing simulation references.
 
 ---
 
