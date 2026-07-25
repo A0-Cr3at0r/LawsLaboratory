@@ -1,8 +1,7 @@
-﻿using LawsLaboratory.Core.Formula.Element;
-using LawsLaboratory.Core.SpatialModel;
+﻿using LawsLaboratory.Core.SpatialModel;
 using LawsLaboratory.Core.Value;
 
-namespace LawsLaboratory.Core.Formula;
+namespace LawsLaboratory.Core.Formula.Element;
 
 public sealed class CompiledExpression
 {
