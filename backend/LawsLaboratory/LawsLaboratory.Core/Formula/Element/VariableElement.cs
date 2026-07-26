@@ -7,14 +7,14 @@ public sealed class VariableElement : ExpressionElement
 {
     public int ParameterId { get; }
 
-    public RelativePosition Position { get; }
+    public  Position RelativePosition { get; }
 
     public IValue Value { get; private set; }
 
-    public VariableElement( int parameterId, RelativePosition position)
+    public VariableElement( int parameterId, Position relativePosition)
     {
         ParameterId = parameterId;
-        Position = position;
+        RelativePosition = relativePosition;
         Value = Dead.Instance;
     }
 

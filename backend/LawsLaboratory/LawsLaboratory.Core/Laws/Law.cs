@@ -60,4 +60,8 @@ public sealed class Law
     {
         return _transmissionRule.CompiledExpression;
     }
+
+    public IReadOnlyList<Position> GetTransmissionDestinations() {
+        return _transmissionRule.RelativeDestinations;
+    }
 }

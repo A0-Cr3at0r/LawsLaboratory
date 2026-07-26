@@ -2,5 +2,5 @@
 
 public readonly record struct VariableReference(
     int ParameterId,
-    RelativePosition Position
+    Position RelativePosition
     );

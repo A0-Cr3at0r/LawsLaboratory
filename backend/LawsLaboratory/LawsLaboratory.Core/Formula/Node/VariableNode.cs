@@ -6,12 +6,12 @@ public sealed class VariableNode : ExpressionNode
 {
     public int ParameterId { get; }
 
-    public RelativePosition Position { get; }
+    public Position RelativePosition { get; }
 
 
-    public VariableNode( int parameterId, RelativePosition position)
+    public VariableNode( int parameterId, Position relativePosition)
     {
         ParameterId = parameterId;
-        Position = position;
+        RelativePosition = relativePosition;
     }
 }
