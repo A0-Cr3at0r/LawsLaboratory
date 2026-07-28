@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Laws\" />
     <Folder Include="Formula\" />
     <Folder Include="SpatialModel\" />
     <Folder Include="Simulation\" />

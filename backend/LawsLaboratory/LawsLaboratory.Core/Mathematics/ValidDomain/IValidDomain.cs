@@ -3,4 +3,5 @@
 public interface IValidDomain<T>
 {
     bool IsMine(T value);
+    T Discretize(T value);
 }

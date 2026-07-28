@@ -1,33 +1,29 @@
-﻿namespace LawsLaboratory.Core.SpatialModel;
+﻿namespace LawsLaboratory.Core.Parameters;
 
 using LawsLaboratory.Core.Value;
 
-internal sealed class Parameter
+public sealed class Parameter
 {
-    private IValue _value;
+    private readonly Func<double, IValue> _factory;
 
     public int Id { get; }
 
-    public IValue Value => _value;
+    public string Name { get; }
 
-    public Parameter(int id)
+
+    public Parameter(
+        int id,
+        string name,
+        Func<double, IValue> factory)
     {
         Id = id;
-        _value = Dead.Instance;
+        Name = name;
+        _factory = factory;
     }
 
-    public void Set(double value)
-    {
-        _value = _value.Set(value);
-    }
 
-    public void Set(IValue value)
+    public IValue CreateValue(double value)
     {
-        _value = value;
-    }
-
-    public void Kill()
-    {
-        _value = Dead.Instance;
+        return _factory(value);
     }
 }
