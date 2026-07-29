@@ -1,14 +1,14 @@
-﻿using LawsLaboratory.Core.SpatialModel;
+﻿using LawsLaboratory.Core.SpatialModel.Position;
 using System.Numerics;
 
 namespace LawsLaboratory.Core.Mathematics.Discretizer;
 
 public sealed class Vector2RoundDiscretizer
-    : IDiscretizer<Vector2, Position>
+    : IDiscretizer<Vector2, PlanePosition>
 {
-    public Position Discretize(Vector2 value)
+    public PlanePosition Discretize(Vector2 value)
     {
-        return new Position(
+        return new PlanePosition(
             (int)Math.Round(value.X),
             (int)Math.Round(value.Y));
     }

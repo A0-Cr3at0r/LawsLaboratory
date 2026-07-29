@@ -1,4 +1,4 @@
-﻿namespace LawsLaboratory.Core.Parameters;
+﻿namespace LawsLaboratory.Core.Laws;
 
 using LawsLaboratory.Core.Value;
 

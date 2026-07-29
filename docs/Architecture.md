@@ -523,3 +523,45 @@ The architecture allows future additions:
 - advanced visualization tools.
 
 These extensions should not require modifications to the scientific domain model.
+
+
+
+
+
+```mermaid
+
+flowchart LR
+
+    subgraph Spatial["Spatial"]
+        G[PlaneGrid]
+        AP[SpatialAccessPlan]
+        SB[SpatialBufferBuilder]
+        G --> SB
+        AP --> SB
+    end
+
+    subgraph Pipeline["Execution Pipeline"]
+        EB[ExecutionBatch]
+        OP[Optimizer]
+        TR[Translator]
+        GW[Gateway]
+        EN[Engine]
+        DC[Decoder]
+    end
+
+    subgraph Simulation["Simulation"]
+        SM[StateManager]
+        AM[ApplyResults]
+    end
+
+    SB --> EB
+    EB --> OP
+    OP --> TR
+    TR --> GW
+    GW --> EN
+    EN --> GW
+    GW --> DC
+    DC --> AM
+    AM --> SM
+    SM --> G
+```

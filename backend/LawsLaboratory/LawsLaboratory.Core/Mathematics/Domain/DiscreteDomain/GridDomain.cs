@@ -1,8 +1,8 @@
-﻿using LawsLaboratory.Core.SpatialModel;
+﻿using LawsLaboratory.Core.SpatialModel.Position;
 
 namespace LawsLaboratory.Core.Mathematics.Domain.DiscreteDomain;
 
-public sealed class GridDomain : IDomain<Position>
+public sealed class GridDomain : IDomain<PlanePosition>
 {
     private readonly int _width;
     private readonly int _height;
@@ -19,7 +19,7 @@ public sealed class GridDomain : IDomain<Position>
         _height = height;
     }
 
-    public bool Contains(Position position)
+    public bool Contains(PlanePosition position)
     {
         return position.X >= 0 &&
                position.X < _width &&

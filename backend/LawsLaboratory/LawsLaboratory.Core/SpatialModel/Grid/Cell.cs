@@ -1,4 +1,4 @@
-﻿namespace LawsLaboratory.Core.SpatialModel;
+﻿namespace LawsLaboratory.Core.SpatialModel.Grid;
 
 using LawsLaboratory.Core.Value;
 
