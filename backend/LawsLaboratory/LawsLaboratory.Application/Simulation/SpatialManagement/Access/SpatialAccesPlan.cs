@@ -1,4 +1,4 @@
-﻿namespace LawsLaboratory.Application.SpatialManagement.Access;
+﻿namespace LawsLaboratory.Application.Simulation.SpatialManagement.Access;
 
 internal sealed class SpatialAccessPlan
 {

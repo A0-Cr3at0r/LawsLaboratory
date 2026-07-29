@@ -1,6 +1,6 @@
-﻿using LawsLaboratory.Application.SpatialManagement.Access;
+﻿using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
 
-namespace LawsLaboratory.Application.SpatialManagement;
+namespace LawsLaboratory.Application.Simulation.SpatialManagement;
 
 internal readonly struct SpatialAccessBundle
 {

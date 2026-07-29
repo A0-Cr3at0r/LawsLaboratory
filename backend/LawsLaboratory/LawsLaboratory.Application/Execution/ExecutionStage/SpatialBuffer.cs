@@ -14,7 +14,7 @@
  * same packet simultaneously, allowing future execution on separate threads.
  */
 
-namespace LawsLaboratory.Application.ExecutionStage;
+namespace LawsLaboratory.Application.Execution.ExecutionStage;
 public sealed class ExecutionBuffer
 {
     private readonly SpatialPacket[] _packets;

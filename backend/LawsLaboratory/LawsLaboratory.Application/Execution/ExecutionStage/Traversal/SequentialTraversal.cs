@@ -1,4 +1,4 @@
-﻿namespace LawsLaboratory.Application.ExecutionStage.Traversal;
+﻿namespace LawsLaboratory.Application.Execution.ExecutionStage.Traversal;
 
 internal sealed class SequentialTraversal : ITraversalStrategy<int>
 {

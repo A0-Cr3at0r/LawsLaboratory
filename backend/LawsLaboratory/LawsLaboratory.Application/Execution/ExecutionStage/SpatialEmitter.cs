@@ -1,5 +1,4 @@
-﻿namespace  LawsLaboratory.Application.ExecutionStage;
-
+﻿namespace  LawsLaboratory.Application.Execution.ExecutionStage;
 
 using LawsLaboratory.Core.Value;
 

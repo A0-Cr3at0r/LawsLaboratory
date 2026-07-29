@@ -1,6 +1,6 @@
 ﻿using LawsLaboratory.Core.Value;
 
-namespace LawsLaboratory.Application.ExecutionStage;
+namespace LawsLaboratory.Application.Execution.ExecutionStage;
 
 public sealed class SpatialPacket
 {
