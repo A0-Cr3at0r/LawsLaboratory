@@ -1,6 +1,6 @@
-﻿namespace LawsLaboratory.Core.SpatialModel;
+﻿namespace LawsLaboratory.Core.SpatialModel.Position;
 
 public readonly record struct VariableReference(
     int ParameterId,
-    Position RelativePosition
+    PlanePosition RelativePosition
     );

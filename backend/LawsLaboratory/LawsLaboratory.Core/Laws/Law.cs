@@ -2,6 +2,8 @@
 using LawsLaboratory.Core.Mathematics.Distributions;
 using LawsLaboratory.Core.Mathematics.Domain;
 using LawsLaboratory.Core.SpatialModel;
+using LawsLaboratory.Core.SpatialModel.Position;
+using System.Numerics;
 
 namespace LawsLaboratory.Core.Laws;
 
@@ -31,14 +33,18 @@ public sealed class Law
         return _initializationRule.TargetCellCount;
     }
 
-    public IDistribution<double> GetInitializationDistribution()
+    public IDistribution<double> GetInitializationValueDistribution()
     {
-        return _initializationRule.Distribution;
+        return _initializationRule.ValueDistribution;
+    }
+    public IDistribution<Vector2> GetInitializationSpaceDistribution()
+    {
+        return _initializationRule.SpaceDistribution;
     }
 
-    public IValidDomain<double>? GetInitializationValidDomain()
+    public IDomain<Vector2>? GetInitializationSpaceDomain()
     {
-        return _initializationRule.ValidDomain;
+        return _initializationRule.SpaceDomain;
     }
 
     public IReadOnlyList<VariableReference> GetVariationVariables()
@@ -61,7 +67,7 @@ public sealed class Law
         return _transmissionRule.CompiledExpression;
     }
 
-    public IReadOnlyList<Position> GetTransmissionDestinations() {
+    public IReadOnlyList<PlanePosition> GetTransmissionDestinations() {
         return _transmissionRule.RelativeDestinations;
     }
 }

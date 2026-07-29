@@ -1,7 +1,7 @@
 ﻿namespace LawsLaboratory.Core.Laws;
 
 using LawsLaboratory.Core.Formula.Element;
-using LawsLaboratory.Core.SpatialModel;
+using LawsLaboratory.Core.SpatialModel.Position;
 
 public sealed class TransmissionRule
 {
@@ -9,11 +9,11 @@ public sealed class TransmissionRule
 
     internal CompiledExpression CompiledExpression { get; }
 
-    internal IReadOnlyList<Position> RelativeDestinations { get; }
+    internal IReadOnlyList<PlanePosition> RelativeDestinations { get; }
 
     public TransmissionRule(string formula, 
                             CompiledExpression compiledExpression,
-                            IReadOnlyList<Position> relativeDestinations)
+                            IReadOnlyList<PlanePosition> relativeDestinations)
     {
         Formula = formula;
         CompiledExpression = compiledExpression;

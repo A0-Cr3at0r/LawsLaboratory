@@ -1,4 +1,4 @@
-﻿using LawsLaboratory.Core.SpatialModel;
+﻿using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;
 
 namespace LawsLaboratory.Core.Formula.Element;
@@ -46,7 +46,7 @@ public sealed class CompiledExpression
             references.Add(
                 new VariableReference(
                 variable.ParameterId,
-                variable.Position));
+                variable.RelativePosition));
         }
 
         return references;
@@ -70,7 +70,7 @@ public sealed class CompiledExpression
 
             VariableElement assigned = new(
                 original.ParameterId,
-                original.Position);
+                original.RelativePosition);
 
             assigned.Assign(values[valueIndex++]);
 

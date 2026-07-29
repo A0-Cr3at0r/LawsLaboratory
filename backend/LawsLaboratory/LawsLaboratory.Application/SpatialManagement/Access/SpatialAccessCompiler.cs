@@ -1,4 +1,4 @@
-﻿namespace LawsLaboratory.Core.Simulation.SpatialManagement.Access;
+﻿namespace LawsLaboratory.Application.SpatialManagement.Access;
 
 using LawsLaboratory.Core.Formula.Element;
 
