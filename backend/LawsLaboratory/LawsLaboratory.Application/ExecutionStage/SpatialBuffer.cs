@@ -1,7 +1,4 @@
-﻿using LawsLaboratory.Core.Simulation.SpatialManagement.Execution;
-
-
-/*
+﻿/*
  * ExecutionBuffer is a preallocated circular buffer designed for a
  * single-producer / single-consumer execution pipeline.
  *
@@ -16,6 +13,8 @@
  * This design guarantees that the writer and reader never access the
  * same packet simultaneously, allowing future execution on separate threads.
  */
+
+namespace LawsLaboratory.Application.ExecutionStage;
 public sealed class ExecutionBuffer
 {
     private readonly SpatialPacket[] _packets;
@@ -98,7 +97,6 @@ public sealed class ExecutionBuffer
 
     public void ReleaseRead()
     {
-        _packets[_readIndex].Clear();
 
         _readIndex++;
 

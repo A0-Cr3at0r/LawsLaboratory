@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Formula\" />
-    <Folder Include="SpatialModel\" />
-    <Folder Include="Simulation\" />
   </ItemGroup>
 
 </Project>

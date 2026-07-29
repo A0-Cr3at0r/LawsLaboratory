@@ -1,6 +1,6 @@
 ﻿using LawsLaboratory.Core.Value;
 
-namespace LawsLaboratory.Core.Simulation.SpatialManagement.Execution;
+namespace LawsLaboratory.Application.ExecutionStage;
 
 public sealed class SpatialPacket
 {
@@ -15,7 +15,13 @@ public sealed class SpatialPacket
     {
         Values = new IValue[valueCount];
 
-        Clear();
+        CellId = -1;
+        ParamId = 0;
+
+        for (int i = 0; i < Values.Length; i++)
+        {
+            Values[i] = Dead.Instance;
+        }
     }
 
 
@@ -28,22 +34,16 @@ public sealed class SpatialPacket
     }
 
 
-    public void Clear()
+    public void Write(
+    int index,
+    double value)
     {
-        CellId = -1;
-        ParamId = 0;
-
-        for (int i = 0; i < Values.Length; i++)
-        {
-            Values[i] = Dead.Instance;
-        }
+        Values[index] =
+            Values[index].Set(value);
     }
 
-
-    public void Write(
-        int index,
-        IValue value)
+    public void WriteDead(int index)
     {
-        Values[index] = value;
+        Values[index] = Dead.Instance;
     }
 }

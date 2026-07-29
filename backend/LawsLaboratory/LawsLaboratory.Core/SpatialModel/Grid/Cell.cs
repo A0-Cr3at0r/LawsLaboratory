@@ -22,7 +22,7 @@ internal sealed class Cell
     }
 
 
-    public IValue GetValue(int parameterId)
+    public IValue GetParameterValue(int parameterId)
     {
         return _values[parameterId];
     }

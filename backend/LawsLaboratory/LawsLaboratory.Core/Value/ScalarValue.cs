@@ -11,7 +11,7 @@
             return this;
         }
 
-        internal double get()
+        internal double Get()
         {
             return Value;
         }

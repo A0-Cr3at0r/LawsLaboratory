@@ -13,13 +13,4 @@ public readonly struct PlanePosition
         Y = y;
     }
 
-
-    public static PlanePosition operator +
-        (PlanePosition left, PlanePosition right)
-    {
-        return new PlanePosition(
-            left.X + right.X,
-            left.Y + right.Y
-        );
-    }
 }
