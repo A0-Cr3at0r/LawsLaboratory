@@ -2,11 +2,13 @@
 {
     public sealed class ScalarValue : IValue
     {
-        private double Value { get; set;  }
-        internal ScalarValue(double value) { 
+        private double Value { get; set; }
+        public ScalarValue(double value)
+        {
             Value = value;
         }
-        public IValue Set(double value) {
+        public IValue Set(double value)
+        {
             Value = value;
             return this;
         }
@@ -16,5 +18,5 @@
             return Value;
         }
 
-     }
+    }
 }

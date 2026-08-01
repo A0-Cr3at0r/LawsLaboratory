@@ -1,8 +1,8 @@
 ﻿using LawsLaboratory.Core.Value;
 
-namespace LawsLaboratory.Application.Execution.ExecutionStage;
+namespace LawsLaboratory.Application.Execution.ExecutionRequestStage;
 
-public sealed class SpatialPacket
+public sealed class RequestPacket
 {
     public int CellId { get; private set; }
 
@@ -11,7 +11,7 @@ public sealed class SpatialPacket
     public IValue[] Values { get; }
 
 
-    public SpatialPacket(int valueCount)
+    public RequestPacket(int valueCount)
     {
         Values = new IValue[valueCount];
 

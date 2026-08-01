@@ -1,8 +1,6 @@
-﻿using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
+﻿namespace LawsLaboratory.Application.Simulation.SpatialManagement.Access;
 
-namespace LawsLaboratory.Application.Simulation.SpatialManagement;
-
-internal readonly struct SpatialAccessBundle
+internal readonly struct LawSpatialExecutionPlan
 {
     internal SpatialAccessPlan VariationAccessPlan { get; }
 
@@ -11,7 +9,7 @@ internal readonly struct SpatialAccessBundle
     internal SpatialAccessPlan TransmissionDestinationAccessPlan { get; }
 
 
-    internal SpatialAccessBundle(
+    internal LawSpatialExecutionPlan(
         SpatialAccessPlan variationAccessPlan,
         SpatialAccessPlan transmissionSourceAccessPlan,
         SpatialAccessPlan transmissionDestinationAccessPlan)

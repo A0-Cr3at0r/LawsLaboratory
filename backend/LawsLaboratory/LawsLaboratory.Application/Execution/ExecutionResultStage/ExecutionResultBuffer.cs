@@ -1,23 +1,8 @@
-﻿/*
- * ExecutionBuffer is a preallocated circular buffer designed for a
- * single-producer / single-consumer execution pipeline.
- *
- * The writer and reader operate independently using their own indices.
- * Availability flags remove the ambiguity of equal read/write indices:
- * - availableToRead indicates that committed packets are waiting.
- * - availableToWrite indicates that free packet slots are available.
- *
- * A packet becomes visible to the reader only after CommitWrite().
- * A packet becomes reusable only after ReleaseRead().
- *
- * This design guarantees that the writer and reader never access the
- * same packet simultaneously, allowing future execution on separate threads.
- */
+﻿namespace LawsLaboratory.Application.Execution.ExecutionResultStage;
 
-namespace LawsLaboratory.Application.Execution.ExecutionStage;
-public sealed class ExecutionBuffer
+internal sealed class ExecutionResultBuffer<T>
 {
-    private readonly SpatialPacket[] _packets;
+    private readonly ResultPacket<T>[] _packets;
 
     private int _writeIndex;
     private int _readIndex;
@@ -25,29 +10,22 @@ public sealed class ExecutionBuffer
     private bool _availableToRead;
     private bool _availableToWrite;
 
-
     public int Capacity => _packets.Length;
 
-
-    public ExecutionBuffer(
-        int packetCount,
-        int maxVariableCount)
+    public ExecutionResultBuffer(int packetCount)
     {
-        _packets = new SpatialPacket[packetCount];
+        _packets = new ResultPacket<T>[packetCount];
 
         for (int i = 0; i < packetCount; i++)
         {
-            _packets[i] =
-                new SpatialPacket(maxVariableCount);
+            _packets[i] = new ResultPacket<T>();
         }
 
         _availableToWrite = true;
         _availableToRead = false;
     }
 
-
-    public bool TryAcquireWrite(
-        out SpatialPacket packet)
+    public bool TryAcquireWrite(out ResultPacket<T> packet)
     {
         if (!_availableToWrite)
         {
@@ -56,10 +34,8 @@ public sealed class ExecutionBuffer
         }
 
         packet = _packets[_writeIndex];
-
         return true;
     }
-
 
     public void CommitWrite()
     {
@@ -72,16 +48,13 @@ public sealed class ExecutionBuffer
 
         _availableToRead = true;
 
-
         if (_writeIndex == _readIndex)
         {
             _availableToWrite = false;
         }
     }
 
-
-    public bool TryAcquireRead(
-        out SpatialPacket packet)
+    public bool TryAcquireRead(out ResultPacket<T> packet)
     {
         if (!_availableToRead)
         {
@@ -90,14 +63,11 @@ public sealed class ExecutionBuffer
         }
 
         packet = _packets[_readIndex];
-
         return true;
     }
 
-
     public void ReleaseRead()
     {
-
         _readIndex++;
 
         if (_readIndex == Capacity)
@@ -106,7 +76,6 @@ public sealed class ExecutionBuffer
         }
 
         _availableToWrite = true;
-
 
         if (_readIndex == _writeIndex)
         {

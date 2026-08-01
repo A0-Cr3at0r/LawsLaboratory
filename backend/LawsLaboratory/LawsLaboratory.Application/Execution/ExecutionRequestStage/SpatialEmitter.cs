@@ -1,14 +1,14 @@
-﻿namespace  LawsLaboratory.Application.Execution.ExecutionStage;
+﻿namespace  LawsLaboratory.Application.Execution.ExecutionRequestStage;
 
 using LawsLaboratory.Core.Value;
 
 internal sealed class SpatialEmitter
 {
-    private readonly ExecutionBuffer _buffer;
+    private readonly ExecutionRequestBuffer _buffer;
 
 
     public SpatialEmitter(
-        ExecutionBuffer buffer)
+        ExecutionRequestBuffer buffer)
     {
         _buffer = buffer;
     }
@@ -20,7 +20,7 @@ internal sealed class SpatialEmitter
         IValue[] values,
         int valueCount)
     {
-        if (!_buffer.TryAcquireWrite(out SpatialPacket packet))
+        if (!_buffer.TryAcquireWrite(out RequestPacket packet))
         {
             return false;
         }

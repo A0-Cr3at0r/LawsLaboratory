@@ -6,13 +6,13 @@ namespace LawsLaboratory.Core.Formula.Element;
 
 public sealed class VariableElement : ExpressionElement
 {
-    public int ParameterId { get; }
+    public ushort ParameterId { get; }
 
     public PlanePosition RelativePosition { get; }
 
     public IValue Value { get; private set; }
 
-    public VariableElement( int parameterId, PlanePosition relativePosition)
+    public VariableElement(ushort parameterId, PlanePosition relativePosition)
     {
         ParameterId = parameterId;
         RelativePosition = relativePosition;

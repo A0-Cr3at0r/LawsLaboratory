@@ -2,7 +2,7 @@
 
 using LawsLaboratory.Core.Value;
 
-internal sealed class Cell
+public sealed class Cell
 {
     public int Id { get; }
 
@@ -22,19 +22,27 @@ internal sealed class Cell
     }
 
 
-    public IValue GetParameterValue(int parameterId)
+    internal IValue GetParameterValue(ushort parameterId)
     {
         return _values[parameterId];
     }
 
 
-    internal void SetValue(int parameterId, IValue value)
+    internal void SetParameterValue(
+        int parameterId,
+        IValue value)
     {
         _values[parameterId] = value;
     }
 
+    internal void SetParameterValue(
+        int parameterId,
+        double value)
+    {
+        _values[parameterId].Set(value);
+    }
 
-    internal void KillParameter(int parameterId)
+    internal void KillParameter(ushort parameterId)
     {
         _values[parameterId] = Dead.Instance;
     }

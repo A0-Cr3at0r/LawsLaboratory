@@ -1,7 +1,6 @@
 ﻿using LawsLaboratory.Core.Formula.Element;
 using LawsLaboratory.Core.Mathematics.Distributions;
 using LawsLaboratory.Core.Mathematics.Domain;
-using LawsLaboratory.Core.SpatialModel;
 using LawsLaboratory.Core.SpatialModel.Position;
 using System.Numerics;
 
@@ -9,14 +8,14 @@ namespace LawsLaboratory.Core.Laws;
 
 public sealed class Law
 {
-    public int TargetParameterId { get; }
+    public ushort TargetParameterId { get; }
 
     private readonly InitializationRule _initializationRule;
     private readonly VariationRule _variationRule;
     private readonly TransmissionRule _transmissionRule;
 
     public Law(
-        int targetParameterId,
+        ushort targetParameterId,
         VariationRule variationRule,
         TransmissionRule transmissionRule,
         InitializationRule initializationRule)

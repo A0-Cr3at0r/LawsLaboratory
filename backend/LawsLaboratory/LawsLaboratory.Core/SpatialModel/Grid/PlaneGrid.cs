@@ -1,11 +1,10 @@
-﻿namespace LawsLaboratory.Core.SpatialModel;
+﻿namespace LawsLaboratory.Core.SpatialModel.Grid;
 
 using LawsLaboratory.Core.SpatialModel.Boundary;
-using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
+using LawsLaboratory.Core.Value;
 
-
-internal sealed class PlaneGrid : IGrid<PlanePosition>
+public sealed class PlaneGrid : IGrid<PlanePosition>
 {
     private readonly Cell[] _cells;
 
@@ -40,10 +39,19 @@ internal sealed class PlaneGrid : IGrid<PlanePosition>
         }
     }
 
-
-    public Cell GetCell(int id)
+    public IValue GetParameterValue(int cellId,  ushort parameterId)
     {
-        return _cells[id];
+        return _cells[cellId].GetParameterValue(parameterId);
+    }
+
+    public void SetCellParameterValue(int cellId, ushort parameterId, IValue value)
+    {
+        _cells[cellId].SetParameterValue(parameterId, value);
+    }
+
+    public void SetCellParameterValue(int cellId, ushort parameterId, double value)
+    {
+        _cells[cellId].SetParameterValue(parameterId, value);
     }
 
 
@@ -66,13 +74,13 @@ internal sealed class PlaneGrid : IGrid<PlanePosition>
     }
 
 
-    public Cell GetCell(PlanePosition position)
+    public IValue GetParameterValue(PlanePosition position, ushort parameterId)
     {
         PlanePosition resolved = _boundary.Resolve(position);
 
-        int id = ToId(resolved);
+        int cellId = ToId(resolved);
 
-        return _cells[id];
+        return GetParameterValue(cellId, parameterId);
     }
 
 

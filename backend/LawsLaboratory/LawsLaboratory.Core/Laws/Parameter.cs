@@ -6,13 +6,13 @@ public sealed class Parameter
 {
     private readonly Func<double, IValue> _factory;
 
-    public int Id { get; }
+    public ushort Id { get; }
 
     public string Name { get; }
 
 
     public Parameter(
-        int id,
+        ushort id,
         string name,
         Func<double, IValue> factory)
     {

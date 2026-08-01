@@ -1,19 +1,18 @@
-﻿namespace LawsLaboratory.Core.Simulation.SpatialManagement;
-
-using LawsLaboratory.Core.Simulation.SpatialManagement.Access;
-using LawsLaboratory.Core.SpatialModel;
+﻿namespace LawsLaboratory.Application.Simulation.SpatialManagement.ReaderWriter;
+using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
 using LawsLaboratory.Core.SpatialModel.Grid;
+using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;
 
 internal sealed class SpatialReader
 {
-    private readonly PlaneGrid _grid;
+    private readonly IGrid<PlanePosition> _grid;
 
     private readonly IValue[] _values;
 
 
     public SpatialReader(
-        PlaneGrid grid,
+        IGrid<PlanePosition> grid,
         int maxVariableCount)
     {
         _grid = grid;
@@ -36,11 +35,11 @@ internal sealed class SpatialReader
             SpatialAccess access =
                 accessPlan.GetAccess(i);
 
-            Cell cell =
-                _grid.GetCell(cellId + access.CellOffset);
+            _values[i] = 
+                _grid.GetParameterValue(
+                    cellId + access.CellOffset, 
+                    access.ParameterId);
 
-            _values[i] =
-                cell.GetParameterValue(access.ParameterId);
         }
 
         return _values;

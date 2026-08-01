@@ -5,12 +5,12 @@ namespace LawsLaboratory.Core.Formula.Node;
 
 public sealed class VariableNode : ExpressionNode
 {
-    public int ParameterId { get; }
+    public ushort ParameterId { get; }
 
     public PlanePosition RelativePosition { get; }
 
 
-    public VariableNode( int parameterId, PlanePosition relativePosition)
+    public VariableNode(ushort parameterId, PlanePosition relativePosition)
     {
         ParameterId = parameterId;
         RelativePosition = relativePosition;

@@ -2,13 +2,13 @@
 
 internal readonly struct SpatialAccess
 {
-    public int ParameterId { get; }
+    public ushort ParameterId { get; }
 
     public int CellOffset { get; }
 
 
     public SpatialAccess(
-        int parameterId,
+        ushort parameterId,
         int cellOffset)
     {
         ParameterId = parameterId;
