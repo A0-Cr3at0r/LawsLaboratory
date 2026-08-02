@@ -1,7 +1,4 @@
-﻿using LawsLaboratory.Core.Mathematics.Distributions;
-
-
-namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
+﻿namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
     public sealed class ConstantDistribution  : IDistribution<double>
     {   
         private readonly double _constant;
