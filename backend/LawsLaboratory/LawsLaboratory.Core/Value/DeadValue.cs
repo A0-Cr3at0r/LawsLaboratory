@@ -9,6 +9,5 @@
             return new ScalarValue(value);
         }
 
-        private Dead() { }
     }
 }

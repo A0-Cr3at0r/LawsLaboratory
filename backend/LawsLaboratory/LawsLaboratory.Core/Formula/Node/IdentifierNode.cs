@@ -2,16 +2,18 @@
 
 namespace LawsLaboratory.Core.Formula.Node;
 
-public sealed class VariableNode : ExpressionNode
+public sealed class IdentifierNode : ExpressionNode
 {
-    public ushort ParameterId { get; }
+    public string Name { get; }
 
     public PlanePosition RelativePosition { get; }
 
 
-    public VariableNode(ushort parameterId, PlanePosition relativePosition)
+    public IdentifierNode(
+        string name,
+        PlanePosition relativePosition)
     {
-        ParameterId = parameterId;
+        Name = name;
         RelativePosition = relativePosition;
     }
 }

@@ -1,5 +1,4 @@
-﻿using LawsLaboratory.Core.SpatialModel;
-using LawsLaboratory.Core.SpatialModel.Position;
+﻿using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;
 
 namespace LawsLaboratory.Core.Formula.Element;
