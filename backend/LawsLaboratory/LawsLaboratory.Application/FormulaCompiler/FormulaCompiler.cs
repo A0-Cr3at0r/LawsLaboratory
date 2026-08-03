@@ -2,13 +2,13 @@
 using LawsLaboratory.Application.FormulaCompiler.Optimization;
 using LawsLaboratory.Application.FormulaCompiler.Parser;
 using LawsLaboratory.Application.FormulaCompiler.Semantic;
-using LawsLaboratory.Application.FormulaCompiler.CompiledGenerator;
+using LawsLaboratory.Application.FormulaCompiler.COmpiledGenerator;
 using LawsLaboratory.Core.Formula.Element;
 using LawsLaboratory.Core.Formula.Node;
 using LawsLaboratory.Application.Simulation.Registry;
 
 
-namespace LawsLaboratory.Core.Formula;
+namespace LawsLaboratory.Application.FormulaCompiler;
 
 public sealed class FormulaCompiler
 {

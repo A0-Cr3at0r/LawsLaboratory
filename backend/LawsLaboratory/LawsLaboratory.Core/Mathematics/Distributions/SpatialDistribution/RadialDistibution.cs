@@ -1,5 +1,4 @@
-﻿using LawsLaboratory.Core.Mathematics.Distributions;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.SpatialDistribution;
 

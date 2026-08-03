@@ -1,6 +1,4 @@
-﻿using LawsLaboratory.Core.SpatialModel;
-using System.Drawing;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace LawsLaboratory.Core.Mathematics.Domain.GeometricDomain;
 

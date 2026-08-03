@@ -25,7 +25,7 @@
     {
         public double Weight { get; init; }
 
-        public RealDistributionConfiguration Distribution { get; init; }
+        public SpatialDistributionConfiguration Distribution { get; init; }
     }
 
     public sealed class MixtureDistributionConfiguration

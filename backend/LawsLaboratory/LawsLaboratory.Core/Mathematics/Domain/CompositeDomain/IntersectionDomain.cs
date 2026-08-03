@@ -1,6 +1,4 @@
-﻿using LawsLaboratory.Core.Mathematics.Domain;
-
-namespace LawsLaboratory.Core.Mathematics.Domain.CompositeDomain;
+﻿namespace LawsLaboratory.Core.Mathematics.Domain.CompositeDomain;
 
 public sealed class IntersectionDomain<T> : IDomain<T>
 {

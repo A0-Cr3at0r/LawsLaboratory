@@ -27,7 +27,7 @@ public sealed class Law
     }
 
 
-    public int GetTargetCellCount()
+    public int? GetTargetCellCount()
     {
         return _initializationRule.TargetCellCount;
     }
@@ -36,7 +36,7 @@ public sealed class Law
     {
         return _initializationRule.ValueDistribution;
     }
-    public IDistribution<Vector2> GetInitializationSpaceDistribution()
+    public IDistribution<Vector2>? GetInitializationSpaceDistribution()
     {
         return _initializationRule.SpaceDistribution;
     }

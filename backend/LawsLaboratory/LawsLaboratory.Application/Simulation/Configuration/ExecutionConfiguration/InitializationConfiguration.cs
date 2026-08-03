@@ -2,12 +2,12 @@
 {
     public sealed class InitializationConfiguration
     {
-        public RealDistributionConfiguration InitialValueDistribution { get; init; }
+        public required RealDistributionConfiguration InitialValueDistribution { get; init; }
 
-        public SpatialDistributionConfiguration? InitialPositionDistribution { get; init; }
+        public SpatialDistributionConfiguration? InitialSpatialDistribution { get; init; }
 
         public DomainConfiguration? DomainConfiguration { get; init; }
 
-        public int TargetCellCount { get; init; }
+        public int? TargetCellCount { get; init; }
     }
 }

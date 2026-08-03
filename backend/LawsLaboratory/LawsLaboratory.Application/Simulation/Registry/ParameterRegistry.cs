@@ -58,30 +58,36 @@ public sealed class ParameterRegistry : IParameterRegistry
         _parameterNames = names.MoveToImmutable();
     }
 
-
-    public bool TryGetParameterId(
-        string parameterName,
-        out ushort parameterId)
+    public bool ContainsParameter(string parameterName)
     {
-        ArgumentNullException.ThrowIfNull(parameterName);
-
-        return _parameterIds.TryGetValue(
-            parameterName,
-            out parameterId);
+        return _parameterIds.ContainsKey(parameterName);
     }
 
 
-    public bool TryGetParameterName(
-        ushort parameterId,
-        out string parameterName)
+    public ushort GetParameterId(
+    string parameterName)
+    {
+        ArgumentNullException.ThrowIfNull(parameterName);
+
+        if (!_parameterIds.TryGetValue(
+                parameterName,
+                out ushort parameterId))
+        {
+            throw new KeyNotFoundException(
+                $"Unknown parameter '{parameterName}'.");
+        }
+
+        return parameterId;
+    }
+    public string GetParameterName(
+    ushort parameterId)
     {
         if (parameterId >= _parameterNames.Length)
         {
-            parameterName = string.Empty;
-            return false;
+            throw new ArgumentOutOfRangeException(
+                nameof(parameterId));
         }
 
-        parameterName = _parameterNames[parameterId];
-        return true;
+        return _parameterNames[parameterId];
     }
 }

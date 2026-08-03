@@ -125,12 +125,10 @@ internal sealed class SemanticAnalyzer
     private ExpressionNode AnalyzeIdentifier(
         IdentifierNode node)
     {
-        if (_parameterRegistry.TryGetParameterId(
-                node.Name,
-                out ushort parameterId))
+        if (_parameterRegistry.ContainsParameter(node.Name))
         {
             return new VariableNode(
-                parameterId,
+                _parameterRegistry.GetParameterId(node.Name),
                 node.RelativePosition);
         }
 

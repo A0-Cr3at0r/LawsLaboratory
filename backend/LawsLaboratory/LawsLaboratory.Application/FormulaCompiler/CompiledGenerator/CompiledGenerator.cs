@@ -1,7 +1,7 @@
 ﻿using LawsLaboratory.Core.Formula.Element;
 using LawsLaboratory.Core.Formula.Node;
 
-namespace LawsLaboratory.Application.FormulaCompiler.CompiledGenerator;
+namespace LawsLaboratory.Application.FormulaCompiler.COmpiledGenerator;
 
 /// <summary>
 /// Converts a scientific expression tree into a compiled postfix expression.

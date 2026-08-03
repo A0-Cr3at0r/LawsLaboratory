@@ -6,11 +6,12 @@ public interface IParameterRegistry
 
     IReadOnlyCollection<string> ParameterNames { get; }
 
-    bool TryGetParameterId(
-        string parameterName,
-        out ushort parameterId);
+    bool ContainsParameter(
+        string parameterName);
 
-    bool TryGetParameterName(
-        ushort parameterId,
-        out string parameterName);
+    ushort GetParameterId(
+        string parameterName);
+
+    string GetParameterName(
+        ushort parameterId);
 }

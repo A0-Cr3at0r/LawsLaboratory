@@ -131,3 +131,4 @@ public sealed class Vector2Configuration
 
     public double Y { get; init; }
 }
+
