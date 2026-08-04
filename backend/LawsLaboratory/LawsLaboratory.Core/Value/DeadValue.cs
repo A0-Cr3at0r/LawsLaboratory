@@ -9,5 +9,10 @@
             return new ScalarValue(value);
         }
 
+        public double? Get()
+        {
+            return null;
+        }
+
     }
 }

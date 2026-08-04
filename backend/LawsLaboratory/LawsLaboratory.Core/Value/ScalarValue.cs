@@ -13,7 +13,7 @@
             return this;
         }
 
-        internal double Get()
+        public double? Get()
         {
             return Value;
         }

@@ -9,9 +9,6 @@
   <ItemGroup>
     <Folder Include="Execution\EngineGateway\" />
     <Folder Include="DefaultEngine\" />
-    <Folder Include="FormulaCompiler\CommpiledGenerator\" />
-    <Folder Include="FormulaCompiler\Optimizer\" />
-    <Folder Include="FormulaCompiler\Semantic\" />
     <Folder Include="Identity\" />
     <Folder Include="ProjectManagement\" />
   </ItemGroup>

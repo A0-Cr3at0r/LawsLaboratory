@@ -34,7 +34,7 @@ internal sealed class SpatialController
     private readonly SpatialWriter _writer;
 
     private readonly SpatialEmitter _emitter;
-    private readonly SpatialReceiver<double> _receiver;
+    private readonly SpatialAbsorber<double> _absorber;
 
     private readonly ITraversalStrategy<int> _traversal;
 
@@ -61,7 +61,7 @@ internal sealed class SpatialController
         SpatialReader reader,
         SpatialWriter writer,
         SpatialEmitter emitter,
-        SpatialReceiver<double> receiver,
+        SpatialAbsorber<double> absorber,
         ITraversalStrategy<int> traversal,
         int cellCount)
     {
@@ -71,7 +71,7 @@ internal sealed class SpatialController
         _writer = writer;
 
         _emitter = emitter;
-        _receiver = receiver;
+        _absorber = absorber;
 
         _readCursor = traversal.CreateCursor(cellCount);
     }
@@ -224,7 +224,7 @@ internal sealed class SpatialController
 
         _controllerState = controllerState.WaitingReception;
 
-        if (!_receiver.Receive())
+        if (!_absorber.Absorb())
         {
             return;
         }
@@ -232,9 +232,9 @@ internal sealed class SpatialController
         _controllerState = controllerState.Running;
 
         _writer.Write(
-            _receiver.CellId,
+            _absorber.CellId,
             _currentWritePlan,
-            _receiver.Result);
+            _absorber.Result);
     }
 
 }

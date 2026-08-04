@@ -1,6 +1,6 @@
 ﻿namespace LawsLaboratory.Application.Execution.ExecutionResultStage;
 
-internal sealed class SpatialReceiver<T>
+internal sealed class SpatialAbsorber<T>
 {
     private readonly ExecutionResultBuffer<T> _buffer;
 
@@ -16,13 +16,13 @@ internal sealed class SpatialReceiver<T>
 
     public T Result => _result;
 
-    public SpatialReceiver(
+    public SpatialAbsorber(
         ExecutionResultBuffer<T> buffer)
     {
         _buffer = buffer;
     }
 
-    public bool Receive()
+    public bool Absorb()
     {
         if (!_buffer.TryAcquireRead(out ResultPacket<T> packet))
         {

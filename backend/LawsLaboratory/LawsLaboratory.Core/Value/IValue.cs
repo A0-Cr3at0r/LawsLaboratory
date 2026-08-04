@@ -11,5 +11,7 @@ namespace LawsLaboratory.Core.Value
     {
         IValue Set(double value);
 
+        double? Get();
+
     }
 }
