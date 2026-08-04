@@ -6,16 +6,16 @@ public enum FlowDirection
     Exit
 }
 
-internal  record struct FlowObservation
+public  record struct FlowObservation
 {
-    public MonitorChannel Channel { get; set; }
+    public ObserverChannel Channel { get; set; }
 
     public FlowDirection Direction { get; set; }
 
     public ushort? ParameterId { get; set; }
 
     public FlowObservation(
-        MonitorChannel channel,
+        ObserverChannel channel,
         FlowDirection direction,
         ushort? parameterId = null)
     {

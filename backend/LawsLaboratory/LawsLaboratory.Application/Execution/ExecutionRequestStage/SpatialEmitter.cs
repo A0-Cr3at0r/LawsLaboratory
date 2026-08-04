@@ -17,7 +17,7 @@ internal sealed class SpatialEmitter
     public bool Emit(
         int cellId,
         ushort paramId,
-        IValue[] values,
+        ReadOnlySpan<IValue> values,
         int valueCount)
     {
         if (!_buffer.TryAcquireWrite(out RequestPacket packet))

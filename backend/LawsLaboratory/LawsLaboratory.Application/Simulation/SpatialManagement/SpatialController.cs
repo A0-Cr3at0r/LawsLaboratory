@@ -187,21 +187,30 @@ internal sealed class SpatialController
         if (_currentReadPlan is null)
             return;
 
-        IValue[] values =
-            _reader.Read(
-                _readCursor.Current,
-                _currentReadPlan);
+        while (true)
+        {
+            if (_reader.TryRead(
+                    _readCursor.Current,
+                    _currentReadPlan,
+                    _currentParameterId))
+            {
+                break;
+            }
+
+            if (!_readCursor.TryAdvance())
+            {
+                Stop();
+                return;
+            }
+        }
 
         _controllerState = controllerState.WaitingEmittion;
 
-        bool emitted =
-            _emitter.Emit(
+        if (!_emitter.Emit(
                 _readCursor.Current,
                 _currentParameterId,
-                values,
-                _currentReadPlan.Count);
-
-        if (!emitted)
+                _reader.Values,
+                _currentReadPlan.Count))
         {
             return;
         }
@@ -211,9 +220,7 @@ internal sealed class SpatialController
         if (!_readCursor.TryAdvance())
         {
             Stop();
-            return;
         }
-
     }
 
 

@@ -2,7 +2,7 @@
 
 namespace LawsLaboratory.Application.Observer;
 
-public enum MonitorChannel
+public enum ObserverChannel
 {
     RequestBuffer,
     ResultBuffer,
@@ -21,7 +21,7 @@ internal sealed class ObservationDispatcher
     public ObservationDispatcher()
     {
         _flowObservation = new FlowObservation(
-            MonitorChannel.RequestBuffer,
+            ObserverChannel.RequestBuffer,
             FlowDirection.Enter);
 
         _userMetricObservation = new UserMetricObservation(
@@ -45,7 +45,7 @@ internal sealed class ObservationDispatcher
     }
 
     public void EmitFlow(
-        MonitorChannel channel,
+        ObserverChannel channel,
         FlowDirection direction,
         ushort? parameterId = null)
     {

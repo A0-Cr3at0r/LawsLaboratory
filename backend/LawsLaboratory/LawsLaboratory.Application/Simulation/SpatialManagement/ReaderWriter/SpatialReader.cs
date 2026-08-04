@@ -1,6 +1,5 @@
-﻿namespace LawsLaboratory.Application.Simulation.SpatialManagement.ReaderWriter;
+﻿using LawsLaboratory.Application.Observer;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
-using LawsLaboratory.Application.Observer;
 using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;
@@ -8,11 +7,8 @@ using LawsLaboratory.Core.Value;
 internal sealed class SpatialReader
 {
     private readonly IGrid<PlanePosition> _grid;
-
     private readonly IValue[] _values;
-
-    private  readonly ObservationDispatcher _observer;
-
+    private readonly ObservationDispatcher _observer;
 
     public SpatialReader(
         IGrid<PlanePosition> grid,
@@ -20,7 +16,6 @@ internal sealed class SpatialReader
         int maxVariableCount)
     {
         _grid = grid;
-
         _observer = observer;
 
         _values = new IValue[maxVariableCount];
@@ -31,32 +26,34 @@ internal sealed class SpatialReader
         }
     }
 
+    public ReadOnlySpan<IValue> Values => _values;
 
-    public IValue[] Read(
+    public bool TryRead(
         int cellId,
         SpatialAccessPlan accessPlan,
-        ushort currentParamId)
+        ushort currentParameterId)
     {
-        double? parmeterValue = 
-            _grid.GetParameterValue(cellId, currentParamId)
-            .Get();
+        IValue currentValue =
+            _grid.GetParameterValue(cellId, currentParameterId);
 
         _observer.EmitMetric(
-            currentParamId, 
-            parmeterValue);
+            currentParameterId,
+            currentValue.Get());
+
+        if (ReferenceEquals(currentValue, Dead.Instance))
+        {
+            return false;
+        }
 
         for (int i = 0; i < accessPlan.Count; i++)
         {
-            SpatialAccess access =
-                accessPlan.GetAccess(i);
+            SpatialAccess access = accessPlan.GetAccess(i);
 
-            _values[i] = 
-                _grid.GetParameterValue(
-                    cellId + access.CellOffset, 
-                    access.ParameterId);
-
+            _values[i] = _grid.GetParameterValue(
+                cellId + access.CellOffset,
+                access.ParameterId);
         }
 
-        return _values;
+        return true;
     }
 }
