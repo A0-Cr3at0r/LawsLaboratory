@@ -11,7 +11,6 @@ public sealed class PerformanceObserver :
     private readonly PipelinePerformanceMetrics _global;
 
 
-
     public PerformanceObserver()
     {
         _segments =

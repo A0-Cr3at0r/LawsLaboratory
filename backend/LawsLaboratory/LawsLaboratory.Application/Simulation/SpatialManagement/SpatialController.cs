@@ -5,7 +5,6 @@ using LawsLaboratory.Application.Execution.ExecutionResultStage;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
 using LawsLaboratory.Application.Simulation.SpatialManagement.ReaderWriter;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
-using LawsLaboratory.Core.Value;
 
 
 internal enum SpatialOperation
