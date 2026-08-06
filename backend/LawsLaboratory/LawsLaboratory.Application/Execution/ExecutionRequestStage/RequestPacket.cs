@@ -6,44 +6,28 @@ public sealed class RequestPacket
 {
     public int CellId { get; private set; }
 
-    public ushort ParamId { get; private set; }
-
-    public IValue[] Values { get; }
+    public double?[] Values { get; }
 
 
-    public RequestPacket(int valueCount)
+    public RequestPacket(int MaxValueCount)
     {
-        Values = new IValue[valueCount];
+        Values = new double?[MaxValueCount];
 
         CellId = -1;
-        ParamId = 0;
+    }
 
-        for (int i = 0; i < Values.Length; i++)
-        {
-            Values[i] = Dead.Instance;
+    public void Clear()
+    {
+        for (int i = 0; i < Values.Length; i++) { 
+            Values[i] = null;
         }
     }
-
-
-    public void Set(
-        int cellId,
-        ushort paramId)
-    {
-        CellId = cellId;
-        ParamId = paramId;
-    }
-
 
     public void Write(
     int index,
     double value)
     {
-        Values[index] =
-            Values[index].Set(value);
+        Values[index] = value;
     }
 
-    public void WriteDead(int index)
-    {
-        Values[index] = Dead.Instance;
-    }
 }

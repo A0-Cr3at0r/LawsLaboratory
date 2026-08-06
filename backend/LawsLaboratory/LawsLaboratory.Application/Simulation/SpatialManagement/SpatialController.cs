@@ -32,7 +32,7 @@ internal sealed class SpatialController
     private readonly SpatialReader _reader;
     private readonly SpatialWriter _writer;
 
-    private readonly SpatialEmitter _emitter;
+    private readonly RequestEmitter _emitter;
     private readonly SpatialAbsorber<double> _absorber;
 
     private readonly ITraversalStrategy<int> _traversal;
@@ -59,7 +59,7 @@ internal sealed class SpatialController
         SpatialRepository repository,
         SpatialReader reader,
         SpatialWriter writer,
-        SpatialEmitter emitter,
+        RequestEmitter emitter,
         SpatialAbsorber<double> absorber,
         ITraversalStrategy<int> traversal,
         int cellCount)

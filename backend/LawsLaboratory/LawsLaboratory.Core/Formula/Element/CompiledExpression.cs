@@ -8,6 +8,8 @@ public sealed class CompiledExpression
     private readonly IReadOnlyList<ExpressionElement> _elements;
     private readonly int[] _variableElementIndexes;
 
+    public IReadOnlyList<ExpressionElement> Element  => _elements;
+
     public CompiledExpression(IReadOnlyList<ExpressionElement> elements)
     {
         _elements = elements;
@@ -34,6 +36,7 @@ public sealed class CompiledExpression
             }
         }
     }
+
 
     public IReadOnlyList<VariableReference> GetVariableReferences()
     {

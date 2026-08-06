@@ -4,6 +4,7 @@ using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;
 
+namespace LawsLaboratory.Application.Simulation.SpatialManagement.ReaderWriter;
 internal sealed class SpatialReader
 {
     private readonly IGrid<PlanePosition> _grid;
@@ -20,19 +21,22 @@ internal sealed class SpatialReader
 
         _values = new IValue[maxVariableCount];
 
-        for (int i = 0; i < maxVariableCount; i++)
-        {
-            _values[i] = Dead.Instance;
-        }
+        Array.Fill(_values, Dead.Instance);
     }
 
     public ReadOnlySpan<IValue> Values => _values;
+
+    public int Count { get; private set; }
 
     public bool TryRead(
         int cellId,
         SpatialAccessPlan accessPlan,
         ushort currentParameterId)
     {
+        Count = 0;
+
+        Array.Fill(_values, Dead.Instance);
+
         IValue currentValue =
             _grid.GetParameterValue(cellId, currentParameterId);
 
@@ -49,10 +53,19 @@ internal sealed class SpatialReader
         {
             SpatialAccess access = accessPlan.GetAccess(i);
 
-            _values[i] = _grid.GetParameterValue(
+            IValue value = _grid.GetParameterValue(
                 cellId + access.CellOffset,
                 access.ParameterId);
+
+            if (ReferenceEquals(value, Dead.Instance))
+            {
+                return false;
+            }
+
+            _values[i] = value;
         }
+
+        Count = accessPlan.Count;
 
         return true;
     }

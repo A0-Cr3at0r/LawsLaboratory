@@ -30,7 +30,6 @@ internal sealed class SpatialAbsorber<T>
         }
 
         _cellId = packet.CellId;
-        _parameterId = packet.ParameterId;
         _result = packet.Result;
 
         _buffer.ReleaseRead();
