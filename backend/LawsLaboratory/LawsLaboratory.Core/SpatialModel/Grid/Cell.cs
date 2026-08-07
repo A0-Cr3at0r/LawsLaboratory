@@ -32,7 +32,7 @@ public sealed class Cell
         int parameterId,
         IValue value)
     {
-        _values[parameterId] = value;
+        _values[parameterId] = _values[parameterId].Set(value);
     }
 
     internal void SetParameterValue(

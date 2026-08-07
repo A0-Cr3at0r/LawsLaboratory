@@ -12,7 +12,6 @@ public enum ExpressionKinds : byte
     Operator
 }
 
-
 public readonly record struct ExpressionEntry(
     ExpressionKinds Kind,
     double Value);

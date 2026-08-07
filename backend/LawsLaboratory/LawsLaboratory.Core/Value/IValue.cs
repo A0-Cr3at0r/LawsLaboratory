@@ -1,17 +1,12 @@
-﻿//using LawsLaboratory.Core.Value;
+﻿namespace LawsLaboratory.Core.Value;
 
-//Future evolution:
-//IValue currently represents scalar values and Dead.
-//It may later evolve to support generic mathematical objects
-//(vectors, matrices, tensors, etc.) without changing the Cell API.
-
-namespace LawsLaboratory.Core.Value
+public interface IValue
 {
-    public interface IValue
-    {
-        IValue Set(double value);
+    IValue Set(double value);
 
-        double? Get();
+    IValue Set(IValue value);
 
-    }
+    IValue Clone();
+
+    double? Get();
 }

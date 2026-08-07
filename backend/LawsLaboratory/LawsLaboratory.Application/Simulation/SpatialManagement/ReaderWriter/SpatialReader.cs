@@ -1,4 +1,4 @@
-﻿using LawsLaboratory.Application.Observer;
+﻿using LawsLaboratory.Application.Simulation.Observer;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
 using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;

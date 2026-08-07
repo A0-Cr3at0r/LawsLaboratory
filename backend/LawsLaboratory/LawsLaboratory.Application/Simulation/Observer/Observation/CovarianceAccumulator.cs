@@ -1,6 +1,6 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
 
-namespace LawsLaboratory.Application.Observer.Observation;
+namespace LawsLaboratory.Application.Simulation.Observer.Observation;
 
 
 public sealed class CovarianceAccumulator

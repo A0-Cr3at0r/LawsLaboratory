@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 
 
-namespace LawsLaboratory.Application.Observer.Performance;
+namespace LawsLaboratory.Application.Simulation.Observer.Observer.Performance;
 
 
 internal sealed class PipelinePerformanceMetrics

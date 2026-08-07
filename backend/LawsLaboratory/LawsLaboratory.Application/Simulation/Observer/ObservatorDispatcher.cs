@@ -1,6 +1,6 @@
-﻿using LawsLaboratory.Application.Observer.Observation;
+﻿using LawsLaboratory.Application.Simulation.Observer.Observation;
 
-namespace LawsLaboratory.Application.Observer;
+namespace LawsLaboratory.Application.Simulation.Observer;
 
 public enum ObserverChannel
 {

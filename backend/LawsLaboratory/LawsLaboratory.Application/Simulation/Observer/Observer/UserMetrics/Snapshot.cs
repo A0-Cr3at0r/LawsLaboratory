@@ -1,6 +1,6 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
 
-namespace LawsLaboratory.Application.Observer.Observer.UserMetrics;
+namespace LawsLaboratory.Application.Simulation.Observer.Observer.UserMetrics;
 
 public readonly record struct StatisticsSnapshot
 (

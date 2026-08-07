@@ -1,19 +1,15 @@
 ﻿using LawsLaboratory.Application.Execution.EngineGateway.Entry;
-using LawsLaboratory.Application.Observer;
+using LawsLaboratory.Application.Simulation.Observer;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
 using LawsLaboratory.Application.Simulation.SpatialManagement.ReaderWriter;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
 using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
+using LawsLaboratory.Application.Execution.ControllersState;
+
 
 namespace LawsLaboratory.Application.Execution.ExecutionRequestStage;
 
-enum ControllerState
-{
-    None,
-    Running,
-    Completed
-}
 internal class RequestController
 {
     private readonly int _beginAt;
@@ -36,6 +32,8 @@ internal class RequestController
                         get => _controllerState; 
                                           }
 
+    public int Count { get; private set; } = 0;
+
 
     public RequestController(
         int beginAt, 
@@ -52,6 +50,7 @@ internal class RequestController
         _spatialReader = new SpatialReader(grid, observerDispatcher, MaxVariableCount);
         _requestEmitter = new RequestEmitter(buffer);
         _cursor = traversal.CreateCursor(boxSize);
+        _controllerState = ControllerState.None;
     }
 
     public void SetParameterId(ushort parameterId)
@@ -65,7 +64,9 @@ internal class RequestController
                                     .GetPlan(_currentParameterId)
                                     .VariationAccessPlan;
 
-        _controllerState = ControllerState.running;
+        _controllerState = ControllerState.Running;
+
+        Count = 0;
 
         RunDataEmission();
     }
@@ -76,7 +77,9 @@ internal class RequestController
                                     .GetPlan(_currentParameterId)
                                     .TransmissionSourceAccessPlan;
 
-        _controllerState = ControllerState.running;
+        _controllerState = ControllerState.Running;
+
+        Count = 0;
 
         RunDataEmission();
     }
@@ -97,6 +100,8 @@ internal class RequestController
                     cellId,
                     _spatialReader.Values,
                     _spatialReader.Count);
+
+                Count++;
             }
 
         } while (_cursor.TryAdvance());

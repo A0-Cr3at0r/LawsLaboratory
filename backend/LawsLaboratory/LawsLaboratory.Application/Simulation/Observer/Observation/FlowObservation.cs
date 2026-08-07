@@ -1,4 +1,6 @@
-﻿namespace LawsLaboratory.Application.Observer.Observation;
+﻿using LawsLaboratory.Application.Simulation.Observer;
+
+namespace LawsLaboratory.Application.Simulation.Observer.Observation;
 
 public enum FlowDirection
 {

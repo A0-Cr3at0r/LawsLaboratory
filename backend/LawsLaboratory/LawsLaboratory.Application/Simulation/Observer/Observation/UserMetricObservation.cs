@@ -1,4 +1,4 @@
-﻿namespace LawsLaboratory.Application.Observer.Observation;
+﻿namespace LawsLaboratory.Application.Simulation.Observer.Observation;
 
 public  record struct UserMetricObservation
 {

@@ -1,8 +1,10 @@
 ﻿using System.Diagnostics;
 
-namespace LawsLaboratory.Application.Observer.Performance;
+namespace LawsLaboratory.Application.Simulation.Observer.Observer.Performance;
 
-using global::LawsLaboratory.Application.Observer.Observation;
+using LawsLaboratory.Application.Observer.Observation;
+using LawsLaboratory.Application.Simulation.Observer;
+using LawsLaboratory.Application.Simulation.Observer.Observation;
 
 internal readonly record struct FlowPoint(
     ObserverChannel Channel,

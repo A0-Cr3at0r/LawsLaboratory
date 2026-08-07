@@ -1,4 +1,4 @@
-﻿namespace LawsLaboratory.Application.Observer.Observer.UserMetrics;
+﻿namespace LawsLaboratory.Application.Simulation.Observer.Observer.UserMetrics;
 
 
 public sealed class ParameterStatistics

@@ -1,18 +1,30 @@
-﻿namespace LawsLaboratory.Core.Value
+﻿namespace LawsLaboratory.Core.Value;
+
+public sealed class Dead : IValue
 {
-    public sealed class Dead : IValue
+    public static Dead Instance { get; } = new();
+
+    private Dead()
     {
-        public static Dead Instance { get; } = new();
+    }
 
-        public IValue Set(double value)
-        {
-            return new ScalarValue(value);
-        }
+    public IValue Set(double value)
+    {
+        return new ScalarValue(value);
+    }
 
-        public double? Get()
-        {
-            return null;
-        }
+    public IValue Set(IValue value)
+    {
+        return value.Clone();
+    }
 
+    public IValue Clone()
+    {
+        return Instance;
+    }
+
+    public double? Get()
+    {
+        return null;
     }
 }
