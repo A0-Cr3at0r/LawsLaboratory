@@ -466,4 +466,245 @@ public class DefaultEngineTest
             ExpressionKinds.Operator,
             (double)operation);
     }
+
+    [Fact]
+    public void VariableOutsideValues_ThrowsIndexOutOfRangeException()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        Variable(2)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Throws<IndexOutOfRangeException>(
+            () => engine.Evaluate([10, 20]));
+    }
+
+    [Fact]
+    public void NegativeVariableIndex_ThrowsIndexOutOfRangeException()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        Variable(-1)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Throws<IndexOutOfRangeException>(
+            () => engine.Evaluate([10, 20]));
+    }
+
+    [Fact]
+    public void UnaryOperatorWithoutOperand_ThrowsInvalidOperationException()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        Operator(OperatorType.Sqrt)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Throws<InvalidOperationException>(
+            () => engine.Evaluate([]));
+    }
+
+    [Fact]
+    public void BinaryOperatorWithoutOperands_ThrowsInvalidOperationException()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        Operator(OperatorType.Add)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Throws<InvalidOperationException>(
+            () => engine.Evaluate([]));
+    }
+
+    [Fact]
+    public void BinaryOperatorWithOnlyOneOperand_ThrowsInvalidOperationException()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        Constant(10),
+        Operator(OperatorType.Add)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Throws<InvalidOperationException>(
+            () => engine.Evaluate([]));
+    }
+
+    [Fact]
+    public void ExpressionWithMultipleResults_ThrowsInvalidOperationException()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        Constant(10),
+        Constant(20)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Throws<InvalidOperationException>(
+            () => engine.Evaluate([]));
+    }
+
+    [Fact]
+    public void EmptyExpression_ThrowsInvalidOperationException()
+    {
+        var expression = new List<ExpressionEntry>();
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Throws<InvalidOperationException>(
+            () => engine.Evaluate([]));
+    }
+
+    [Fact]
+    public void ExpressionWithUnusedOperand_ThrowsInvalidOperationException()
+    {
+        // 2 3 4 +
+        //
+        // Stack finale:
+        // 2
+        // 7
+
+        var expression = new List<ExpressionEntry>
+    {
+        Constant(2),
+        Constant(3),
+        Constant(4),
+        Operator(OperatorType.Add)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Throws<InvalidOperationException>(
+            () => engine.Evaluate([]));
+    }
+
+    [Fact]
+    public void InvalidExpressionDoesNotCorruptNextEvaluation()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        Variable(0),
+        Constant(2),
+        Operator(OperatorType.Add)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Equal(5, engine.Evaluate([3]));
+
+        // La première évaluation est valide.
+        // La seconde utilise volontairement un index invalide.
+        Assert.Throws<IndexOutOfRangeException>(
+            () => engine.Evaluate([]));
+
+        // Le moteur doit rester réutilisable après l'échec.
+        Assert.Equal(12, engine.Evaluate([10]));
+    }
+
+    [Fact]
+    public void DivisionByZero_FollowsDoubleSemantics()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        Constant(10),
+        Constant(0),
+        Operator(OperatorType.Divide)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        var result = engine.Evaluate([]);
+
+        Assert.True(double.IsPositiveInfinity(result));
+    }
+
+    [Fact]
+    public void InvalidSqrt_FollowsDoubleSemantics()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        Constant(-1),
+        Operator(OperatorType.Sqrt)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        var result = engine.Evaluate([]);
+
+        Assert.True(double.IsNaN(result));
+    }
+
+    [Fact]
+    public void InvalidLogBase_FollowsDoubleSemantics()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        Constant(1),
+        Constant(10),
+        Operator(OperatorType.Log)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        var result = engine.Evaluate([]);
+
+        Assert.True(double.IsNaN(result));
+    }
+
+    [Fact]
+    public void InvalidEnumValue_ThrowsInvalidOperationException()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        new(
+            ExpressionKinds.Operator,
+            255)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Throws<InvalidOperationException>(
+            () => engine.Evaluate([]));
+    }
+
+    [Fact]
+    public void InvalidSymbolValue_ThrowsInvalidOperationException()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        new(
+            ExpressionKinds.Symbol,
+            255)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Throws<InvalidOperationException>(
+            () => engine.Evaluate([]));
+    }
+
+    [Fact]
+    public void OperatorWithTooFewOperands_LeavesNoInvalidResult()
+    {
+        var expression = new List<ExpressionEntry>
+    {
+        Constant(10),
+        Operator(OperatorType.Multiply),
+        Constant(5)
+    };
+
+        var engine = new DefaultEngine(expression);
+
+        Assert.Throws<InvalidOperationException>(
+            () => engine.Evaluate([]));
+    }
 }
