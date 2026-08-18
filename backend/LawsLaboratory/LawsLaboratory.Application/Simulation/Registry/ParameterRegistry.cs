@@ -16,7 +16,7 @@ public sealed class ParameterRegistry : IParameterRegistry
         _parameterNames;
 
     public ParameterRegistry(
-        IEnumerable<string> parameterNames)
+        IReadOnlyCollection<string> parameterNames)
     {
         ArgumentNullException.ThrowIfNull(parameterNames);
 
@@ -24,7 +24,8 @@ public sealed class ParameterRegistry : IParameterRegistry
             ImmutableDictionary.CreateBuilder<string, ushort>();
 
         ImmutableArray<string>.Builder names =
-            ImmutableArray.CreateBuilder<string>();
+            ImmutableArray.CreateBuilder<string>(
+                parameterNames.Count);
 
 
         foreach (string parameterName in parameterNames)

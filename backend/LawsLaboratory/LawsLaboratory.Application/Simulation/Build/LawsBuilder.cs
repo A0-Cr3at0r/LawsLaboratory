@@ -1,10 +1,10 @@
 ﻿namespace LawsLaboratory.Application.Simulation.Build;
 
-using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
-using LawsLaboratory.Application.Simulation.Registry;
-using LawsLaboratory.Application.Simulation.Build.InitializationBuild;
-using LawsLaboratory.Application.Simulation.Laws;
 using LawsLaboratory.Application.FormulaCompiler;
+using LawsLaboratory.Application.Simulation.Build.InitializationBuild;
+using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
+using LawsLaboratory.Application.Simulation.LawsRepository;
+using LawsLaboratory.Application.Simulation.Registry;
 using LawsLaboratory.Core.Laws;
 using LawsLaboratory.Core.SpatialModel.Position;
 

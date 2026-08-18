@@ -2,6 +2,7 @@
 
 using LawsLaboratory.Core.SpatialModel.Position;
 
+
 internal sealed class PeriodicBoundaryCondition : IBoundaryCondition<PlanePosition>
 {
     private readonly int _width;
@@ -15,18 +16,12 @@ internal sealed class PeriodicBoundaryCondition : IBoundaryCondition<PlanePositi
     }
 
 
-    public PlanePosition Resolve(PlanePosition position)
-    {
-        int x = Mod(position.X, _width);
-        int y = Mod(position.Y, _height);
 
-        return new PlanePosition(x, y);
+    public int Resolve(int cellId)
+    {
+        int modId = cellId % (_width * _height);
+
+        return cellId >= 0 ? modId : modId + (_width * _height);
     }
 
-
-    private static int Mod(int value, int modulo)
-    {
-        int result = value % modulo;
-        return result < 0 ? result + modulo : result;
-    }
 }

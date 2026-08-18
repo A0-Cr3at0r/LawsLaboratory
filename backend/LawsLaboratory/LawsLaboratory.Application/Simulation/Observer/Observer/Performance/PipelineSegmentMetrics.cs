@@ -2,7 +2,6 @@
 
 namespace LawsLaboratory.Application.Simulation.Observer.Observer.Performance;
 
-using LawsLaboratory.Application.Observer.Observation;
 using LawsLaboratory.Application.Simulation.Observer;
 using LawsLaboratory.Application.Simulation.Observer.Observation;
 

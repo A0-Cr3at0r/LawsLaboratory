@@ -39,7 +39,7 @@ public sealed class Cell
         int parameterId,
         double value)
     {
-        _values[parameterId].Set(value);
+        _values[parameterId] = _values[parameterId].Set(value);
     }
 
     internal void KillParameter(ushort parameterId)

@@ -5,7 +5,7 @@ namespace LawsLaboratory.Application.Execution.ExecutionResultStage;
 
 internal sealed class ResultAbsorber
 {
-    private readonly GatewayExit _gatewayExit;
+    private readonly GatewayExitBuffer _gatewayExit;
 
     public IValue Value { get; private set; }
 
@@ -13,7 +13,7 @@ internal sealed class ResultAbsorber
 
 
     public ResultAbsorber(
-        GatewayExit gatewayExit)
+        GatewayExitBuffer gatewayExit)
     {
         _gatewayExit = gatewayExit;
 
@@ -24,7 +24,7 @@ internal sealed class ResultAbsorber
 
     public bool TryAbsorb(int index)
     {
-        if (index < 0 || index >= _gatewayExit.Results.Count)
+        if (index < 0 || index >= _gatewayExit.Results.Length)
         {
             return false;
         }
@@ -67,4 +67,7 @@ internal sealed class ResultAbsorber
                 return false;
         }
     }
+
 }
+
+

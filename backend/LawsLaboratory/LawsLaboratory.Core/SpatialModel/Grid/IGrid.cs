@@ -14,7 +14,5 @@ public interface IGrid<TPosition>
 
     void SetCellParameterValue(int cellId, ushort parameterId, double value);
 
-    TPosition GetPosition(int id);
 
-    bool Contains(TPosition position);
 }

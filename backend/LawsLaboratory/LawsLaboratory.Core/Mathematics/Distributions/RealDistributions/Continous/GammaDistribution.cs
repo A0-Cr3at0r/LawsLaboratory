@@ -64,7 +64,7 @@ public sealed class GammaDistribution : IDistribution<double>
         if (_shape < 1.0)
         {
 
-            double y = _shapePlusOneDistribution.Generate();
+            double y = _shapePlusOneDistribution!.Generate();
 
             double u = _random.NextDouble();
 

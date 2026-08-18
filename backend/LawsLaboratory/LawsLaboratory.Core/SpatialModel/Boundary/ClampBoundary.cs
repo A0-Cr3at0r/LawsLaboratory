@@ -38,6 +38,21 @@ internal sealed class ClampBoundaryCondition : IBoundaryCondition<PlanePosition>
         return new PlanePosition(x, y);
     }
 
+    public int Resolve(int cellID)
+    {
+        if (cellID < 0)
+        {
+            return 0;
+        }
+        else if (cellID >= _width * _height)
+        {
+            return _width * _height - 1;
+        }
+
+        return cellID;
+    }
+
+
 
     private static int Clamp(
         int value,

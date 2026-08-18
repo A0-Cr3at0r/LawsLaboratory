@@ -22,7 +22,7 @@ internal sealed class ResultController
 
     private ushort _currentParameterId;
 
-    private SpatialAccessPlan _currentAccessPlan;
+    private SpatialAccessPlan? _currentAccessPlan;
 
     private bool _isVariation;
 
@@ -36,7 +36,7 @@ internal sealed class ResultController
         int boxSize,
         SpatialRepository spatialRepository,
         IGrid<PlanePosition> grid,
-        GatewayExit gatewayExit,
+        GatewayExitBuffer gatewayExit,
         ITraversalStrategy<int> traversal)
     {
         _beginAt = beginAt;
@@ -101,7 +101,7 @@ internal sealed class ResultController
                 {
                     _spatialWriter.Write(
                         _resultAbsorber.Id,
-                        _currentAccessPlan,
+                        _currentAccessPlan!,
                         _resultAbsorber.Value);
                 }
             }

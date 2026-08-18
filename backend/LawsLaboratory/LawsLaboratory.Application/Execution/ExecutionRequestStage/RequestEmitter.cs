@@ -17,14 +17,22 @@ internal sealed class RequestEmitter
     public void Emit(
         int packetIndex,
         ReadOnlySpan<IValue> values,
-        int count)
+        int count,
+        int CellID)
+
     {
         for (int i = 0; i < count; i++)
         {
             _buffer.Write(
                 packetIndex,
                 i,
-                (double)values[i].Get());
+                (double)values[i].Get()!);
         }
+
+        _buffer.WriteCellID(packetIndex, CellID);
+    }
+
+    public void updateBoxLimit(int boxId, int boxLimit) {
+        _buffer.BoxLimite[boxId] = boxLimit;
     }
 }

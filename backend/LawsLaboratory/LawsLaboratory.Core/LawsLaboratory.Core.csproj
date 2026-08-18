@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="LawsLaboratory.Tests" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<InternalsVisibleTo Include="LawsLaboratory.Application" />
+	</ItemGroup>
+	
+	
+
 </Project>

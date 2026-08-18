@@ -1,6 +1,5 @@
 ﻿using LawsLaboratory.Application.Execution.ExecutionRequestStage;
 using LawsLaboratory.Core.Formula.Element;
-using System.Reflection.Metadata;
 
 namespace LawsLaboratory.Application.Execution.EngineGateway.Entry;
 
@@ -18,17 +17,24 @@ public readonly record struct ExpressionEntry(
 
 internal sealed class GatewayEntryBuffer
 {
+    public int[] BoxLimite { get; set; }
 
     private readonly List<ExpressionEntry> _expression;
 
     private readonly RequestPacket[] _packets;
 
+    internal Span<RequestPacket> Packets =>
+    _packets.AsSpan();
+
     public GatewayEntryBuffer(
                         int maxPackets,
                         int maxValueCount,
+                        int maxBoxUsable,
                         ushort firstParameterId,
                         CompiledExpression firstExpression)
     {
+        BoxLimite = new int[maxBoxUsable];
+
         _expression = new List<ExpressionEntry>();
 
         _packets = new RequestPacket[maxPackets];
@@ -106,6 +112,11 @@ internal sealed class GatewayEntryBuffer
         for (int i = 0; i < val.Length; i++) {
             Write(packetIndex, i, val[i]);
         }
+    }
+
+    public void WriteCellID(int packetIndex, int CellID)
+    {
+        _packets[packetIndex].CellId =  CellID;
     }
 
     public void Write(int packetIndex, int valIndex, double val)

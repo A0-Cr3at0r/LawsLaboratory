@@ -5,8 +5,8 @@ namespace LawsLaboratory.Application.Simulation.Configuration;
 
 public class SimulationConfiguration
 {
-    public ModelConfiguration Model { get; init; }
+    public required ModelConfiguration Model { get; init; }
 
-    public RuntimeConfiguration runtime { get; init; }
+    public required RuntimeConfiguration runtime { get; init; }
 
 }

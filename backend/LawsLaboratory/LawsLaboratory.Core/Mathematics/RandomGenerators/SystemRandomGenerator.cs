@@ -14,10 +14,6 @@ public sealed class SystemRandomGenerator : IRandomGenerator
         _random = new Random(seed);
     }
 
-    public SystemRandomGenerator(long seed)
-    {
-        _random = new Random(seed);
-    }
 
     public double NextDouble()
     {

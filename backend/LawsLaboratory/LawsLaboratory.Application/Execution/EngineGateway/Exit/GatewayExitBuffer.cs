@@ -24,8 +24,17 @@ public sealed class GatewayResult
     public required ISerializedValue Value { get; init; }
 }
 
-public sealed class GatewayExit
+internal sealed class GatewayExitBuffer
 {
-    public IReadOnlyList<GatewayResult> Results { get; init; }
-        = Array.Empty<GatewayResult>();
+    private readonly GatewayResult[] _results;
+
+    public int ResultReceived { get; internal set; }
+
+    public Span<GatewayResult> Results =>
+        _results.AsSpan();
+
+    public GatewayExitBuffer(int maxResults)
+    {
+        _results = new GatewayResult[maxResults];
+    }
 }

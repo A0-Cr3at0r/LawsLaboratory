@@ -1,10 +1,8 @@
-﻿using LawsLaboratory.Core.Value;
+﻿namespace LawsLaboratory.Application.Execution.ExecutionRequestStage;
 
-namespace LawsLaboratory.Application.Execution.ExecutionRequestStage;
-
-public sealed class RequestPacket
+internal sealed class RequestPacket
 {
-    public int CellId { get; private set; }
+    public int CellId { get; internal set; }
 
     public double?[] Values { get; }
 
@@ -21,6 +19,8 @@ public sealed class RequestPacket
         for (int i = 0; i < Values.Length; i++) { 
             Values[i] = null;
         }
+
+        CellId = -1;
     }
 
     public void Write(

@@ -9,7 +9,7 @@ internal readonly struct LawSpatialExecutionPlan
     internal SpatialAccessPlan TransmissionDestinationAccessPlan { get; }
 
 
-    internal LawSpatialExecutionPlan(
+    public LawSpatialExecutionPlan(
         SpatialAccessPlan variationAccessPlan,
         SpatialAccessPlan transmissionSourceAccessPlan,
         SpatialAccessPlan transmissionDestinationAccessPlan)

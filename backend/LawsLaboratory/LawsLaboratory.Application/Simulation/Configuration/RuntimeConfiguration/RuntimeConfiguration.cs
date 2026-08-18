@@ -2,7 +2,7 @@
 
 public sealed class RuntimeConfiguration
 {
-    public TimeConfiguration Time { get; init; }
+    public required TimeConfiguration Time { get; init; }
 
-    public GridConfiguration Grid { get; init; }
+    public required GridConfiguration Grid { get; init; }
 }

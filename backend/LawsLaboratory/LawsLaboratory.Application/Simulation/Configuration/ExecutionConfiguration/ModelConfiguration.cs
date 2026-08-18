@@ -2,6 +2,6 @@
 {
     public sealed class ModelConfiguration
     {
-        public Dictionary<string, LawConfiguration> ParametersLaws { get; init; }
+        public required Dictionary<string, LawConfiguration> ParametersLaws { get; init; }
     }
 }

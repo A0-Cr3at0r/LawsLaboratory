@@ -11,6 +11,7 @@ public sealed class NegativeBinomialDistribution : IDistribution<int>
     private readonly GammaDistribution _gamma;
     private readonly PoissonDistribution _poisson;
 
+    private readonly IRandomGenerator _random;
 
     public NegativeBinomialDistribution(
         int successCount,
@@ -27,15 +28,16 @@ public sealed class NegativeBinomialDistribution : IDistribution<int>
         _successCount = successCount;
         _probability = probability;
 
+        _random = random;
 
         _gamma = new GammaDistribution(
             successCount,
             (1 - probability) / probability,
-            random);
+            _random);
 
         _poisson = new PoissonDistribution(
             1,
-            random);
+            _random);
     }
 
 
@@ -45,7 +47,7 @@ public sealed class NegativeBinomialDistribution : IDistribution<int>
 
         return new PoissonDistribution(
             lambda,
-            _poisson.Random)
+            _random)
             .Generate();
     }
 }

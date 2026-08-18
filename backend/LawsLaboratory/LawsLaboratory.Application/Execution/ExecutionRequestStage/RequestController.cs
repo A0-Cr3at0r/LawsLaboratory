@@ -10,9 +10,11 @@ using LawsLaboratory.Application.Execution.ControllersState;
 
 namespace LawsLaboratory.Application.Execution.ExecutionRequestStage;
 
-internal class RequestController
+ internal sealed class RequestController
 {
     private readonly int _beginAt;
+
+    private readonly int _boxId;
 
     private readonly SpatialRepository _spatialRepository;
 
@@ -24,7 +26,7 @@ internal class RequestController
 
     ushort _currentParameterId;
 
-    private SpatialAccessPlan _currentAccessPlan;
+    private SpatialAccessPlan? _currentAccessPlan;
 
     private ControllerState _controllerState;
 
@@ -38,6 +40,7 @@ internal class RequestController
     public RequestController(
         int beginAt, 
         int boxSize,
+        int boxId,
         SpatialRepository spatialRepository, 
         ObservationDispatcher observerDispatcher,
         IGrid<PlanePosition> grid, 
@@ -46,6 +49,7 @@ internal class RequestController
         ITraversalStrategy<int> traversal)
     {
         _beginAt = beginAt;
+        _boxId = boxId;
         _spatialRepository = spatialRepository;
         _spatialReader = new SpatialReader(grid, observerDispatcher, MaxVariableCount);
         _requestEmitter = new RequestEmitter(buffer);
@@ -87,26 +91,37 @@ internal class RequestController
 
     private void RunDataEmission()
     {
+        int packetId = 0;
+
         do
         {
             int cellId = _beginAt + _cursor.Current;
 
+            
+
             if (_spatialReader.TryRead(
                 cellId,
-                _currentAccessPlan,
+                _currentAccessPlan!,
                 _currentParameterId))
             {
-                _requestEmitter.Emit(
-                    cellId,
-                    _spatialReader.Values,
-                    _spatialReader.Count);
+                packetId = _beginAt + Count++;
 
-                Count++;
+                _requestEmitter.Emit(
+                    packetId,
+                    _spatialReader.Values,
+                    _spatialReader.Count,
+                    cellId);
+
             }
 
         } while (_cursor.TryAdvance());
 
         _cursor.Reset();
+
+        Console.WriteLine(
+    $"Controller {_boxId}: begin={_beginAt}, count={Count}");
+
+        _requestEmitter.updateBoxLimit(_boxId, Count);
 
         _controllerState = ControllerState.Completed;
     }

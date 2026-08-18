@@ -4,15 +4,15 @@ using LawsLaboratory.Core.SpatialModel.Boundary;
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;
 
-public sealed class PlaneGrid : IGrid<PlanePosition>
+internal sealed class PlaneGrid : IGrid<PlanePosition>
 {
     private readonly Cell[] _cells;
 
     private readonly int _width;
     private readonly int _height;
 
-    private readonly IBoundaryCondition<PlanePosition> _boundary;
 
+    private int _resolveId;
 
     public int Dimension => 2;
 
@@ -22,13 +22,11 @@ public sealed class PlaneGrid : IGrid<PlanePosition>
     public PlaneGrid(
         int width,
         int height,
-        int parameterCount,
-        IBoundaryCondition<PlanePosition> boundary)
+        int parameterCount)
     {
         _width = width;
         _height = height;
 
-        _boundary = boundary;
 
         _cells = new Cell[width * height];
 
@@ -39,53 +37,34 @@ public sealed class PlaneGrid : IGrid<PlanePosition>
         }
     }
 
-    public IValue GetParameterValue(int cellId,  ushort parameterId)
+    public IValue GetParameterValue(int cellId, ushort parameterId)
     {
-        return _cells[cellId].GetParameterValue(parameterId);
+        return _cells[Resolve(cellId)].GetParameterValue(parameterId);
     }
 
     public void SetCellParameterValue(int cellId, ushort parameterId, IValue value)
     {
-        _cells[cellId].SetParameterValue(parameterId, value);
+        _cells[Resolve(cellId)].SetParameterValue(parameterId, value);
     }
 
     public void SetCellParameterValue(int cellId, ushort parameterId, double value)
     {
-        _cells[cellId].SetParameterValue(parameterId, value);
+        _cells[Resolve(cellId)].SetParameterValue(parameterId, value);
     }
 
-
-    public PlanePosition GetPosition(int id)
+    private int Resolve(int cellId)
     {
-        int x = id % _width;
-        int y = id / _width;
+        if (0 <= cellId && cellId < Size)
+        {
+            return cellId;
+        }
 
-        return new PlanePosition(x, y);
+        _resolveId = cellId % Size;
+
+        return cellId < 0 ? _resolveId + Size : _resolveId;
+
     }
 
-
-    public bool Contains(PlanePosition position)
-    {
-        return
-            position.X >= 0 &&
-            position.X < _width &&
-            position.Y >= 0 &&
-            position.Y < _height;
-    }
-
-
-    public IValue GetParameterValue(PlanePosition position, ushort parameterId)
-    {
-        PlanePosition resolved = _boundary.Resolve(position);
-
-        int cellId = ToId(resolved);
-
-        return GetParameterValue(cellId, parameterId);
-    }
-
-
-    private int ToId(PlanePosition position)
-    {
-        return position.Y * _width + position.X;
-    }
 }
+
+

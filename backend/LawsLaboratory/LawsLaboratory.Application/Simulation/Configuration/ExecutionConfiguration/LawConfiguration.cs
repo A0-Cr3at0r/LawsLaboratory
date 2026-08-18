@@ -2,13 +2,13 @@
 
 public sealed class LawConfiguration
 {
-    public string VariationFormula { get; init; }
+    public required string VariationFormula { get; init; }
 
-    public string TransmissionFormula { get; init; }
+    public required string TransmissionFormula { get; init; }
 
-    public InitializationConfiguration InitializationConfiguration { get; init; }
+    public required InitializationConfiguration InitializationConfiguration { get; init; }
 
-    public PlanePositionConfiguration[] TransmissionDestinations { get; init; }
+    public required PlanePositionConfiguration[] TransmissionDestinations { get; init; }
 }
 
 public sealed class PlanePositionConfiguration

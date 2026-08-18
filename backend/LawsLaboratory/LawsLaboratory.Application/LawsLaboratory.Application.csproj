@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Execution\EngineGateway\" />
     <Folder Include="DefaultEngine\" />
     <Folder Include="Identity\" />
     <Folder Include="ProjectManagement\" />
@@ -16,6 +15,10 @@
   <ItemGroup>
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
   </ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="LawsLaboratory.Tests" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\LawsLaboratory.Core\LawsLaboratory.Core.csproj" />

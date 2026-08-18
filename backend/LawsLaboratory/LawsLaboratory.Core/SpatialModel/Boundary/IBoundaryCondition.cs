@@ -3,5 +3,5 @@
 public interface IBoundaryCondition<TPosition>
     where TPosition : struct
 {
-    TPosition Resolve(TPosition position);
+    int Resolve(int position);
 }
