@@ -13,6 +13,10 @@
   <ItemGroup>
 	<ProjectReference Include="..\LawsLaboratory.Application\LawsLaboratory.Application.csproj" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Gateway\" />
+  </ItemGroup>
 
 
 </Project>

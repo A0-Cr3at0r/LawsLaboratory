@@ -9,19 +9,30 @@ public enum ValueKind : byte
     Tensor
 }
 
-public interface ISerializedValue
+public sealed record SerializedValue
 {
-    ValueKind Kind { get; }
+    public ValueKind Kind { get; }
 
-    ReadOnlySpan<int> Shape { get; }
+    public int[] Shape;
 
-    ReadOnlySpan<double> Data { get; }
+    public double[] Data;
+
+    public SerializedValue(
+        ValueKind kind,
+        int[] shape,
+        double[] data)
+    {
+        Kind = kind;
+        Shape = shape;
+        Data = data;
+    }
 }
+
 
 public sealed class GatewayResult
 {
     public int Id { get; init; }
-    public required ISerializedValue Value { get; init; }
+    public required SerializedValue Value { get; init; }
 }
 
 internal sealed class GatewayExitBuffer

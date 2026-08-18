@@ -1,25 +1,25 @@
 ﻿namespace LawsLaboratory.Core.Formula;
 
-public enum OperatorType
+public enum OperatorType : byte
 {
-    Add,
-    Subtract,
-    Multiply,
-    Divide,
-    Power,
+    Add = 0,
+    Subtract = 1,
+    Multiply = 2,
+    Divide = 3,
+    Power = 4,
 
-    Log,
-    Ln,
-    Sqrt,
+    Log = 5,
+    Ln = 6,
+    Sqrt = 7,
 
-    Sin,
-    Cos,
+    Sin = 8,
+    Cos = 9,
 
-    And,
-    Or,
-    Xor,
-    Not,
+    And = 10,
+    Or = 11,
+    Xor = 12,
+    Not = 13,
 
-    Floor,
-    Ceil
+    Floor = 14,
+    Ceil = 15
 }

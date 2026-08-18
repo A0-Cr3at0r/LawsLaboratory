@@ -1,7 +1,6 @@
 using LawsLaboratory.Application.Execution.EngineGateway;
 using LawsLaboratory.Application.Execution.EngineGateway.Entry;
 using LawsLaboratory.Application.Execution.ExecutionRequestStage;
-using LawsLaboratory.Application.Execution.ExecutionResultStage;
 using LawsLaboratory.Application.Simulation.Build.Factories;
 using LawsLaboratory.Application.Simulation.LawsRepository;
 using LawsLaboratory.Application.Simulation.Observer;
@@ -13,12 +12,11 @@ using LawsLaboratory.Core.Formula;
 using LawsLaboratory.Core.Formula.Element;
 using LawsLaboratory.Core.Laws;
 using LawsLaboratory.Core.Mathematics.Distributions;
-using LawsLaboratory.Core.SpatialModel.Boundary;
 using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;
 
-namespace LawsLaboratory.Tests;
+namespace LawsLaboratory.Tests.TaskCoordinatorTest;
 
 public class TaskCoordinatorTest
 {
@@ -69,7 +67,6 @@ public class TaskCoordinatorTest
                 maxPackets: cellCount,
                 maxValueCount: 1,
                 maxBoxUsable: Environment.ProcessorCount,
-                firstParameterId: 0,
                 firstExpression: expression);
 
         GatewayExitBuffer gatewayExitBuffer =
@@ -222,7 +219,6 @@ public class TaskCoordinatorTest
                 maxPackets: cellCount,
                 maxValueCount: 1,
                 maxBoxUsable: Environment.ProcessorCount,
-                firstParameterId: 0,
                 firstExpression: expression);
 
         GatewayExitBuffer gatewayExitBuffer =
@@ -469,8 +465,10 @@ public class TaskCoordinatorTest
                     new GatewayResult
                     {
                         Id = packet.CellId,
-                        Value = new ScalarSerializedValue(
-                            2 * value)
+                        Value = new SerializedValue(
+                            ValueKind.Scalar,
+                            [1, 1],
+                            [2 * value])
                     };
             }
 
@@ -524,8 +522,10 @@ public class TaskCoordinatorTest
                     new GatewayResult
                     {
                         Id = packet.CellId,
-                        Value = new ScalarSerializedValue(
-                            value + 1)
+                        Value = new SerializedValue(
+                            ValueKind.Scalar,
+                            [1, 1],
+                            [value + 1])
                     };
             }
 
@@ -557,23 +557,4 @@ public class TaskCoordinatorTest
 
 
 
-
-    private sealed class ScalarSerializedValue : ISerializedValue
-    {
-        private readonly double[] _data;
-
-        public ValueKind Kind =>
-            ValueKind.Scalar;
-
-        public ReadOnlySpan<int> Shape =>
-            ReadOnlySpan<int>.Empty;
-
-        public ReadOnlySpan<double> Data =>
-            _data;
-
-        public ScalarSerializedValue(double value)
-        {
-            _data = [value];
-        }
-    }
 }

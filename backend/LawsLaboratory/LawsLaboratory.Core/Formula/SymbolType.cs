@@ -1,7 +1,7 @@
 ﻿namespace LawsLaboratory.Core.Formula;
 
-public enum SymbolType
+public enum SymbolType : byte
 {
-    Pi,
-    Euler
+    Pi = 0,
+    Euler = 1
 }

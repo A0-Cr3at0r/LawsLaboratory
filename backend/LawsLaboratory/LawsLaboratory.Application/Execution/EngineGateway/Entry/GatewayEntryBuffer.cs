@@ -5,10 +5,10 @@ namespace LawsLaboratory.Application.Execution.EngineGateway.Entry;
 
 public enum ExpressionKinds : byte
 {
-    Variable,
-    Constant,
-    Symbol,
-    Operator
+    Operator = 0,
+    Variable = 1,
+    Constant = 2,
+    Symbol = 3
 }
 
 public readonly record struct ExpressionEntry(
@@ -30,7 +30,6 @@ internal sealed class GatewayEntryBuffer
                         int maxPackets,
                         int maxValueCount,
                         int maxBoxUsable,
-                        ushort firstParameterId,
                         CompiledExpression firstExpression)
     {
         BoxLimite = new int[maxBoxUsable];
@@ -46,12 +45,10 @@ internal sealed class GatewayEntryBuffer
         }
 
         SetParameterExpression(
-            firstParameterId,
             firstExpression);
     }
 
     public void SetParameterExpression(
-    ushort parameterId,
     CompiledExpression compiledExpression)
     {
 

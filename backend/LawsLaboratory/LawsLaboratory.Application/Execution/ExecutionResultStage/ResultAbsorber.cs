@@ -44,7 +44,7 @@ internal sealed class ResultAbsorber
 
 
     private static bool TryCreateValue(
-        ISerializedValue serializedValue,
+        SerializedValue serializedValue,
         out IValue value)
     {
         switch (serializedValue.Kind)
