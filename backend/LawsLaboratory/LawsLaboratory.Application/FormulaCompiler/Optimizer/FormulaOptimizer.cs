@@ -1,4 +1,21 @@
-﻿using LawsLaboratory.Core.Formula;
+﻿// ----------------------------------------------------------------------------- 
+// LawsLaboratory 
+// Application / FormulaCompiler / Optimization
+// 
+// FormulaOptimizer.cs
+// 
+// Applies optional mathematical transformations to the scientific 
+// expression tree in order to reduce the cost of later evaluation.
+// 
+// Optimization is intended primarily for the internal Laws Laboratory
+// calculation engine and is not required for compilation. 
+//
+// The optimizer targets the real-valued formula model of the current
+// version and rejects constant expressions that produce invalid real 
+// values such as NaN or Infinity. 
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Formula;
 using LawsLaboratory.Core.Formula.Node;
 
 namespace LawsLaboratory.Application.FormulaCompiler.Optimization;

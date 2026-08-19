@@ -1,4 +1,20 @@
-﻿namespace LawsLaboratory.Application.FormulaCompiler.Lexer;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / FormulaCompiler / Lexer
+//
+// FormulaLexer.cs
+//
+// Performs lexical analysis of the formula language.
+//
+// Converts the source string into FormulaToken instances while preserving
+// the lexical position of each token.
+//
+// The lexer recognizes literals, identifiers, arithmetic operators, logical
+// operators, grouping symbols, relative-position syntax, and separators.
+// It does not determine the semantic meaning of identifiers.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Application.FormulaCompiler.Lexer;
 
 internal sealed class FormulaLexer
 {
@@ -16,6 +32,12 @@ internal sealed class FormulaLexer
             [']'] = TokenType.CloseBracket,
             [','] = TokenType.Comma
         };
+
+    private static readonly IReadOnlyDictionary<string, TokenType> Keywords =
+    new Dictionary<string, TokenType>(StringComparer.OrdinalIgnoreCase)
+    {
+        ["xor"] = TokenType.Xor
+    };
 
     private string _source = string.Empty;
     private int _position;
@@ -54,9 +76,30 @@ internal sealed class FormulaLexer
 
             int tokenPosition = _position;
 
+            if (current == '&' || current == '|')
+            {
+                tokens.Add(ReadLogicalOperator());
+                continue;
+            }
+
+            if (current == '!')
+            {
+                Advance();
+
+                tokens.Add(
+                    new FormulaToken(
+                        TokenType.Not,
+                        "!",
+                        tokenPosition));
+
+                continue;
+            }
+
             current = Advance();
 
-            if (SingleCharacterTokens.TryGetValue(current, out TokenType tokenType))
+            if (SingleCharacterTokens.TryGetValue(
+                    current,
+                    out TokenType tokenType))
             {
                 tokens.Add(
                     new FormulaToken(
@@ -89,7 +132,7 @@ internal sealed class FormulaLexer
             Advance();
         }
 
-        if (Peek() == '.' || Peek() == ',')
+        if (Peek() == '.')
         {
             Advance();
 
@@ -118,9 +161,45 @@ internal sealed class FormulaLexer
 
         string lexeme = _source[start.._position];
 
+        if (Keywords.TryGetValue(
+                lexeme,
+                out TokenType tokenType))
+        {
+            return new FormulaToken(
+                tokenType,
+                lexeme,
+                start);
+        }
+
         return new FormulaToken(
             TokenType.Identifier,
             lexeme,
+            start);
+    }
+
+    private FormulaToken ReadLogicalOperator()
+    {
+        int start = _position;
+
+        char first = Peek();
+
+        if (PeekNext() != first)
+        {
+            throw new InvalidOperationException(
+                $"Expected '{first}{first}' at position {start}.");
+        }
+
+        Advance();
+        Advance();
+
+        TokenType tokenType =
+            first == '&'
+                ? TokenType.And
+                : TokenType.Or;
+
+        return new FormulaToken(
+            tokenType,
+            _source[start.._position],
             start);
     }
 

@@ -1,4 +1,23 @@
-﻿namespace LawsLaboratory.Application.FormulaCompiler.Semantic;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / FormulaCompiler / Semantic
+//
+// SemanticAnalyzer.cs
+//
+// Converts the syntax AST into the scientific expression model.
+//
+// Resolves parameter identifiers through IParameterRegistry, symbolic
+// constants through SymbolType, and supported functions through their
+// FunctionDefinition.
+//
+// Also validates semantic constraints such as unknown identifiers,
+// unsupported functions, and invalid function arity.
+//
+// The analyzer assigns domain meaning to the syntax tree but does not
+// optimize or generate the final compiled representation.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Application.FormulaCompiler.Semantic;
 
 using LawsLaboratory.Application.Simulation.EnvironnementRepository.Parameter;
 using LawsLaboratory.Core.Formula;

@@ -221,7 +221,7 @@ public class TaskCoordinatorTest
                 maxPackets: cellCount,
                 maxValueCount: 1,
                 maxBoxUsable: Environment.ProcessorCount,
-                program: expression.Element);
+                program: expression.Program);
 
         GatewayExitBuffer gatewayExitBuffer =
             new GatewayExitBuffer(cellCount);

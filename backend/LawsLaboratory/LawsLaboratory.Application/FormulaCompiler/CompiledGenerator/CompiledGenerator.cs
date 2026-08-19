@@ -1,11 +1,24 @@
-﻿using LawsLaboratory.Core.Formula.Element;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / FormulaCompiler / CompiledGenerator
+//
+// CompiledGenerator.cs
+//
+// Converts the scientific expression tree into the linear postfix
+// representation stored by CompiledExpression.
+//
+// The generator performs no semantic analysis or optimization.
+// Each expression node is translated into its corresponding
+// ExpressionElement, with operator children emitted before the operator.
+// -----------------------------------------------------------------------------
+
+
+using LawsLaboratory.Core.Formula.Element;
 using LawsLaboratory.Core.Formula.Node;
 
 namespace LawsLaboratory.Application.FormulaCompiler.COmpiledGenerator;
 
-/// <summary>
-/// Converts a scientific expression tree into a compiled postfix expression.
-/// </summary>
+
 public sealed class CompiledGenerator
 {
     /// <summary>

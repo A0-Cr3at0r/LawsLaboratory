@@ -1,4 +1,21 @@
-﻿using LawsLaboratory.Application.FormulaCompiler.Lexer;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / FormulaCompiler
+//
+// FormulaCompiler.cs
+//
+// Orchestrates the complete formula compilation pipeline.
+//
+// Pipeline:
+//   Source → Lexing → Parsing → Semantic Analysis
+//   → Optional Optimization → Compiled Generation
+//
+// Optimization is optional. It is primarily intended for the internal
+// calculation engine and can be disabled when the compiled expression is
+// intended for an external engine with its own numerical evaluation strategy.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.FormulaCompiler.Lexer;
 using LawsLaboratory.Application.FormulaCompiler.Optimization;
 using LawsLaboratory.Application.FormulaCompiler.Parser;
 using LawsLaboratory.Application.FormulaCompiler.Semantic;

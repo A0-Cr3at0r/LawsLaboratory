@@ -1,5 +1,4 @@
 ﻿using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
-using LawsLaboratory.Core.Mathematics.DiscreteDistributions;
 using LawsLaboratory.Core.Mathematics.Distributions;
 using LawsLaboratory.Core.Mathematics.Distributions.DiscreteDistributions;
 using LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;

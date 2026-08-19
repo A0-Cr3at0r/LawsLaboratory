@@ -1,149 +1,21 @@
-﻿/*
- * FormulaParser
- *
- * This class performs the syntactic analysis of the formula language
- * used by Laws Laboratory.
- *
- * The parser implements a Recursive Descent parsing algorithm.
- *
- * Principle:
- * ----------
- *
- * The parser receives a sequence of FormulaToken instances produced
- * by the Lexer and builds an Abstract Syntax Tree (AST).
- *
- * It does not validate the scientific meaning of identifiers.
- *
- * Example:
- *
- *     Temperature
- *
- * produces:
- *
- *     IdentifierNode("Temperature")
- *
- * The resolution into:
- *
- *     VariableNode(ParameterId)
- *
- * is the responsibility of the Semantic Analyzer.
- *
- *
- * Grammar:
- * --------
- *
- * The parser is based on a Context-Free Grammar (CFG).
- *
- *
- * Non-terminal symbols:
- *
- *     Expression
- *     LogicalOr
- *     LogicalXor
- *     LogicalAnd
- *     Addition
- *     Multiplication
- *     Power
- *     Unary
- *     Primary
- *     Arguments
- *
- *
- * These symbols exist only during syntactic analysis.
- * They are not preserved in the final AST.
- *
- *
- * Terminal symbols:
- *
- *     Number
- *     Identifier
- *
- *     +
- *     -
- *     *
- *     /
- *     ^
- *
- *     && <=> AND
- *     || <=> OR
- *     !  <=> NOT
- *     xor
- *
- *     (
- *     )
- *
- *     ,
- *
- *
- * Operator precedence:
- * --------------------
- *
- * Expression
- *      -> LogicalOr
- *
- * LogicalOr
- *      -> LogicalXor
- *          ( OR LogicalXor )*
- *
- * LogicalXor
- *      -> LogicalAnd
- *          ( XOR LogicalAnd )*
- *
- * LogicalAnd
- *      -> Addition
- *          ( AND Addition )*
- *
- * Addition
- *      -> Multiplication
- *          ( ("+" | "-") Multiplication )*
- *
- * Multiplication
- *      -> Power
- *          ( ("*" | "/") Power )*
- *
- * Power
- *      -> Unary
- *          ( "^" Unary )*
- *
- * Unary
- *      -> "-" Unary
- *      -> "!" Unary
- *      -> Primary
- *
- * Primary
- *      -> Number
- *      -> Identifier
- *      -> FunctionCall
- *      -> "(" Expression ")"
- *
- *
- * Example:
- *
- *     2 + 3 * x && !enabled
- *
- * produces:
- *
- *                 AND
- *                /   \
- *              (+)    !
- *             /  \     \
- *            2    *   enabled
- *                / \
- *               3   x
- *
- *
- * Intermediate grammar nodes
- * (Addition, Multiplication, etc.)
- * are discarded once the AST has been built.
- *
- * The final AST contains only:
- *
- *     ConstantNode
- *     IdentifierNode
- *     OperatorNode
- *     FunctionCallNode
- *
- */
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / FormulaCompiler / Parser
+//
+// FormulaParser.cs
+//
+// Performs syntactic analysis of the formula language using recursive
+// descent parsing.
+//
+// Converts the token sequence produced by FormulaLexer into a syntax AST
+// while enforcing the grammar, operator precedence, associativity, function
+// call structure, and relative-position syntax.
+//
+// The parser does not resolve identifiers, symbols, parameters, or functions.
+// Those responsibilities belong to SemanticAnalyzer.
+// -----------------------------------------------------------------------------
+
+
 
 namespace LawsLaboratory.Application.FormulaCompiler.Parser;
 

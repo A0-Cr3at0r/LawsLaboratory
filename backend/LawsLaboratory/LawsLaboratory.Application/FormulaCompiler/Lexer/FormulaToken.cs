@@ -1,4 +1,22 @@
-﻿namespace LawsLaboratory.Application.FormulaCompiler.Lexer;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / FormulaCompiler / Lexer
+//
+// FormulaToken.cs
+//
+// Defines the lexical token categories produced by FormulaLexer. 
+// These values describe the syntax recognized by the lexer and are distinct 
+// from the semantic OperatorType and SymbolType representations.
+//
+// Represents a single lexical token produced by FormulaLexer.
+//
+// Each token stores its lexical category, original lexeme, and position in
+// the source expression so that later compilation stages can report
+// meaningful syntax or semantic errors.
+// -----------------------------------------------------------------------------
+
+
+namespace LawsLaboratory.Application.FormulaCompiler.Lexer;
 
 public enum TokenType
 {
