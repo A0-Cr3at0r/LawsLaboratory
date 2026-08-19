@@ -1,5 +1,53 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+		<!--
+    LawsLaboratory.Core
+    _____________________
+	
+    Defines the fundamental domain concepts and mathematical abstractions
+    used by the simulation.
+
+    Core is independent of the application orchestration and execution
+    mechanisms. It describes WHAT the simulation operates on, rather than
+    HOW the simulation is executed.
+
+    Main responsibilities:
+      - Formula:
+          Represents expressions, their elements, variable references,
+          and their compiled instruction representation.
+
+      - Laws:
+          Represents the semantic rules governing the evolution and
+          initialization of the simulation state. A Law aggregates its
+          initialization, variation, and transmission rules.
+
+      - SpatialModel / Value:
+          Defines the fundamental spatial and value representations
+          manipulated by the simulation.
+
+      - Mathematics:
+          Provides reusable mathematical abstractions required by the
+          domain, notably probability distributions, random generators,
+          domains, and geometric constraints.
+
+    Architectural principle:
+      Core contains domain concepts and mathematical mechanisms but does
+      not orchestrate simulation execution. Higher layers may depend on
+      Core, while Core should remain unaware of application-level
+      pipelines, gateways, controllers, transport, or serialization.
+
+    Initialization rules may combine a value distribution with an optional
+    spatial distribution and an optional spatial domain. The spatial
+    distribution determines candidate positions, while the spatial domain
+    constrains the positions where initialization is effective.
+
+    Laws intentionally remain a domain-level abstraction. Execution layers
+    consume the compiled representations exposed by Core rather than
+    depending on the internal structure of individual rule types.
+  -->
+
+
+
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
