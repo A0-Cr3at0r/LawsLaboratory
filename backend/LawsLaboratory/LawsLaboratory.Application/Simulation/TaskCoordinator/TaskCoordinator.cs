@@ -1,4 +1,51 @@
-﻿using LawsLaboratory.Application.Execution.EngineGateway.Exit;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / TaskCoordinator
+//
+// TaskCoordinator.cs
+//
+// Orchestrates the execution stages of a simulation cycle.
+//
+// For each simulation parameter, the coordinator:
+//   1. selects the corresponding law expression;
+//   2. launches the RequestControllers;
+//   3. notifies the EngineGateway that the input data is ready;
+//   4. waits for calculation completion;
+//   5. determines the number of results actually produced;
+//   6. distributes the valid result range among the ResultControllers;
+//   7. launches the ResultControllers;
+//   8. synchronizes the execution phases.
+//
+// The coordinator does not perform formula evaluation and does not directly
+// access the simulation grid. Request and result controllers perform the
+// spatial data operations, while the EngineGateway is responsible for
+// calculation.
+//
+// The GatewayExitBuffer is preallocated and its capacity may exceed the
+// number of results produced by a calculation. The ResultReceived value
+// determines the valid result range for the current calculation. Entries
+// outside this range may remain uninitialized and must not be consumed.
+//
+// Consequently, ResultControllers are configured according to the actual
+// number of received results rather than the maximum buffer capacity. The
+// coordinator distributes this valid range so that each ResultController
+// operates only on a valid portion of the result data.
+//
+// Controllers are created once during initialization and reused across
+// simulation cycles.
+//
+// Variation and transmission share the same execution pipeline but use
+// different spatial access plans and law expressions.
+//
+// The TaskCoordinator does not execute calculations and has no knowledge
+// of the underlying execution engine.
+//
+// TaskCoordinatorState represents the current synchronization stage of the
+// pipeline, including calculation waits and lifecycle states such as pause,
+// resume, completion, and stop.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Execution.EngineGateway.Exit;
 using LawsLaboratory.Application.Execution.EngineGateway.Entry;
 using LawsLaboratory.Application.Execution.ExecutionRequestStage;
 using LawsLaboratory.Application.Execution.ExecutionResultStage;
@@ -9,10 +56,7 @@ using LawsLaboratory.Application.Simulation.EnvironnementRepository.Parameter;
 
 namespace LawsLaboratory.Application.Simulation.TaskCoordinator;
 
-/// <summary>
-/// Represents the current execution stage
-/// of the simulation orchestration pipeline.
-/// </summary>
+
 internal enum TaskCoordinatorState
 {
     None,

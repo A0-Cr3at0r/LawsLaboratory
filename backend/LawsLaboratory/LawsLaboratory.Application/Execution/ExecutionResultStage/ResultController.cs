@@ -1,4 +1,31 @@
-﻿using LawsLaboratory.Application.Execution.ControllersState;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Execution / ExecutionResultStage
+//
+// ResultController.cs
+//
+// Applies the results produced by the execution engine back to the simulation
+// grid for a given parameter and traversal range.
+//
+// The controller:
+//   - reads results from the GatewayExitBuffer;
+//   - converts them through ResultAbsorber;
+//   - determines their destination according to the execution mode;
+//   - writes the resulting value into the grid through SpatialWriter.
+//
+// Variation writes each result to the parameter value of the cell identified
+// by the result.
+//
+// Transmission uses the parameter's precomputed destination spatial access
+// plan to write the result to the appropriate destination cells.
+//
+// It does not perform formula evaluation. Its responsibility is to materialize
+// engine results into the simulation state.
+//
+// The controller reports its execution state through ControllerState.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Execution.ControllersState;
 using LawsLaboratory.Application.Simulation.SpatialManagement.ReaderWriter;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
 using LawsLaboratory.Core.SpatialModel.Grid;

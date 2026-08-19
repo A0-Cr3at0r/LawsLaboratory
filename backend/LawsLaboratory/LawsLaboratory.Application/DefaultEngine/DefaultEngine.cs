@@ -1,4 +1,33 @@
-﻿using LawsLaboratory.Core.Formula;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Engine
+//
+// DefaultEngine.cs
+//
+// Provides the internal expression evaluator used by LawsLaboratory when the
+// EngineGateway is configured to use the internal calculation path.
+//
+// The engine evaluates a compiled postfix expression represented as a sequence
+// of ExpressionInstruction values.
+//
+// Evaluation uses a reusable stack of doubles:
+//   - value instructions push constants, variables, or symbols;
+//   - operator instructions consume their operands from the stack;
+//   - the final stack entry is the calculated result.
+//
+// Variable instructions are resolved against the ordered input value array
+// supplied with a request. Symbol instructions are resolved using the
+// mathematical constants supported by the formula language.
+//
+// This engine is an internal execution implementation. It is not the
+// abstraction used to communicate with external calculation engines.
+//
+// The evaluator operates on the compiled expression supplied at construction
+// and therefore does not perform lexing, parsing, semantic analysis, or
+// optimization.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Formula;
 using LawsLaboratory.Core.Formula.Program;
 
 namespace LawsLaboratory.Application.Engine;

@@ -1,4 +1,26 @@
-﻿namespace LawsLaboratory.Application.Simulation.EnvironnementRepository.Parameter;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / EnvironnementRepository / Parameter
+//
+// ParameterRegistry.cs
+//
+// Provides the canonical registration and identity mapping of simulation
+// parameters.
+//
+// Parameters are assigned consecutive ushort identifiers in registration
+// order. The registry maintains both:
+//
+//     name → ParameterId
+//     ParameterId → name
+//
+// Parameter identifiers are stable within the registry and are used throughout
+// the simulation runtime to avoid repeatedly carrying parameter names.
+//
+// The registry validates parameter names, rejects duplicates, and enforces
+// the maximum number of parameters representable by ushort identifiers.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Application.Simulation.EnvironnementRepository.Parameter;
 
 using System.Collections.Immutable;
 

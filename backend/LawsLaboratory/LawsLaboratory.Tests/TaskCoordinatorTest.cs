@@ -452,7 +452,7 @@ public class TaskCoordinatorTest
             if (box == controllerCount - 1)
                 currentBoxSize += remainder;
 
-            int limit = entry.BoxLimite[box];
+            int limit = entry.BoxLimiBoxRequestCounts[box];
 
             for (int i = 0; i < limit; i++)
             {
@@ -510,7 +510,7 @@ public class TaskCoordinatorTest
             if (box == controllerCount - 1)
                 currentBoxSize += remainder;
 
-            int limit = entry.BoxLimite[box];
+            int limit = entry.BoxLimiBoxRequestCounts[box];
 
             for (int i = 0; i < limit; i++)
             {

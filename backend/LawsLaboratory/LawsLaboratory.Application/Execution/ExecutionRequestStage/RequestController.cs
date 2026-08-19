@@ -1,4 +1,30 @@
-﻿using LawsLaboratory.Application.Execution.EngineGateway.Entry;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Execution / ExecutionRequestStage
+//
+// RequestController.cs
+//
+// Prepares the input requests sent to the execution engine for a given
+// parameter and spatial traversal range.
+//
+// The controller:
+//   - selects the spatial access plan associated with the current parameter;
+//   - traverses its assigned cells;
+//   - reads the required spatial values from the grid;
+//   - emits the corresponding requests into the GatewayEntryBuffer.
+//
+// It does not perform formula evaluation. Its responsibility is limited to
+// collecting and preparing the data required by the execution engine.
+//
+// A controller operates on one parameter and one traversal range at a time.
+// Variation and transmission differ only by the spatial access plan selected
+// for reading the required source values.
+//
+// The controller reports its execution state through ControllerState and
+// updates the number of successfully emitted requests for its assigned box.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Execution.EngineGateway.Entry;
 using LawsLaboratory.Application.Simulation.Observer;
 using LawsLaboratory.Application.Simulation.SpatialManagement.ReaderWriter;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;

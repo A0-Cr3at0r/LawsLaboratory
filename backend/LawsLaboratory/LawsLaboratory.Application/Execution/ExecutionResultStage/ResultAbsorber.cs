@@ -1,4 +1,28 @@
-﻿using LawsLaboratory.Application.Execution.EngineGateway.Exit;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Execution / ExecutionResultStage
+//
+// ResultAbsorber.cs
+//
+// Reads one serialized result from the GatewayExitBuffer and converts it into
+// the corresponding Core value representation.
+//
+// The absorber validates both the requested result position and the presence
+// of a result before attempting deserialization. This provides a defensive
+// boundary even though the execution gateway normally guarantees that consumed
+// result slots have been populated.
+//
+// The current implementation accepts scalar results and converts them into
+// ScalarValue instances.
+//
+// Unsupported or invalid serialized values are rejected and represented as
+// Dead.Instance.
+//
+// The absorber performs no spatial write; it only interprets the result
+// received from the execution gateway.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Execution.EngineGateway.Exit;
 using LawsLaboratory.Core.Value;
 
 namespace LawsLaboratory.Application.Execution.ExecutionResultStage;
@@ -29,7 +53,12 @@ internal sealed class ResultAbsorber
             return false;
         }
 
-        GatewayResult result = _gatewayExit.Results[index];
+        GatewayResult? result = _gatewayExit.Results[index];
+
+        if (result is null)
+        {
+            return false;
+        }
 
         if (!TryCreateValue(result.Value, out IValue value))
         {

@@ -1,4 +1,27 @@
-﻿using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / SpatialManagement / ReaderWriter
+//
+// SpatialReader.cs
+//
+// Reads the values required to evaluate a spatial law from the simulation
+// grid.
+//
+// For a given cell and parameter, the reader first verifies that the current
+// value is alive, then follows a precomputed SpatialAccessPlan to collect all
+// required spatial dependencies.
+//
+// Values are written into a reusable fixed-capacity buffer and exposed as a
+// ReadOnlySpan to avoid allocations during request preparation.
+//
+// A request is considered unreadable when the current value or any required
+// dependency is Dead. Such cells are therefore excluded from engine requests.
+//
+// The reader also emits the current parameter value to the observation
+// dispatcher for metric collection.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
 using LawsLaboratory.Application.Simulation.Observer;
 using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;

@@ -1,4 +1,19 @@
-﻿namespace LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / SpatialManagement / Traversal
+//
+// SequentialTraversalCursor.cs
+//
+// Implements the cursor for sequential traversal of a linearized spatial
+// domain.
+//
+// The cursor starts at position zero and advances one position at a time
+// until TraversalCount is reached.
+//
+// It contains only traversal state and does not perform any simulation work.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
 
 internal sealed class SequentialTraversalCursor : ITraversalCursor
 {

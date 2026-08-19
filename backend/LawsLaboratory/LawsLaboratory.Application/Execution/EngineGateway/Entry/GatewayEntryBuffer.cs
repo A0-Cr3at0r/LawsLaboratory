@@ -1,5 +1,27 @@
-﻿using LawsLaboratory.Application.Execution.ExecutionRequestStage;
-using LawsLaboratory.Core.Formula.Element;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Execution / EngineGateway / Entry
+//
+// GatewayEntryBuffer.cs
+//
+// Preallocated input buffer shared between the execution request stage and
+// the EngineGateway.
+//
+// The buffer contains:
+//   - the compiled expression/program to execute;
+//   - a fixed-capacity array of reusable RequestPacket instances;
+//   - the number of usable requests assigned to each controller box.
+//
+// The buffer is designed for repeated simulation execution with minimal
+// allocation. Request controllers write their prepared requests into it,
+// after which the gateway can expose the complete batch to the execution
+// engine.
+//
+// The buffer therefore forms the application-side boundary between request
+// preparation and engine execution.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Execution.ExecutionRequestStage;
 using LawsLaboratory.Core.Formula.Program;
 
 
@@ -10,7 +32,7 @@ using Program = List<ExpressionInstruction>;
 
 internal sealed class GatewayEntryBuffer
 {
-    public int[] BoxLimite { get; set; }
+    public int[] BoxLimiBoxRequestCounts{ get; set; }
 
     private readonly RequestPacket[] _packets;
 
@@ -25,7 +47,7 @@ internal sealed class GatewayEntryBuffer
                         int maxBoxUsable,
                         Program program)
     {
-        BoxLimite = new int[maxBoxUsable];
+        BoxLimiBoxRequestCounts = new int[maxBoxUsable];
 
         Expression = program;
 

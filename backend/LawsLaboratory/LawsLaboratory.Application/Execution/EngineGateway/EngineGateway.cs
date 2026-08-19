@@ -1,4 +1,29 @@
-﻿using LawsLaboratory.Application.Engine;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Execution / Gateway
+//
+// EngineGateway.cs
+//
+// Forms the execution boundary between the simulation pipeline and a
+// calculation engine.
+//
+// The gateway receives a complete batch of requests through its
+// GatewayEntryBuffer and produces serialized results through its
+// GatewayExitBuffer.
+//
+// The calculation engine is intentionally abstracted from the rest of the
+// execution pipeline. The current implementation can execute expressions
+// through the internal DefaultEngine, while the external-engine path is
+// reserved for an engine connected through the external calculation
+// transport/serialization layer.
+//
+// After calculation, the gateway notifies the TaskCoordinator so that the
+// result reception stage can begin.
+//
+// The gateway owns the execution-side buffers and keeps their storage
+// preallocated for repeated simulation cycles.
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Application.Engine;
 using LawsLaboratory.Application.Execution.EngineGateway.Entry;
 using LawsLaboratory.Application.Execution.EngineGateway.Exit;
 using LawsLaboratory.Core.Formula.Program;
@@ -45,7 +70,7 @@ internal class EngineGateway
         _defaultEngine =
             new DefaultEngine(EntryBuffer.Expression);
 
-        _boxCount = EntryBuffer.BoxLimite.Length;
+        _boxCount = EntryBuffer.BoxLimiBoxRequestCounts.Length;
 
         if (_boxCount <= 0)
         {
@@ -105,7 +130,7 @@ internal class EngineGateway
     public void ExecuteInternalCalculation()
     {
         var packets = EntryBuffer.Packets;
-        var boxLimits = EntryBuffer.BoxLimite;
+        var boxLimits = EntryBuffer.BoxLimiBoxRequestCounts;
         var results = ExitBuffer.Results;
 
         ExitBuffer.ResultReceived = 0;
