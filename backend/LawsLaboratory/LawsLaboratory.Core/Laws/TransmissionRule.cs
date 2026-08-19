@@ -1,4 +1,16 @@
-﻿namespace LawsLaboratory.Core.Laws;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Laws
+//
+// TransmissionRule.cs
+//
+// Defines how a calculated value is transmitted to other cells.
+//
+// The rule contains the original formula, its compiled representation, and
+// the relative positions of the destination cells.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Core.Laws;
 
 using LawsLaboratory.Core.Formula.Element;
 using LawsLaboratory.Core.SpatialModel.Position;

@@ -1,4 +1,14 @@
-﻿using System.Numerics;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Domain / GeometricDomain
+//
+// HyperbolaDomain.cs
+//
+// Represents the region defined by a pair of foci and a maximum allowed
+// absolute difference between the distances to those foci.
+// -----------------------------------------------------------------------------
+
+using System.Numerics;
 
 namespace LawsLaboratory.Core.Mathematics.Domain.GeometricDomain;
 

@@ -1,4 +1,20 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / DiscreteDistributions
+//
+// BinomialDistribution.cs
+//
+// Represents a binomial distribution with a fixed number of independent
+// Bernoulli trials.
+//
+// The generated value represents the number of successful trials among n
+// trials, where each trial has success probability p.
+//
+// Sampling is performed by generating the underlying Bernoulli trials.
+//
+// Requires trials >= 0 and 0 <= p <= 1.
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.DiscreteDistributions;
 

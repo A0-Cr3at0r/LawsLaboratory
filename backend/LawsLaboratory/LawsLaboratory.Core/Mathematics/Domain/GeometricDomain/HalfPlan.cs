@@ -1,4 +1,16 @@
-﻿using System.Numerics;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Domain / GeometricDomain
+//
+// HalfPlaneDomain.cs
+//
+// Represents one of the two half-planes defined by a linear boundary.
+//
+// A point belongs to the domain when it satisfies the configured linear
+// inequality.
+// -----------------------------------------------------------------------------
+
+using System.Numerics;
 
 namespace LawsLaboratory.Core.Mathematics.Domain.GeometricDomain;
 

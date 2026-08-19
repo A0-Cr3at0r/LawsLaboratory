@@ -1,4 +1,25 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / RealDistributions
+//
+// StudentTDistribution.cs
+//
+// Represents the Student's t-distribution with the specified degrees of
+// freedom.
+//
+// Samples are generated from the relationship:
+//
+//     T = Z / sqrt(V / nu)
+//
+// where Z ~ Normal(0, 1) and V ~ ChiSquare(nu).
+//
+// The chi-square variable is generated as a Gamma distribution with
+// shape = nu / 2 and scale = 2.
+//
+// Requires degreesOfFreedom > 0.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
 

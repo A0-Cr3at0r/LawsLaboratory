@@ -3,9 +3,9 @@ using LawsLaboratory.Application.Execution.EngineGateway.Entry;
 using LawsLaboratory.Application.Execution.ExecutionRequestStage;
 using LawsLaboratory.Application.Execution.ExecutionResultStage;
 using LawsLaboratory.Application.Simulation.Build.Factories;
-using LawsLaboratory.Application.Simulation.LawsRepository;
-using LawsLaboratory.Application.Simulation.Registry;
 using LawsLaboratory.Core.Laws;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.LawsRepository;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Parameter;
 
 namespace LawsLaboratory.Application.Simulation.TaskCoordinator;
 
@@ -257,8 +257,8 @@ internal sealed class TaskCoordinator
 
         _gatewayEntryBuffer.SetExpression(
             variation
-                ? law.GetVariationExpression().Element
-                : law.GetTransmissionExpression().Element);
+                ? law.GetVariationExpression().Program
+                : law.GetTransmissionExpression().Program);
 
 
         await ExecuteRequestStageAsync(

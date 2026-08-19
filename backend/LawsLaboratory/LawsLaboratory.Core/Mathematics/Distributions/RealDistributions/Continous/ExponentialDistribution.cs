@@ -1,17 +1,27 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / RealDistributions
+//
+// ExponentialDistribution.cs
+//
+// Represents the exponential distribution with rate parameter lambda.
+//
+// Samples are generated using inverse transform sampling:
+//
+//     X = -ln(U) / lambda
+//
+// where U is uniformly distributed on (0, 1).
+//
+// Requires lambda > 0.
+// Reference:
+// Devroye, L. (1986).
+// Non-Uniform Random Variate Generation.
+// Springer.
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
 
-    /// <summary>
-    /// Generates exponentially distributed random values.
-    /// Uses inverse transform sampling:
-    /// X = -ln(U) / lambda
-    /// 
-    /// Reference:
-    /// Devroye, L. (1986).
-    /// Non-Uniform Random Variate Generation.
-    /// Springer.
-    /// </summary>
     public sealed class ExponentialDistribution : IDistribution<double>
     {
         private readonly double _lambda;

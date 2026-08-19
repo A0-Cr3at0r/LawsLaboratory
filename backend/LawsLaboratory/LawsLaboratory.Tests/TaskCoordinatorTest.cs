@@ -2,9 +2,7 @@ using LawsLaboratory.Application.Execution.EngineGateway.Exit;
 using LawsLaboratory.Application.Execution.EngineGateway.Entry;
 using LawsLaboratory.Application.Execution.ExecutionRequestStage;
 using LawsLaboratory.Application.Simulation.Build.Factories;
-using LawsLaboratory.Application.Simulation.LawsRepository;
 using LawsLaboratory.Application.Simulation.Observer;
-using LawsLaboratory.Application.Simulation.Registry;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
 using LawsLaboratory.Application.Simulation.TaskCoordinator;
 using LawsLaboratory.Core.Formula;
@@ -15,6 +13,10 @@ using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;
 using LawsLaboratory.Application.Simulation.Build.SpatialBuild;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.LawsRepository;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Parameter;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
+
 
 namespace LawsLaboratory.Tests.TaskCoordinatorTest;
 
@@ -67,7 +69,7 @@ public class TaskCoordinatorTest
                 maxPackets: cellCount,
                 maxValueCount: 1,
                 maxBoxUsable: Environment.ProcessorCount,
-                program: expression.Element);
+                program: expression.Program);
 
         GatewayExitBuffer gatewayExitBuffer =
             new GatewayExitBuffer(cellCount);

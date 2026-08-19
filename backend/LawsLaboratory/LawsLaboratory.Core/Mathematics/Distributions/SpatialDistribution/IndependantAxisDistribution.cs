@@ -1,4 +1,14 @@
-﻿using System.Numerics;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / SpatialDistribution
+//
+// IndependentAxisDistribution.cs
+//
+// Generates two-dimensional points by independently sampling the X and Y
+// coordinates from separate distributions.
+// -----------------------------------------------------------------------------
+
+using System.Numerics;
 
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.SpatialDistribution;

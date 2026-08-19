@@ -3,8 +3,8 @@
 using LawsLaboratory.Application.FormulaCompiler;
 using LawsLaboratory.Application.Simulation.Build.InitializationBuild;
 using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
-using LawsLaboratory.Application.Simulation.LawsRepository;
-using LawsLaboratory.Application.Simulation.Registry;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.LawsRepository;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Parameter;
 using LawsLaboratory.Core.Laws;
 using LawsLaboratory.Core.SpatialModel.Position;
 

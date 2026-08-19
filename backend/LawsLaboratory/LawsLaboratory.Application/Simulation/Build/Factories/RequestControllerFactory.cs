@@ -4,6 +4,8 @@ using LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
 using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Application.Execution.ExecutionRequestStage;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
+
 
 namespace LawsLaboratory.Application.Simulation.Build.Factories;
 

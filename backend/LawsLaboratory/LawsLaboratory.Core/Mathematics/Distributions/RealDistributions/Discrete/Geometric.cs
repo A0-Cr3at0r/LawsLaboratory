@@ -1,4 +1,24 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / DiscreteDistributions
+//
+// GeometricDistribution.cs
+//
+// Represents a geometric distribution describing the number of failures
+// before the first success.
+//
+// The generated value belongs to {0, 1, 2, ...} and uses success probability
+// p.
+//
+// Sampling is performed using inverse transform sampling:
+//
+//     X = floor(ln(1 - U) / ln(1 - p))
+//
+// where U is uniformly distributed on (0, 1).
+//
+// Requires 0 < p <= 1.
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.DiscreteDistributions;
 

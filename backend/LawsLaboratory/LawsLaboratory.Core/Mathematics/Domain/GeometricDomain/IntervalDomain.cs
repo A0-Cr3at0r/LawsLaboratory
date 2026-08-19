@@ -1,4 +1,15 @@
-﻿namespace LawsLaboratory.Core.Mathematics.Domain.GeometricDomain;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Domain / GeometricDomain
+//
+// IntervalDomain.cs
+//
+// Represents a closed interval on the real number line.
+//
+// A value belongs to the domain when it lies between the minimum and maximum
+// bounds, inclusively.
+// -----------------------------------------------------------------------------
+namespace LawsLaboratory.Core.Mathematics.Domain.GeometricDomain;
 
 public sealed class IntervalDomain : IDomain<double>
 {

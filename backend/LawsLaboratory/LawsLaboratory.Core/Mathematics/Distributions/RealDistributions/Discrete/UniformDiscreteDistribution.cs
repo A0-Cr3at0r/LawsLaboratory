@@ -1,4 +1,17 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / DiscreteDistributions
+//
+// DiscreteUniformDistribution.cs
+//
+// Represents a discrete uniform distribution over the integer interval
+// [min, max].
+//
+// Each integer in the interval has equal probability of being generated.
+//
+// Requires min <= max.
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.DiscreteDistributions;
 

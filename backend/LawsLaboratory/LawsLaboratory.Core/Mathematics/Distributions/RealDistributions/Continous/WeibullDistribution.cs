@@ -1,4 +1,20 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / RealDistributions
+//
+// WeibullDistribution.cs
+//
+// Represents the Weibull distribution parameterized by shape and scale.
+//
+// Samples are generated using inverse transform sampling:
+//
+//     X = scale * (-ln(U))^(1 / shape)
+//
+// where U is uniformly distributed on (0, 1).
+//
+// Requires shape > 0 and scale > 0.
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
 

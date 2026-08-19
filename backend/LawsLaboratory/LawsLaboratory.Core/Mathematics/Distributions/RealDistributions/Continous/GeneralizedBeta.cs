@@ -1,4 +1,20 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / RealDistributions
+//
+// GeneralizedBetaDistribution.cs
+//
+// Represents a Beta distribution transformed from [0, 1] to an interval
+// starting at min with the specified size.
+//
+// If B follows Beta(alpha, beta), the generated value is:
+//
+//     X = min + size * B
+//
+// Requires size > 0.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions
 {

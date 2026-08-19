@@ -1,21 +1,27 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / RealDistributions
+//
+// GammaDistribution.cs
+//
+// Represents the Gamma distribution parameterized by shape and scale.
+//
+// Samples with shape >= 1 are generated using the Marsaglia-Tsang method.
+// For 0 < shape < 1, Gamma(shape + 1, 1) sampling is transformed to obtain
+// Gamma(shape, 1).
+//
+// Reference:
+// Marsaglia, G. and Tsang, W. W. (2000).
+// A Simple Method for Generating Gamma Variables.
+// ACM Transactions on Mathematical Software, 26(3), 363-372.
+//
+// Requires shape > 0 and scale > 0.
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
 
-/// <summary>
-/// Generates Gamma distributed random values using the
-/// Marsaglia-Tsang method.
-///
-/// For shape >= 1, the algorithm is applied directly.
-/// For 0 < shape < 1, a Gamma(shape + 1, 1) is first generated,
-/// then transformed into Gamma(shape, 1).
-///
-/// Reference:
-/// Marsaglia, G., Tsang, W. W. (2000).
-/// A Simple Method for Generating Gamma Variables.
-/// ACM Transactions on Mathematical Software,
-/// 26(3), 363-372.
-/// </summary>
+
 public sealed class GammaDistribution : IDistribution<double>
 {
     private readonly double _shape;

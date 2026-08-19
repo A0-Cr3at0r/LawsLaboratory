@@ -1,4 +1,16 @@
-﻿namespace LawsLaboratory.Core.Laws;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Laws
+//
+// Law.cs
+//
+// Represents the complete set of rules governing a simulation parameter.
+//
+// A law associates a target parameter with its initialization, variation, and
+// transmission rules.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Core.Laws;
 
 using LawsLaboratory.Core.Value;
 

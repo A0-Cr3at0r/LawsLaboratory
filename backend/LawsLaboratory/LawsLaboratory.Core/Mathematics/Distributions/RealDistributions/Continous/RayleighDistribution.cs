@@ -1,4 +1,21 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / RealDistributions
+//
+// RayleighDistribution.cs
+//
+// Represents the Rayleigh distribution with the specified scale parameter.
+//
+// Samples are generated using inverse transform sampling:
+//
+//     X = scale * sqrt(-2 * ln(U))
+//
+// where U is uniformly distributed on (0, 1).
+//
+// Requires scale > 0.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
 

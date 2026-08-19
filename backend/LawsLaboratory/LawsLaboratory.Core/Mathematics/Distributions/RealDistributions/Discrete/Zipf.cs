@@ -1,13 +1,28 @@
-﻿using LawsLaboratory.Core.Mathematics.Distributions;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / DiscreteDistributions
+//
+// ZipfDistribution.cs
+//
+// Represents a finite Zipf distribution over the integers 1 through size.
+//
+// The probability of generating rank k is proportional to:
+//
+//     1 / k^exponent
+//
+// The cumulative distribution function is precomputed during construction
+// and binary search is used to generate samples.
+//
+// Requires size > 0 and exponent > 0.
+// -----------------------------------------------------------------------------
 using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
-namespace LawsLaboratory.Core.Mathematics.DiscreteDistributions;
+namespace LawsLaboratory.Core.Mathematics.Distributions.DiscreteDistributions;
 
 public sealed class ZipfDistribution : IDistribution<int>
 {
     private readonly double[] _cdf;
 
-    private readonly int _size;
 
     private readonly IRandomGenerator _random;
 
@@ -23,8 +38,6 @@ public sealed class ZipfDistribution : IDistribution<int>
         if (exponent <= 0)
             throw new ArgumentOutOfRangeException(nameof(exponent));
 
-
-        _size = size;
         _random = random;
 
         _cdf = BuildCDF(size, exponent);

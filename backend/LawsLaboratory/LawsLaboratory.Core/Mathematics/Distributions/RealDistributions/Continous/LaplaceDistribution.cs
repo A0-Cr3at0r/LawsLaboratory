@@ -1,4 +1,18 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / RealDistributions
+//
+// LaplaceDistribution.cs
+//
+// Represents the Laplace distribution parameterized by its mean and scale.
+//
+// Samples are generated using the inverse transform of the Laplace
+// distribution's piecewise cumulative distribution function.
+//
+// Requires scale > 0.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
 

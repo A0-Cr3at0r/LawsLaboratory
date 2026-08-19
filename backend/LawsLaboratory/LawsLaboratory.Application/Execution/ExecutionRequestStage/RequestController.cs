@@ -1,11 +1,11 @@
 ﻿using LawsLaboratory.Application.Execution.EngineGateway.Entry;
 using LawsLaboratory.Application.Simulation.Observer;
-using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
 using LawsLaboratory.Application.Simulation.SpatialManagement.ReaderWriter;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
 using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Application.Execution.ControllersState;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
 
 
 namespace LawsLaboratory.Application.Execution.ExecutionRequestStage;

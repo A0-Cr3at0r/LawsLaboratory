@@ -1,4 +1,4 @@
-﻿using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
+﻿using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
 using LawsLaboratory.Core.Laws;
 
 namespace LawsLaboratory.Application.Simulation.Build.SpatialBuild;

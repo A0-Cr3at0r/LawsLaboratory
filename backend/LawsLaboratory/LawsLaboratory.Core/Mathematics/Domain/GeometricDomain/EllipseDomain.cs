@@ -1,4 +1,16 @@
-﻿using System.Numerics;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Domain / GeometricDomain
+//
+// EllipseDomain.cs
+//
+// Represents the interior of an ellipse defined by two foci and its
+// semi-major-axis length.
+//
+// A point belongs to the domain when the sum of its distances to the two
+// foci does not exceed twice the semi-major-axis length.
+// -----------------------------------------------------------------------------
+using System.Numerics;
 
 namespace LawsLaboratory.Core.Mathematics.Domain.GeometricDomain;
 

@@ -1,7 +1,11 @@
 ﻿using LawsLaboratory.Core.SpatialModel.Position;
 
 namespace LawsLaboratory.Core.Mathematics.Domain.DiscreteDomain;
-
+/// <summary>
+/// Represents the finite rectangular domain of a two-dimensional grid.
+/// Coordinates are valid when they fall within the configured width
+/// and height.
+/// </summary>
 public sealed class GridDomain : IDomain<PlanePosition>
 {
     private readonly int _width;

@@ -1,4 +1,15 @@
-﻿using System.Numerics;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Domain / GeometricDomain
+//
+// ParabolaDomain.cs
+//
+// Represents one of the two regions defined by a parabola, using a focus and
+// a directrix. The selected side is determined by comparing the distance from
+// a point to the focus with its distance to the directrix.
+// -----------------------------------------------------------------------------
+
+using System.Numerics;
 
 namespace LawsLaboratory.Core.Mathematics.Domain.GeometricDomain;
 

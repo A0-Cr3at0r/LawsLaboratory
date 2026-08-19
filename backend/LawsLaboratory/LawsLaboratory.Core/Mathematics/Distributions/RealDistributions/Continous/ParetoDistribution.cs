@@ -1,4 +1,21 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / RealDistributions
+//
+// ParetoDistribution.cs
+//
+// Represents a Pareto distribution with the specified minimum value and
+// shape parameter.
+//
+// Samples are generated using inverse transform sampling:
+//
+//     X = min / U^(1 / shape)
+//
+// where U is uniformly distributed on (0, 1).
+//
+// Requires min > 0 and shape > 0.
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
 

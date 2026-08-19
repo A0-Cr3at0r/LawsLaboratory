@@ -1,4 +1,13 @@
-﻿using System.Numerics;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Domain / GeometricDomain
+//
+// BoxDomain.cs
+//
+// Represents a rectangular region of the plane defined by independent
+// intervals on the X and Y axes.
+// -----------------------------------------------------------------------------
+using System.Numerics;
 
 namespace LawsLaboratory.Core.Mathematics.Domain.GeometricDomain;
 

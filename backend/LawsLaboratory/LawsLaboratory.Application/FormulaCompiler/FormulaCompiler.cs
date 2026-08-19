@@ -5,7 +5,7 @@ using LawsLaboratory.Application.FormulaCompiler.Semantic;
 using LawsLaboratory.Application.FormulaCompiler.COmpiledGenerator;
 using LawsLaboratory.Core.Formula.Element;
 using LawsLaboratory.Core.Formula.Node;
-using LawsLaboratory.Application.Simulation.Registry;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Parameter;
 
 
 namespace LawsLaboratory.Application.FormulaCompiler;

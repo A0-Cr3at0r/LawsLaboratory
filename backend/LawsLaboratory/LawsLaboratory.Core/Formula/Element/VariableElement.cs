@@ -1,7 +1,22 @@
-﻿using LawsLaboratory.Core.SpatialModel.Position;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Formula / Element
+//
+// VariableElement.cs
+//
+// Represents a reference to a simulation parameter in the intermediate
+// formula representation.
+//
+// ParameterId identifies the parameter being referenced, while
+// RelativePosition identifies the position of the referenced cell relative to
+// the cell currently being evaluated.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;
 
 namespace LawsLaboratory.Core.Formula.Element;
+
 
 public sealed class VariableElement : ExpressionElement
 {

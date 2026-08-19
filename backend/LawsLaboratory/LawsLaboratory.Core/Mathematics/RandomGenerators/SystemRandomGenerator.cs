@@ -1,4 +1,16 @@
-﻿namespace LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / RandomGenerators
+//
+// SystemRandomGenerator.cs
+//
+// Implements IRandomGenerator using the .NET System.Random pseudo-random
+// number generator.
+//
+// An optional seed can be supplied to produce a reproducible sequence of
+// pseudo-random values.
+// -----------------------------------------------------------------------------
+namespace LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 public sealed class SystemRandomGenerator : IRandomGenerator
 {

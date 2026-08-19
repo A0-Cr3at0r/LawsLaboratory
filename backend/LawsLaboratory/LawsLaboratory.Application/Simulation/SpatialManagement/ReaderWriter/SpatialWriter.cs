@@ -1,6 +1,6 @@
 ﻿namespace LawsLaboratory.Application.Simulation.SpatialManagement.ReaderWriter;
 
-using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
 using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;

@@ -1,4 +1,16 @@
-﻿namespace LawsLaboratory.Core.Mathematics.Domain.DiscreteDomain;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Domain / DiscreteDomain
+//
+// FiniteDomain.cs
+//
+// Represents a finite collection whose elements are currently addressed
+// through their integer indices.
+//
+// This index-based representation is temporary and may be replaced by a
+// domain representation specific to the underlying value type.
+// -----------------------------------------------------------------------------
+namespace LawsLaboratory.Core.Mathematics.Domain.DiscreteDomain;
 
 public sealed class FiniteDomain<T> : IDomain<int>
 {

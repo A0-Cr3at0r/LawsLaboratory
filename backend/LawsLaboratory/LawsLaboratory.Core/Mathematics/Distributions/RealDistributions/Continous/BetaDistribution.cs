@@ -1,13 +1,29 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / RealDistributions
+//
+// BetaDistribution.cs
+//
+// Represents the Beta(alpha, beta) probability distribution on the interval
+// [0, 1].
+//
+// Samples are generated using the relationship between the Beta and Gamma
+// distributions:
+//
+//     X ~ Gamma(alpha, 1)
+//     Y ~ Gamma(beta, 1)
+//     B = X / (X + Y)
+//
+// Requires alpha > 0 and beta > 0.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions
 {
     public sealed class BetaDistribution : IDistribution<double>
     {   
-        private readonly double _alpha;
-        private readonly double _beta;
 
-        private readonly IRandomGenerator _random;
         private readonly GammaDistribution _gammaDistributionAlpha;
         private readonly GammaDistribution _gammaDistributionBeta;
 
@@ -23,10 +39,6 @@ namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions
                 throw new ArgumentOutOfRangeException(nameof(beta));
             }
 
-            _alpha = alpha;
-            _beta = beta;
-
-            _random = random;
 
             _gammaDistributionAlpha = new GammaDistribution(alpha, 1, random);
             _gammaDistributionBeta = new GammaDistribution(beta, 1,random);

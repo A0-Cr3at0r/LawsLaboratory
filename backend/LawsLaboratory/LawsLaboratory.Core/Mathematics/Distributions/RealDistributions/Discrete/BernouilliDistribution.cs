@@ -1,4 +1,17 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / DiscreteDistributions
+//
+// BernoulliDistribution.cs
+//
+// Represents a Bernoulli distribution with success probability p.
+//
+// Each generated value is either 0 or 1. A value of 1 is produced with
+// probability p and a value of 0 otherwise.
+//
+// Requires 0 <= p <= 1.
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.DiscreteDistributions;
 

@@ -1,4 +1,4 @@
-﻿namespace LawsLaboratory.Application.Simulation.Registry;
+﻿namespace LawsLaboratory.Application.Simulation.EnvironnementRepository.Parameter;
 
 public interface IParameterRegistry
 {

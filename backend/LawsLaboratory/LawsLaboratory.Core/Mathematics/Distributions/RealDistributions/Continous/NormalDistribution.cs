@@ -1,14 +1,26 @@
-﻿using LawsLaboratory.Core.Mathematics.Distributions;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / RealDistributions
+//
+// NormalDistribution.cs
+//
+// Represents the normal distribution parameterized by its mean and standard
+// deviation.
+//
+// Samples are generated using the Box-Muller transform.
+//
+// Reference:
+// Box, G. E. P. and Muller, M. E. (1958).
+// A Note on the Generation of Random Normal Deviates.
+//
+// Requires standardDeviation > 0.
+// -----------------------------------------------------------------------------
+
 using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
-/// <summary>
-/// Generates normally distributed random values using
-/// the Box-Muller transform.
-///
-/// Reference:
-/// Box, G. E. P. and Muller, M. E. (1958).
-/// A Note on the Generation of Random Normal Deviates.
-/// </summary>
+
+namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
+
 public sealed class NormalDistribution : IDistribution<double>
 {
     private readonly double _mean;

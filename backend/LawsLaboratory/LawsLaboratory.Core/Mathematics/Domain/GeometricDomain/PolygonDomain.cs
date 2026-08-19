@@ -1,18 +1,21 @@
-﻿using System.Numerics;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Domain / GeometricDomain
+//
+// PolygonDomain.cs
+//
+// Represents the interior of a polygon and determines whether a point belongs
+// to it using the ray casting algorithm.
+//
+// Reference:
+// Shimrat, G. (1962).
+// Algorithm 112: Position of Point Relative to Polygon.
+// Communications of the ACM, 5(8), 434.
+// -----------------------------------------------------------------------------
+using System.Numerics;
 
 namespace LawsLaboratory.Core.Mathematics.Domain.GeometricDomain;
 
-
-
-/// <summary>
-/// Generates normally distributed random position using
-/// the Ray Casting algorithm.
-///
-//Shimrat, G. (1962).
-//Algorithm 112: Position of Point Relative to Polygon.
-//Communications of the ACM, 5(8), 434.
-/// </summary>
-/// 
 
 public sealed class PolygonDomain : IDomain<Vector2>
 {

@@ -1,4 +1,13 @@
-﻿namespace LawsLaboratory.Core.Mathematics.Domain.CompositeDomain;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Domain / CompositeDomain
+//
+// UnionDomain.cs
+//
+// Represents the union of multiple domains. A value belongs to the resulting
+// domain when it belongs to at least one component domain.
+// -----------------------------------------------------------------------------
+namespace LawsLaboratory.Core.Mathematics.Domain.CompositeDomain;
 
 public sealed class UnionDomain<T> : IDomain<T>
 {

@@ -1,4 +1,16 @@
-﻿namespace LawsLaboratory.Core.Laws;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Laws
+//
+// VariationRule.cs
+//
+// Defines the formula used to calculate the next value of a parameter from
+// the current simulation state.
+//
+// The original formula is retained alongside its compiled representation.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Core.Laws;
 
 using LawsLaboratory.Core.Formula.Element;
 

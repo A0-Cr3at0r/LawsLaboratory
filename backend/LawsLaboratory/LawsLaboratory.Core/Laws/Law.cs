@@ -1,4 +1,21 @@
-﻿using LawsLaboratory.Core.Formula.Element;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Laws
+//
+// Law.cs
+//
+// Represents a law governing the evolution of a simulation parameter.
+//
+// A law associates a target parameter with the rules that define its
+// initialization, variation, and transmission behavior.
+//
+// Law is a domain-level concept and therefore encapsulates the rules that
+// describe how a parameter participates in the simulation. The execution
+// layer consumes the compiled representations exposed by the law without
+// depending on the concrete structure or evolution of its individual rules.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Formula.Element;
 using LawsLaboratory.Core.Mathematics.Distributions;
 using LawsLaboratory.Core.Mathematics.Domain;
 using LawsLaboratory.Core.SpatialModel.Position;

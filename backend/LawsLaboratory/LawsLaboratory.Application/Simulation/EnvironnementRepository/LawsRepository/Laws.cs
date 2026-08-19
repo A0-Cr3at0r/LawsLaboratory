@@ -1,4 +1,4 @@
-﻿namespace LawsLaboratory.Application.Simulation.LawsRepository;
+﻿namespace LawsLaboratory.Application.Simulation.EnvironnementRepository.LawsRepository;
 
 using LawsLaboratory.Core.Laws;
 

@@ -1,15 +1,32 @@
-﻿using LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / DiscreteDistributions
+//
+// NegativeBinomialDistribution.cs
+//
+// Represents a negative binomial distribution describing the number of
+// failures observed before a fixed number of successes is reached.
+//
+// The distribution is parameterized by the required number of successes and
+// the probability of success on each independent trial.
+//
+// Sampling uses the Gamma-Poisson mixture representation of the negative
+// binomial distribution.
+//
+// Requires:
+// - successCount > 0
+// - 0 < probability < 1
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
 using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.DiscreteDistributions;
 
 public sealed class NegativeBinomialDistribution : IDistribution<int>
 {
-    private readonly int _successCount;
-    private readonly double _probability;
 
     private readonly GammaDistribution _gamma;
-    private readonly PoissonDistribution _poisson;
 
     private readonly IRandomGenerator _random;
 
@@ -25,8 +42,6 @@ public sealed class NegativeBinomialDistribution : IDistribution<int>
             throw new ArgumentOutOfRangeException(nameof(probability));
 
 
-        _successCount = successCount;
-        _probability = probability;
 
         _random = random;
 
@@ -35,9 +50,6 @@ public sealed class NegativeBinomialDistribution : IDistribution<int>
             (1 - probability) / probability,
             _random);
 
-        _poisson = new PoissonDistribution(
-            1,
-            _random);
     }
 
 

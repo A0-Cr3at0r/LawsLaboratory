@@ -1,19 +1,32 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / DiscreteDistributions
+//
+// HypergeometricDistribution.cs
+//
+// Represents a hypergeometric distribution describing the number of
+// successes obtained when sampling without replacement from a finite
+// population.
+//
+// The population contains a fixed number of successful elements and
+// unsuccessful elements. The distribution describes the number of successes
+// obtained in a sample of the specified size.
+//
+// Sampling uses different strategies depending on the sampling regime:
+// direct sequential sampling for small samples, a binomial approximation
+// when the sampling fraction is negligible, and exact inverse cumulative
+// distribution sampling otherwise.
+//
+// Requires:
+// - populationSize > 0
+// - 0 <= successPopulation <= populationSize
+// - 0 <= sampleSize <= populationSize
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.DiscreteDistributions;
 
-/// <summary>
-/// Generates values following a hypergeometric distribution.
-/// 
-/// The hypergeometric distribution models sampling without replacement
-/// from a finite population.
-/// 
-/// The implementation uses:
-/// - direct sequential sampling for small samples;
-/// - binomial approximation for negligible sampling fractions;
-/// - inverse cumulative distribution sampling for general cases.
-/// 
-/// </summary>
+
 public sealed class HypergeometricDistribution : IDistribution<int>
 {
     private readonly int _populationSize;

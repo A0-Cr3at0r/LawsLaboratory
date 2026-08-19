@@ -1,6 +1,6 @@
 ﻿namespace LawsLaboratory.Application.FormulaCompiler.Semantic;
 
-using LawsLaboratory.Application.Simulation.Registry;
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Parameter;
 using LawsLaboratory.Core.Formula;
 using LawsLaboratory.Core.Formula.Node;
 

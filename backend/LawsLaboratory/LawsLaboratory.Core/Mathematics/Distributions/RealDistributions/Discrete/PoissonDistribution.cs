@@ -1,25 +1,30 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / DiscreteDistributions
+//
+// PoissonDistribution.cs
+//
+// Represents a Poisson distribution with rate parameter lambda.
+//
+// For small lambda values, samples are generated using Knuth's algorithm.
+// For larger lambda values, the PTRS (Poisson Transformed Rejection with
+// Squeeze) algorithm is used.
+//
+// References:
+// Knuth, D. E. (1969).
+// The Art of Computer Programming, Volume 2:
+// Seminumerical Algorithms. Addison-Wesley.
+//
+// Hörmann, W. (1993).
+// The Transformed Rejection Method for Generating Poisson Random Variables.
+// Insurance: Mathematics and Economics, 12(1), 39-45.
+//
+// Requires lambda > 0.
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.DiscreteDistributions;
 
-/// <summary>
-/// Generates Poisson distributed values using a hybrid approach:
-/// Knuth's algorithm for small lambda values and PTRS
-/// (Poisson Transformed Rejection with Squeeze) for large lambda values.
-///
-/// PTRS is an efficient exact rejection algorithm designed for
-/// Poisson distributions with large lambda values.
-///
-/// References:
-/// Hörmann, W. (1993).
-/// The Transformed Rejection Method for Generating Poisson Random Variables.
-/// Insurance: Mathematics and Economics, 12(1), 39-45.
-///
-/// Knuth, D. E. (1969).
-/// The Art of Computer Programming, Volume 2:
-/// Seminumerical Algorithms.
-/// Addison-Wesley.
-/// </summary>
 public sealed class PoissonDistribution : IDistribution<int>
 {
     private readonly double _lambda;

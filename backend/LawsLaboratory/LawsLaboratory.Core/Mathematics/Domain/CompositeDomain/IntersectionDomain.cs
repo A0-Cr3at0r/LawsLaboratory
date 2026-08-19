@@ -1,4 +1,13 @@
-﻿namespace LawsLaboratory.Core.Mathematics.Domain.CompositeDomain;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Domain / CompositeDomain
+//
+// IntersectionDomain.cs
+//
+// Represents the intersection of multiple domains. A value belongs to the
+// resulting domain only when it belongs to every component domain.
+// -----------------------------------------------------------------------------
+namespace LawsLaboratory.Core.Mathematics.Domain.CompositeDomain;
 
 public sealed class IntersectionDomain<T> : IDomain<T>
 {

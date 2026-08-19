@@ -1,4 +1,25 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / DiscreteDistributions
+//
+// MultinomialDistribution.cs
+//
+// Represents a multinomial distribution describing the counts obtained when
+// performing a fixed number of independent trials across multiple categories.
+//
+// Each category has an associated probability and the probabilities must sum
+// to 1.
+//
+// Sampling is performed by decomposing the multinomial distribution into a
+// sequence of conditional binomial distributions.
+//
+// Requires:
+// - trials >= 0
+// - at least one category
+// - probabilities >= 0
+// - sum of probabilities = 1
+// -----------------------------------------------------------------------------
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.DiscreteDistributions;
 
@@ -24,8 +45,14 @@ public sealed class MultinomialDistribution : IDistribution<int[]>
         if (Math.Abs(probabilities.Sum() - 1) > 1e-10)
             throw new ArgumentException("Probabilities must sum to 1.");
 
+        foreach (var probability in probabilities)
+        {
+            if (probability < 0)
+                throw new ArgumentOutOfRangeException(nameof(probability));
+        }
+
         _trials = trials;
-        _probabilities = probabilities;
+        _probabilities = (double[])probabilities.Clone();
         _random = random;
     }
 

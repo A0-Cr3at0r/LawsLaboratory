@@ -1,4 +1,19 @@
-﻿using LawsLaboratory.Core.Mathematics.RandomGenerators;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / RealDistributions
+//
+// TriangularDistribution.cs
+//
+// Represents a triangular distribution defined by its minimum, mode, and
+// maximum values.
+//
+// Samples are generated using inverse transform sampling on the two
+// piecewise branches of the triangular cumulative distribution function.
+//
+// Requires min < max and min <= mode <= max.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Mathematics.RandomGenerators;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;
 

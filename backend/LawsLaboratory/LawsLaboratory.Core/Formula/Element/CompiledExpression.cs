@@ -1,4 +1,21 @@
-﻿using LawsLaboratory.Core.Formula.Program;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Formula
+//
+// CompiledExpression.cs
+//
+// Represents the compiled form of a formula expression.
+//
+// A compiled expression contains:
+// - an executable expression program composed of ExpressionInstructions;
+// - the spatial variable references required to resolve variable values.
+//
+// The expression program is consumed by the execution layer, while the
+// variable references are used by the spatial planning and data preparation
+// stages of the simulation pipeline.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Formula.Program;
 using LawsLaboratory.Core.SpatialModel.Position;
 
 
@@ -9,13 +26,13 @@ using Program = List<ExpressionInstruction>;
 
 public sealed class CompiledExpression
 {
-    private  List<VariableReference> references;
+    private readonly List<VariableReference> _references;
 
-    public Program Element { get; private set; } 
+    public Program Program { get; } 
 
     public CompiledExpression(IReadOnlyList<ExpressionElement> elements)
     {
-        Element = initExpressionProgram(elements);
+        Program = initExpressionProgram(elements);
 
         int variableCount = 0;
 
@@ -27,7 +44,7 @@ public sealed class CompiledExpression
             }
         }
 
-        references = new(variableCount);
+        _references = new(variableCount);
 
 
         for (int i = 0; i < elements.Count; i++)
@@ -36,7 +53,7 @@ public sealed class CompiledExpression
             {
                 VariableElement variable = (VariableElement)elements[i];
 
-                references.Add(
+                _references.Add(
                 new VariableReference(
                 variable.ParameterId,
                 variable.RelativePosition));
@@ -48,14 +65,14 @@ public sealed class CompiledExpression
 
     public IReadOnlyList<VariableReference> GetVariableReferences()
     {
-        return references;
+        return _references;
     }
 
 
-    public Program initExpressionProgram(IReadOnlyList<ExpressionElement> expressionElements)
+    private Program initExpressionProgram(IReadOnlyList<ExpressionElement> expressionElements)
     {
 
-        Program program = new     Program ();
+        Program program = new  Program ();
 
         double variableIndex = 0;
 

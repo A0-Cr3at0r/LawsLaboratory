@@ -1,5 +1,5 @@
-﻿using LawsLaboratory.Application.Simulation.Observer;
-using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
+﻿using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
+using LawsLaboratory.Application.Simulation.Observer;
 using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;

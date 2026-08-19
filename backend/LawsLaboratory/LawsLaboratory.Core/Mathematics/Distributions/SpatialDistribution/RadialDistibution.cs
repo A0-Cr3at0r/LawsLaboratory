@@ -1,4 +1,13 @@
-﻿using System.Numerics;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Mathematics / Distributions / SpatialDistribution
+//
+// RadialDistribution.cs
+//
+// Generates two-dimensional points from independently sampled radial and
+// angular coordinates.
+// -----------------------------------------------------------------------------
+using System.Numerics;
 
 namespace LawsLaboratory.Core.Mathematics.Distributions.SpatialDistribution;
 
