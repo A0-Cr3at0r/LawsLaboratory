@@ -1,18 +1,21 @@
-﻿using LawsLaboratory.Core.SpatialModel.Position;
-using LawsLaboratory.Core.Value;
+﻿using LawsLaboratory.Core.Formula.Program;
+using LawsLaboratory.Core.SpatialModel.Position;
+
 
 namespace LawsLaboratory.Core.Formula.Element;
 
+using Program = List<ExpressionInstruction>;
+
+
 public sealed class CompiledExpression
 {
-    private readonly IReadOnlyList<ExpressionElement> _elements;
-    private readonly int[] _variableElementIndexes;
+    private  List<VariableReference> references;
 
-    public IReadOnlyList<ExpressionElement> Element  => _elements;
+    public Program Element { get; private set; } 
 
     public CompiledExpression(IReadOnlyList<ExpressionElement> elements)
     {
-        _elements = elements;
+        Element = initExpressionProgram(elements);
 
         int variableCount = 0;
 
@@ -24,63 +27,81 @@ public sealed class CompiledExpression
             }
         }
 
-        _variableElementIndexes = new int[variableCount];
+        references = new(variableCount);
 
-        int current = 0;
 
         for (int i = 0; i < elements.Count; i++)
         {
             if (elements[i] is VariableElement)
             {
-                _variableElementIndexes[current++] = i;
+                VariableElement variable = (VariableElement)elements[i];
+
+                references.Add(
+                new VariableReference(
+                variable.ParameterId,
+                variable.RelativePosition));
             }
         }
+
     }
 
 
     public IReadOnlyList<VariableReference> GetVariableReferences()
     {
-        List<VariableReference> references = new(_variableElementIndexes.Length);
-
-        foreach (int index in _variableElementIndexes)
-        {
-            VariableElement variable = (VariableElement)_elements[index];
-
-            references.Add(
-                new VariableReference(
-                variable.ParameterId,
-                variable.RelativePosition));
-        }
-
         return references;
     }
 
-    public CompiledExpression CreateAssignedExpression(IReadOnlyList<IValue> values)
+
+    public Program initExpressionProgram(IReadOnlyList<ExpressionElement> expressionElements)
     {
-        if (values.Count != _variableElementIndexes.Length)
+
+        Program program = new     Program ();
+
+        double variableIndex = 0;
+
+        foreach (var element in expressionElements)
         {
-            throw new ArgumentException(
-                "The number of values does not match the number of variables.");
+            switch (element)
+            {
+                case ConstantElement constant:
+
+                    program.Add(
+                        new ExpressionInstruction(
+                            ExpressionKinds.Constant,
+                            constant.Value));
+
+                    break;
+
+                case SymbolElement symbol:
+
+                    program.Add(
+                        new ExpressionInstruction(
+                            ExpressionKinds.Symbol,
+                            (double)symbol.Symbol));
+
+                    break;
+
+                case OperatorElement operator_:
+
+                    program.Add(
+                        new ExpressionInstruction(
+                            ExpressionKinds.Operator,
+                            (double)operator_.Operator));
+
+                    break;
+
+                case VariableElement:
+
+                    program.Add(
+                        new ExpressionInstruction(
+                            ExpressionKinds.Variable,
+                            variableIndex++));
+
+                    break;
+            }
         }
 
-        List<ExpressionElement> clonedElements = new(_elements);
-
-        int valueIndex = 0;
-
-        foreach (int elementIndex in _variableElementIndexes)
-        {
-            VariableElement original = (VariableElement)clonedElements[elementIndex];
-
-            VariableElement assigned = new(
-                original.ParameterId,
-                original.RelativePosition);
-
-            assigned.Assign(values[valueIndex++]);
-
-            clonedElements[elementIndex] = assigned;
-        }
-
-        return new CompiledExpression(clonedElements);
+        return program;
     }
 
 }

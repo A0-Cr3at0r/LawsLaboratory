@@ -1,42 +1,33 @@
 ﻿using LawsLaboratory.Application.Execution.ExecutionRequestStage;
 using LawsLaboratory.Core.Formula.Element;
+using LawsLaboratory.Core.Formula.Program;
+
 
 namespace LawsLaboratory.Application.Execution.EngineGateway.Entry;
 
-public enum ExpressionKinds : byte
-{
-    Operator = 0,
-    Variable = 1,
-    Constant = 2,
-    Symbol = 3
-}
+using Program = List<ExpressionInstruction>;
 
-public readonly record struct ExpressionEntry(
-    ExpressionKinds Kind,
-    double Value);
 
 internal sealed class GatewayEntryBuffer
 {
     public int[] BoxLimite { get; set; }
-
-    private readonly List<ExpressionEntry> _expression;
 
     private readonly RequestPacket[] _packets;
 
     internal Span<RequestPacket> Packets =>
     _packets.AsSpan();
 
-    internal  List<ExpressionEntry> Expression { get => _expression; }
+    internal Program Expression { get; private set; }
 
     public GatewayEntryBuffer(
                         int maxPackets,
                         int maxValueCount,
                         int maxBoxUsable,
-                        CompiledExpression firstExpression)
+                        Program program)
     {
         BoxLimite = new int[maxBoxUsable];
 
-        _expression = new List<ExpressionEntry>();
+        Expression = program;
 
         _packets = new RequestPacket[maxPackets];
 
@@ -45,61 +36,13 @@ internal sealed class GatewayEntryBuffer
             _packets[i] =
                 new RequestPacket(maxValueCount);
         }
-
-        SetParameterExpression(
-            firstExpression);
     }
 
-    public void SetParameterExpression(
-    CompiledExpression compiledExpression)
+    public void SetExpression(Program program)
     {
-
-        _expression.Clear();
-
-        double variableIndex = 0;
-
-        foreach (var element in compiledExpression.Element)
-        {
-            switch (element)
-            {
-                case ConstantElement constant:
-
-                    _expression.Add(
-                        new ExpressionEntry(
-                            ExpressionKinds.Constant,
-                            constant.Value));
-
-                    break;
-
-                case SymbolElement symbol:
-
-                    _expression.Add(
-                        new ExpressionEntry(
-                            ExpressionKinds.Symbol,
-                            (double)symbol.Symbol));
-
-                    break;
-
-                case OperatorElement operator_:
-
-                    _expression.Add(
-                        new ExpressionEntry(
-                            ExpressionKinds.Operator,
-                            (double)operator_.Operator));
-
-                    break;
-
-                case VariableElement:
-
-                    _expression.Add(
-                        new ExpressionEntry(
-                            ExpressionKinds.Variable,
-                            variableIndex++));
-
-                    break;
-            }
-        }
+        Expression = program;
     }
+
 
     public void Clear(int packetIndex)
     {

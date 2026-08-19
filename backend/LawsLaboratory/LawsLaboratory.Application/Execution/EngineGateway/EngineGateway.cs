@@ -1,10 +1,12 @@
 ﻿using LawsLaboratory.Application.Engine;
 using LawsLaboratory.Application.Execution.EngineGateway.Entry;
 using LawsLaboratory.Application.Execution.EngineGateway.Exit;
-using LawsLaboratory.Core.Formula.Element;
+using LawsLaboratory.Core.Formula.Program;
 
 
 namespace LawsLaboratory.Application.Execution.Gateway;
+
+using Program = List<ExpressionInstruction>;
 
 internal class EngineGateway
 {
@@ -27,7 +29,7 @@ internal class EngineGateway
         int maxPackets,
         int maxValueCount,
         int maxBoxUsable,
-        CompiledExpression firstExpression)
+         Program program)
     {
 
         EntryBuffer =
@@ -35,7 +37,7 @@ internal class EngineGateway
                 maxPackets,
                 maxValueCount,
                 maxBoxUsable,
-                firstExpression);
+                program);
 
         ExitBuffer =
             new GatewayExitBuffer(maxPackets);

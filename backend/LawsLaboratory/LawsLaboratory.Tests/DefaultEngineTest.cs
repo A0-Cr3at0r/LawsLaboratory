@@ -1,5 +1,5 @@
 ﻿using LawsLaboratory.Application.Engine;
-using LawsLaboratory.Application.Execution.EngineGateway.Entry;
+using LawsLaboratory.Core.Formula.Program;
 using LawsLaboratory.Core.Formula;
 
 namespace LawsLaboratory.Tests.DefaultEngineTest;
@@ -9,7 +9,7 @@ public class DefaultEngineTest
     [Fact]
     public void Constant_ReturnsValue()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(42)
         };
@@ -24,7 +24,7 @@ public class DefaultEngineTest
     [Fact]
     public void Variable_ReturnsValueAtIndex()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Variable(1)
         };
@@ -39,7 +39,7 @@ public class DefaultEngineTest
     [Fact]
     public void Pi_ReturnsPi()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Symbol(SymbolType.Pi)
         };
@@ -54,7 +54,7 @@ public class DefaultEngineTest
     [Fact]
     public void Euler_ReturnsEuler()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Symbol(SymbolType.Euler)
         };
@@ -75,7 +75,7 @@ public class DefaultEngineTest
         double right,
         double expected)
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(left),
             Constant(right),
@@ -98,7 +98,7 @@ public class DefaultEngineTest
         double right,
         double expected)
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(left),
             Constant(right),
@@ -120,7 +120,7 @@ public class DefaultEngineTest
         double right,
         double expected)
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(left),
             Constant(right),
@@ -142,7 +142,7 @@ public class DefaultEngineTest
         double right,
         double expected)
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(left),
             Constant(right),
@@ -165,7 +165,7 @@ public class DefaultEngineTest
         double right,
         double expected)
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(left),
             Constant(right),
@@ -183,7 +183,7 @@ public class DefaultEngineTest
     public void Log_UsesLeftAsBaseAndRightAsValue()
     {
         // log_2(8) = 3
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(2),
             Constant(8),
@@ -200,7 +200,7 @@ public class DefaultEngineTest
     [Fact]
     public void Ln_ReturnsNaturalLogarithm()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(Math.E),
             Operator(OperatorType.Ln)
@@ -221,7 +221,7 @@ public class DefaultEngineTest
         double value,
         double expected)
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(value),
             Operator(OperatorType.Sqrt)
@@ -237,7 +237,7 @@ public class DefaultEngineTest
     [Fact]
     public void Sin_ReturnsSine()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(Math.PI / 2),
             Operator(OperatorType.Sin)
@@ -253,7 +253,7 @@ public class DefaultEngineTest
     [Fact]
     public void Cos_ReturnsCosine()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(Math.PI),
             Operator(OperatorType.Cos)
@@ -273,7 +273,7 @@ public class DefaultEngineTest
         double value,
         double expected)
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(value),
             Operator(OperatorType.Floor)
@@ -293,7 +293,7 @@ public class DefaultEngineTest
         double value,
         double expected)
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(value),
             Operator(OperatorType.Ceil)
@@ -314,7 +314,7 @@ public class DefaultEngineTest
         // Postfix:
         // p0 2 + p1 *
 
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Variable(0),
             Constant(2),
@@ -338,7 +338,7 @@ public class DefaultEngineTest
         // Postfix:
         // 2 pi * e +
 
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(2),
             Symbol(SymbolType.Pi),
@@ -362,7 +362,7 @@ public class DefaultEngineTest
     {
         // p0 * 2
 
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Variable(0),
             Constant(2),
@@ -380,7 +380,7 @@ public class DefaultEngineTest
     [Fact]
     public void BitwiseAnd_ReturnsExpectedValue()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(6),
             Constant(3),
@@ -396,7 +396,7 @@ public class DefaultEngineTest
     [Fact]
     public void BitwiseOr_ReturnsExpectedValue()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(6),
             Constant(3),
@@ -412,7 +412,7 @@ public class DefaultEngineTest
     [Fact]
     public void BitwiseXor_ReturnsExpectedValue()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(6),
             Constant(3),
@@ -428,7 +428,7 @@ public class DefaultEngineTest
     [Fact]
     public void BitwiseNot_ReturnsExpectedValue()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
         {
             Constant(5),
             Operator(OperatorType.Not)
@@ -439,30 +439,30 @@ public class DefaultEngineTest
         Assert.Equal(~5L, (long)engine.Evaluate([]));
     }
 
-    private static ExpressionEntry Constant(double value)
+    private static ExpressionInstruction Constant(double value)
     {
-        return new ExpressionEntry(
+        return new ExpressionInstruction(
             ExpressionKinds.Constant,
             value);
     }
 
-    private static ExpressionEntry Variable(int index)
+    private static ExpressionInstruction Variable(int index)
     {
-        return new ExpressionEntry(
+        return new ExpressionInstruction(
             ExpressionKinds.Variable,
             index);
     }
 
-    private static ExpressionEntry Symbol(SymbolType symbol)
+    private static ExpressionInstruction Symbol(SymbolType symbol)
     {
-        return new ExpressionEntry(
+        return new ExpressionInstruction  (
             ExpressionKinds.Symbol,
             (double)symbol);
     }
 
-    private static ExpressionEntry Operator(OperatorType operation)
+    private static ExpressionInstruction Operator(OperatorType operation)
     {
-        return new ExpressionEntry(
+        return new ExpressionInstruction(
             ExpressionKinds.Operator,
             (double)operation);
     }
@@ -470,7 +470,7 @@ public class DefaultEngineTest
     [Fact]
     public void VariableOutsideValues_ThrowsIndexOutOfRangeException()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Variable(2)
     };
@@ -484,7 +484,7 @@ public class DefaultEngineTest
     [Fact]
     public void NegativeVariableIndex_ThrowsIndexOutOfRangeException()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Variable(-1)
     };
@@ -498,7 +498,7 @@ public class DefaultEngineTest
     [Fact]
     public void UnaryOperatorWithoutOperand_ThrowsInvalidOperationException()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Operator(OperatorType.Sqrt)
     };
@@ -512,7 +512,7 @@ public class DefaultEngineTest
     [Fact]
     public void BinaryOperatorWithoutOperands_ThrowsInvalidOperationException()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Operator(OperatorType.Add)
     };
@@ -526,7 +526,7 @@ public class DefaultEngineTest
     [Fact]
     public void BinaryOperatorWithOnlyOneOperand_ThrowsInvalidOperationException()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Constant(10),
         Operator(OperatorType.Add)
@@ -541,7 +541,7 @@ public class DefaultEngineTest
     [Fact]
     public void ExpressionWithMultipleResults_ThrowsInvalidOperationException()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Constant(10),
         Constant(20)
@@ -556,7 +556,7 @@ public class DefaultEngineTest
     [Fact]
     public void EmptyExpression_ThrowsInvalidOperationException()
     {
-        var expression = new List<ExpressionEntry>();
+        var expression = new List<ExpressionInstruction>();
 
         var engine = new DefaultEngine(expression);
 
@@ -573,7 +573,7 @@ public class DefaultEngineTest
         // 2
         // 7
 
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Constant(2),
         Constant(3),
@@ -590,7 +590,7 @@ public class DefaultEngineTest
     [Fact]
     public void InvalidExpressionDoesNotCorruptNextEvaluation()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Variable(0),
         Constant(2),
@@ -613,7 +613,7 @@ public class DefaultEngineTest
     [Fact]
     public void DivisionByZero_FollowsDoubleSemantics()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Constant(10),
         Constant(0),
@@ -630,7 +630,7 @@ public class DefaultEngineTest
     [Fact]
     public void InvalidSqrt_FollowsDoubleSemantics()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Constant(-1),
         Operator(OperatorType.Sqrt)
@@ -646,7 +646,7 @@ public class DefaultEngineTest
     [Fact]
     public void InvalidLogBase_FollowsDoubleSemantics()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Constant(1),
         Constant(10),
@@ -663,7 +663,7 @@ public class DefaultEngineTest
     [Fact]
     public void InvalidEnumValue_ThrowsInvalidOperationException()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         new(
             ExpressionKinds.Operator,
@@ -679,7 +679,7 @@ public class DefaultEngineTest
     [Fact]
     public void InvalidSymbolValue_ThrowsInvalidOperationException()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         new(
             ExpressionKinds.Symbol,
@@ -695,7 +695,7 @@ public class DefaultEngineTest
     [Fact]
     public void OperatorWithTooFewOperands_LeavesNoInvalidResult()
     {
-        var expression = new List<ExpressionEntry>
+        var expression = new List<ExpressionInstruction>
     {
         Constant(10),
         Operator(OperatorType.Multiply),

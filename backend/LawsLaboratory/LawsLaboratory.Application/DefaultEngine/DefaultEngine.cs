@@ -1,14 +1,17 @@
-﻿using LawsLaboratory.Application.Execution.EngineGateway.Entry;
-using LawsLaboratory.Core.Formula;
+﻿using LawsLaboratory.Core.Formula;
+using LawsLaboratory.Core.Formula.Program;
 
 namespace LawsLaboratory.Application.Engine;
 
+using Program = List<ExpressionInstruction>;
+
+
 internal sealed class DefaultEngine
 {
-    private readonly List<ExpressionEntry> _expression;
+    private readonly Program _expression;
 
     private readonly Stack<double> _stack = new();
-    public DefaultEngine(List<ExpressionEntry> expression)
+    public DefaultEngine(Program  expression)
     {
         ArgumentNullException.ThrowIfNull(expression);
 
@@ -55,7 +58,7 @@ internal sealed class DefaultEngine
     }
 
     private static double ResolveValue(
-    ExpressionEntry entry,
+    ExpressionInstruction entry,
     double?[] values)
     {
         switch (entry.Kind)
@@ -93,12 +96,12 @@ internal sealed class DefaultEngine
         }
     }
 
-    private static int GetVariableIndex(ExpressionEntry entry)
+    private static int GetVariableIndex(ExpressionInstruction entry)
     {
         return checked((int)entry.Value);
     }
 
-    private static double ResolveSymbol(ExpressionEntry entry)
+    private static double ResolveSymbol(ExpressionInstruction entry)
     {
         var symbol = (SymbolType)(byte)entry.Value;
 

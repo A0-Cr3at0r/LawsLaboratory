@@ -255,10 +255,10 @@ internal sealed class TaskCoordinator
             _laws.GetLaw(parameterId);
 
 
-        _gatewayEntryBuffer.SetParameterExpression(
+        _gatewayEntryBuffer.SetExpression(
             variation
-                ? law.GetVariationExpression()
-                : law.GetTransmissionExpression());
+                ? law.GetVariationExpression().Element
+                : law.GetTransmissionExpression().Element);
 
 
         await ExecuteRequestStageAsync(
