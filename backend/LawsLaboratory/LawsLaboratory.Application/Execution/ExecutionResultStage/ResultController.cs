@@ -4,7 +4,7 @@ using LawsLaboratory.Application.Simulation.SpatialManagement.ReaderWriter;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
 using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
-using LawsLaboratory.Application.Execution.EngineGateway;
+using LawsLaboratory.Application.Execution.EngineGateway.Exit;
 
 namespace LawsLaboratory.Application.Execution.ExecutionResultStage;
 

@@ -118,9 +118,6 @@ namespace LawsLaboratory.Application.Execution.ExecutionRequestStage;
 
         _cursor.Reset();
 
-        Console.WriteLine(
-    $"Controller {_boxId}: begin={_beginAt}, count={Count}");
-
         _requestEmitter.updateBoxLimit(_boxId, Count);
 
         _controllerState = ControllerState.Completed;

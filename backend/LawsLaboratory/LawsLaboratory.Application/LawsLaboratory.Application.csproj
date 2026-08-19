@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DefaultEngine\" />
     <Folder Include="Identity\" />
     <Folder Include="ProjectManagement\" />
   </ItemGroup>

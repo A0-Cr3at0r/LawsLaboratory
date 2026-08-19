@@ -1,4 +1,4 @@
-﻿namespace LawsLaboratory.Application.Execution.EngineGateway;
+﻿namespace LawsLaboratory.Application.Execution.EngineGateway.Exit;
 
 public enum ValueKind : byte
 {

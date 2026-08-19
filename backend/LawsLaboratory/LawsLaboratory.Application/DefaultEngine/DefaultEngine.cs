@@ -1,7 +1,7 @@
 ﻿using LawsLaboratory.Application.Execution.EngineGateway.Entry;
 using LawsLaboratory.Core.Formula;
 
-namespace LawsLaboratory.Application.DefaultEngine;
+namespace LawsLaboratory.Application.Engine;
 
 internal sealed class DefaultEngine
 {
@@ -10,11 +10,15 @@ internal sealed class DefaultEngine
     private readonly Stack<double> _stack = new();
     public DefaultEngine(List<ExpressionEntry> expression)
     {
+        ArgumentNullException.ThrowIfNull(expression);
+
         _expression = expression;
     }
 
-    public double Evaluate(ReadOnlySpan<double> values)
+    public double Evaluate(double?[] values)
     {
+        ArgumentNullException.ThrowIfNull(values);
+
         _stack.Clear();
 
         foreach (var entry in _expression)
@@ -24,7 +28,8 @@ internal sealed class DefaultEngine
                 case ExpressionKinds.Constant:
                 case ExpressionKinds.Symbol:
                 case ExpressionKinds.Variable:
-                    _stack.Push(ResolveValue(entry, values));
+                    _stack.Push(
+                        ResolveValue(entry, values));
                     break;
 
                 case ExpressionKinds.Operator:
@@ -50,8 +55,8 @@ internal sealed class DefaultEngine
     }
 
     private static double ResolveValue(
-        ExpressionEntry entry,
-        ReadOnlySpan<double> values)
+    ExpressionEntry entry,
+    double?[] values)
     {
         switch (entry.Kind)
         {
@@ -68,7 +73,15 @@ internal sealed class DefaultEngine
                             $"Variable index {index} is outside the supplied values.");
                     }
 
-                    return values[index];
+                    double? value = values[index];
+
+                    if (!value.HasValue)
+                    {
+                        throw new InvalidOperationException(
+                            $"Variable index {index} has no value.");
+                    }
+
+                    return value.Value;
                 }
 
             case ExpressionKinds.Symbol:

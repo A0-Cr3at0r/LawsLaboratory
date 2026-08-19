@@ -26,6 +26,8 @@ internal sealed class GatewayEntryBuffer
     internal Span<RequestPacket> Packets =>
     _packets.AsSpan();
 
+    internal  List<ExpressionEntry> Expression { get => _expression; }
+
     public GatewayEntryBuffer(
                         int maxPackets,
                         int maxValueCount,

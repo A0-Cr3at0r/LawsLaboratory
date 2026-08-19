@@ -1,4 +1,4 @@
-﻿using LawsLaboratory.Application.Execution.EngineGateway;
+﻿using LawsLaboratory.Application.Execution.EngineGateway.Exit;
 using LawsLaboratory.Application.Execution.EngineGateway.Entry;
 using LawsLaboratory.Application.Execution.ExecutionRequestStage;
 using LawsLaboratory.Application.Execution.ExecutionResultStage;
@@ -66,7 +66,7 @@ internal sealed class TaskCoordinator
     private readonly IReadOnlyList<ResultController> _resultControllers;
 
 
-    private Action? _notifyCalculationReady;
+    private Action? _startCalculation;
 
 
     private TaskCompletionSource? _calculusCompletionSource;
@@ -138,12 +138,12 @@ internal sealed class TaskCoordinator
     /// because the coordinator and gateway are initialized
     /// independently by the simulation.
     /// </summary>
-    public void SetNotifyCalculationReadyCallback(
+    public void SetStartCalculationk(
         Action callback)
     {
         ArgumentNullException.ThrowIfNull(callback);
 
-        _notifyCalculationReady =
+        _startCalculation =
             callback;
     }
 
@@ -273,7 +273,7 @@ internal sealed class TaskCoordinator
             ? TaskCoordinatorState.WaitingVariationCalculation
             : TaskCoordinatorState.WaitingTransmissionCalculation;
 
-        _notifyCalculationReady?
+        _startCalculation?
             .Invoke();
 
         await _calculusCompletionSource!
