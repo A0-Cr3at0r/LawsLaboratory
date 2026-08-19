@@ -1,6 +1,18 @@
-﻿namespace LawsLaboratory.Core.SpatialModel.Grid;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / SpatialModel / Grid
+//
+// PlaneGrid.cs
+//
+// Provides a two-dimensional grid implementation backed by a one-dimensional
+// array of cells.
+//
+// Cell identifiers are resolved cyclically so that identifiers outside the
+// valid range wrap around the grid's flattened storage.
+// -----------------------------------------------------------------------------
 
-using LawsLaboratory.Core.SpatialModel.Boundary;
+namespace LawsLaboratory.Core.SpatialModel.Grid;
+
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;
 
@@ -10,9 +22,6 @@ internal sealed class PlaneGrid : IGrid<PlanePosition>
 
     private readonly int _width;
     private readonly int _height;
-
-
-    private int _resolveId;
 
     public int Dimension => 2;
 
@@ -59,9 +68,7 @@ internal sealed class PlaneGrid : IGrid<PlanePosition>
             return cellId;
         }
 
-        _resolveId = cellId % Size;
-
-        return cellId < 0 ? _resolveId + Size : _resolveId;
+        return cellId < 0 ? cellId % Size + Size : cellId % Size;
 
     }
 

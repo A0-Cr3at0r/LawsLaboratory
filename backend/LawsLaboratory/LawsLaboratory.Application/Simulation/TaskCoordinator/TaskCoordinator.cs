@@ -138,7 +138,7 @@ internal sealed class TaskCoordinator
     /// because the coordinator and gateway are initialized
     /// independently by the simulation.
     /// </summary>
-    public void SetStartCalculationk(
+    public void SetStartCalculation(
         Action callback)
     {
         ArgumentNullException.ThrowIfNull(callback);

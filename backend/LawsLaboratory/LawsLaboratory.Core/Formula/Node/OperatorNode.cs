@@ -1,5 +1,18 @@
-﻿using LawsLaboratory.Core.Formula;
-using LawsLaboratory.Core.Formula.Node;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Formula / Node
+//
+// OperatorNode.cs
+//
+// Represents an operator expression and its operand expressions.
+//
+// The number of children depends on the operator's arity. OperatorNode itself
+// stores the expression structure; validation of operator arity belongs to
+// the formula parsing or compilation stage.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Core.Formula;
+namespace LawsLaboratory.Core.Formula.Node;
 
 public sealed class OperatorNode : ExpressionNode
 {

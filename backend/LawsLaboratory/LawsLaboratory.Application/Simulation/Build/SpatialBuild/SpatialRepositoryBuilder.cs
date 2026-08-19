@@ -1,7 +1,7 @@
 ﻿using LawsLaboratory.Application.Simulation.SpatialManagement.Access;
 using LawsLaboratory.Core.Laws;
 
-namespace LawsLaboratory.Application.Simulation.SpatialManagement.Builder;
+namespace LawsLaboratory.Application.Simulation.Build.SpatialBuild;
 
 internal sealed class SpatialRepositoryBuilder
 {

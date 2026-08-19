@@ -2,7 +2,7 @@
 using LawsLaboratory.Core.Laws;
 using LawsLaboratory.Core.SpatialModel.Position;
 
-namespace LawsLaboratory.Application.Simulation.SpatialManagement.Builder;
+namespace LawsLaboratory.Application.Simulation.Build.SpatialBuild;
 
 internal sealed class SpatialPlanBuilder
 {

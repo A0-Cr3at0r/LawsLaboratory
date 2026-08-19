@@ -1,4 +1,16 @@
-﻿namespace LawsLaboratory.Core.SpatialModel.Position;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / SpatialModel / Position
+//
+// PlanePosition.cs
+//
+// Represents a position in a two-dimensional plane.
+//
+// PlanePosition itself does not define whether the coordinates are absolute
+// or relative. Their interpretation is determined by the component using them.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Core.SpatialModel.Position;
 
 public readonly struct PlanePosition
 {

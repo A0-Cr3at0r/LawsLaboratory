@@ -5,7 +5,6 @@ using LawsLaboratory.Application.Simulation.Build.Factories;
 using LawsLaboratory.Application.Simulation.LawsRepository;
 using LawsLaboratory.Application.Simulation.Observer;
 using LawsLaboratory.Application.Simulation.Registry;
-using LawsLaboratory.Application.Simulation.SpatialManagement.Builder;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
 using LawsLaboratory.Application.Simulation.TaskCoordinator;
 using LawsLaboratory.Core.Formula;
@@ -15,6 +14,7 @@ using LawsLaboratory.Core.Mathematics.Distributions;
 using LawsLaboratory.Core.SpatialModel.Grid;
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Core.Value;
+using LawsLaboratory.Application.Simulation.Build.SpatialBuild;
 
 namespace LawsLaboratory.Tests.TaskCoordinatorTest;
 
@@ -110,7 +110,7 @@ public class TaskCoordinatorTest
         // Faux Gateway
         List<TaskCoordinatorState> states = [];
 
-        taskCoordinator.SetNotifyCalculationReadyCallback(
+        taskCoordinator.SetStartCalculation(
             () =>
             {
                 states.Add(taskCoordinator.State);
@@ -260,7 +260,7 @@ public class TaskCoordinatorTest
         // Act
         List<TaskCoordinatorState> states = [];
 
-        taskCoordinator.SetNotifyCalculationReadyCallback(
+        taskCoordinator.SetStartCalculation(
             () =>
             {
                 states.Add(taskCoordinator.State);

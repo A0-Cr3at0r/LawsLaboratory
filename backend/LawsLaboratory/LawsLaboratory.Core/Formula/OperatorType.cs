@@ -1,4 +1,16 @@
-﻿namespace LawsLaboratory.Core.Formula;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / Formula
+//
+// OperatorType.cs
+//
+// Defines the operators supported by the formula language.
+//
+// The enumeration includes arithmetic, mathematical, logical, and rounding
+// operators.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Core.Formula;
 
 public enum OperatorType : byte
 {

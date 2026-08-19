@@ -1,4 +1,17 @@
-﻿namespace LawsLaboratory.Core.SpatialModel.Grid;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Core / SpatialModel / Grid
+//
+// Cell.cs
+//
+// Represents a single cell in the simulation grid.
+//
+// A cell owns the current value of each registered parameter. It does not
+// define spatial coordinates or grid topology; those responsibilities belong
+// to the grid and spatial model.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Core.SpatialModel.Grid;
 
 using LawsLaboratory.Core.Value;
 
@@ -36,7 +49,7 @@ public sealed class Cell
     }
 
     internal void SetParameterValue(
-        int parameterId,
+        ushort parameterId,
         double value)
     {
         _values[parameterId] = _values[parameterId].Set(value);
