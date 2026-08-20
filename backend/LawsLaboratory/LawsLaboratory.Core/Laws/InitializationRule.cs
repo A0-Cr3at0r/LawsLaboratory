@@ -27,7 +27,7 @@ namespace LawsLaboratory.Core.Laws;
 
 public sealed class InitializationRule
 {
-    public int? TargetCellCount { get; }
+    public int TargetCellCount { get; }
 
     public IDistribution<double> ValueDistribution { get; }
 
@@ -40,7 +40,7 @@ public sealed class InitializationRule
 
     public InitializationRule(
         IDistribution<double> distribution,
-        int? targetCellCount = null,
+        int targetCellCount,
         IDistribution<Vector2>? spaceDistribution = null,
         IDomain<Vector2>? validDomain = null)
     {

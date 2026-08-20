@@ -44,7 +44,7 @@ public sealed class Law
     }
 
 
-    public int? GetTargetCellCount()
+    public int GetTargetCellCount()
     {
         return _initializationRule.TargetCellCount;
     }

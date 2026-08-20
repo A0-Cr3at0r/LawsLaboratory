@@ -4,20 +4,17 @@
 //
 // ResultControllerFactory.cs
 //
-// Creates and partitions the ResultControllers used by the result stage of
-// the simulation pipeline.
+// Creates the ResultControllers used by the result stage of the simulation
+// pipeline.
 //
 // The factory determines the number of controllers according to the number of
-// cells and distributes the valid result range among them. Each controller
-// receives a contiguous portion of the result range.
+// cells and partitions the result range among them. Each controller receives
+// its execution range together with the shared infrastructure required to
+// process engine results.
 //
-// ResultControllerFactory is an infrastructure component used by the
-// TaskCoordinator during pipeline execution. It is not part of the declarative
-// simulation configuration and is therefore not involved in configuration
-// deserialization or persistence.
-//
-// Controller construction is kept here so that the TaskCoordinator remains
-// responsible for orchestration rather than the details of controller setup.
+// Controller construction is kept separate from TaskCoordinator so that the
+// coordinator remains responsible for execution orchestration rather than the
+// details of controller construction.
 // -----------------------------------------------------------------------------
 
 using LawsLaboratory.Application.Execution.EngineGateway.Exit;
