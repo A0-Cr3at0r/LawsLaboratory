@@ -1,23 +1,40 @@
-﻿namespace LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Configuration / ExecutionConfiguration
+//
+// ValueDistributionConfiguration.cs
+//
+// Defines the declarative probability distribution configurations used by
+// simulation initialization.
+//
+// The hierarchy represents continuous and discrete real-valued distributions
+// and contains only the parameters required to construct their corresponding
+// Core distribution objects.
+//
+// The Initializer and its builders consume these configurations and delegates parameter
+// validation to the constructed Core objects.
+// -----------------------------------------------------------------------------
 
-public abstract class DistributionConfiguration
+namespace LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
+
+public abstract record DistributionConfiguration
 {
 }
 
 
-public abstract class RealDistributionConfiguration
+public abstract record RealDistributionConfiguration
     : DistributionConfiguration
 {
 }
 
 
-public abstract class ContinuousDistributionConfiguration
+public abstract record ContinuousDistributionConfiguration
     : RealDistributionConfiguration
 {
 }
 
 
-public abstract class DiscreteDistributionConfiguration
+public abstract record DiscreteDistributionConfiguration
     : RealDistributionConfiguration
 {
 }
@@ -27,14 +44,14 @@ public abstract class DiscreteDistributionConfiguration
 // Continuous distributions
 // ============================================================
 
-public sealed class ConstantDistributionConfiguration
+public sealed record ConstantDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Value { get; init; }
 }
 
 
-public sealed class UniformDistributionConfiguration
+public sealed record UniformDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Minimum { get; init; }
@@ -43,7 +60,7 @@ public sealed class UniformDistributionConfiguration
 }
 
 
-public sealed class NormalDistributionConfiguration
+public sealed record NormalDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Mean { get; init; }
@@ -52,7 +69,7 @@ public sealed class NormalDistributionConfiguration
 }
 
 
-public sealed class LogNormalDistributionConfiguration
+public sealed record LogNormalDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Mean { get; init; }
@@ -61,14 +78,14 @@ public sealed class LogNormalDistributionConfiguration
 }
 
 
-public sealed class StudentTDistributionConfiguration
+public sealed record StudentTDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double DegreesOfFreedom { get; init; }
 }
 
 
-public sealed class GammaDistributionConfiguration
+public sealed record GammaDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Shape { get; init; }
@@ -77,7 +94,7 @@ public sealed class GammaDistributionConfiguration
 }
 
 
-public sealed class BetaDistributionConfiguration
+public sealed record BetaDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Alpha { get; init; }
@@ -86,14 +103,14 @@ public sealed class BetaDistributionConfiguration
 }
 
 
-public sealed class ExponentialDistributionConfiguration
+public sealed record ExponentialDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Lambda { get; init; }
 }
 
 
-public sealed class LaplaceDistributionConfiguration
+public sealed record LaplaceDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Mean { get; init; }
@@ -102,7 +119,7 @@ public sealed class LaplaceDistributionConfiguration
 }
 
 
-public sealed class TriangularDistributionConfiguration
+public sealed record TriangularDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Minimum { get; init; }
@@ -113,7 +130,7 @@ public sealed class TriangularDistributionConfiguration
 }
 
 
-public sealed class CauchyDistributionConfiguration
+public sealed record CauchyDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Location { get; init; }
@@ -122,7 +139,7 @@ public sealed class CauchyDistributionConfiguration
 }
 
 
-public sealed class WeibullDistributionConfiguration
+public sealed record WeibullDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Shape { get; init; }
@@ -131,7 +148,7 @@ public sealed class WeibullDistributionConfiguration
 }
 
 
-public sealed class GumbelDistributionConfiguration
+public sealed record GumbelDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Location { get; init; }
@@ -140,14 +157,14 @@ public sealed class GumbelDistributionConfiguration
 }
 
 
-public sealed class RayleighDistributionConfiguration
+public sealed record RayleighDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Scale { get; init; }
 }
 
 
-public sealed class ParetoDistributionConfiguration
+public sealed record ParetoDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Minimum { get; init; }
@@ -156,7 +173,7 @@ public sealed class ParetoDistributionConfiguration
 }
 
 
-public sealed class GeneralizedBetaDistributionConfiguration
+public sealed record GeneralizedBetaDistributionConfiguration
     : ContinuousDistributionConfiguration
 {
     public double Alpha { get; init; }
@@ -173,14 +190,14 @@ public sealed class GeneralizedBetaDistributionConfiguration
 // Discrete distributions
 // ============================================================
 
-public sealed class BernoulliDistributionConfiguration
+public sealed record BernoulliDistributionConfiguration
     : DiscreteDistributionConfiguration
 {
     public double Probability { get; init; }
 }
 
 
-public sealed class BinomialDistributionConfiguration
+public sealed record BinomialDistributionConfiguration
     : DiscreteDistributionConfiguration
 {
     public int Trials { get; init; }
@@ -189,7 +206,7 @@ public sealed class BinomialDistributionConfiguration
 }
 
 
-public sealed class NegativeBinomialDistributionConfiguration
+public sealed record NegativeBinomialDistributionConfiguration
     : DiscreteDistributionConfiguration
 {
     public int SuccessCount { get; init; }
@@ -198,7 +215,7 @@ public sealed class NegativeBinomialDistributionConfiguration
 }
 
 
-public sealed class HypergeometricDistributionConfiguration
+public sealed record HypergeometricDistributionConfiguration
     : DiscreteDistributionConfiguration
 {
     public int PopulationSize { get; init; }
@@ -209,21 +226,21 @@ public sealed class HypergeometricDistributionConfiguration
 }
 
 
-public sealed class PoissonDistributionConfiguration
+public sealed record PoissonDistributionConfiguration
     : DiscreteDistributionConfiguration
 {
     public double Lambda { get; init; }
 }
 
 
-public sealed class GeometricDistributionConfiguration
+public sealed record GeometricDistributionConfiguration
     : DiscreteDistributionConfiguration
 {
     public double Probability { get; init; }
 }
 
 
-public sealed class ZipfDistributionConfiguration
+public sealed record ZipfDistributionConfiguration
     : DiscreteDistributionConfiguration
 {
     public int Size { get; init; }
@@ -232,7 +249,7 @@ public sealed class ZipfDistributionConfiguration
 }
 
 
-public sealed class MultinomialDistributionConfiguration
+public sealed record MultinomialDistributionConfiguration
     : DiscreteDistributionConfiguration
 {
     public int Trials { get; init; }

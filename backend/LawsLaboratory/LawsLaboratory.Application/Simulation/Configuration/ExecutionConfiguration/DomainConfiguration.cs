@@ -1,7 +1,25 @@
-﻿namespace LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Configuration / ExecutionConfiguration
+//
+// DomainConfiguration.cs
+//
+// Defines the declarative spatial domain configurations used to determine
+// where simulation cells may be initialized.
+//
+// The file contains basic geometric domains, composite domains and supporting
+// two-dimensional position data. Domains describe valid regions in the
+// simulation plane; they do not define the simulation grid itself and contain
+// no runtime execution logic.
+//
+// The Initializer and its builders consume these configurations to construct the corresponding
+// Core domain and spatial objects.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
 
 
-public abstract class DomainConfiguration
+public abstract record DomainConfiguration
 {
 }
 
@@ -10,7 +28,7 @@ public abstract class DomainConfiguration
 // Basic geometric domains
 // ============================================================
 
-public sealed class GridDomainConfiguration
+public sealed record GridDomainConfiguration
     : DomainConfiguration
 {
     public int Width { get; init; }
@@ -19,7 +37,7 @@ public sealed class GridDomainConfiguration
 }
 
 
-public sealed class IntervalDomainConfiguration
+public sealed record IntervalDomainConfiguration
     : DomainConfiguration
 {
     public double Minimum { get; init; }
@@ -28,7 +46,7 @@ public sealed class IntervalDomainConfiguration
 }
 
 
-public sealed class BoxDomainConfiguration
+public sealed record BoxDomainConfiguration
     : DomainConfiguration
 {
     public double MinimumX { get; init; }
@@ -41,7 +59,7 @@ public sealed class BoxDomainConfiguration
 }
 
 
-public sealed class EllipseDomainConfiguration
+public sealed record EllipseDomainConfiguration
     : DomainConfiguration
 {
     public Vector2Configuration Focus1 { get; init; } = null!;
@@ -52,7 +70,7 @@ public sealed class EllipseDomainConfiguration
 }
 
 
-public sealed class HyperbolaDomainConfiguration
+public sealed record HyperbolaDomainConfiguration
     : DomainConfiguration
 {
     public Vector2Configuration Focus1 { get; init; } = null!;
@@ -63,7 +81,7 @@ public sealed class HyperbolaDomainConfiguration
 }
 
 
-public sealed class ParabolaDomainConfiguration
+public sealed record ParabolaDomainConfiguration
     : DomainConfiguration
 {
     public Vector2Configuration Focus { get; init; } = null!;
@@ -78,7 +96,7 @@ public sealed class ParabolaDomainConfiguration
 }
 
 
-public sealed class HalfPlaneDomainConfiguration
+public sealed record HalfPlaneDomainConfiguration
     : DomainConfiguration
 {
     public double A { get; init; }
@@ -89,7 +107,7 @@ public sealed class HalfPlaneDomainConfiguration
 }
 
 
-public sealed class PolygonDomainConfiguration
+public sealed record PolygonDomainConfiguration
     : DomainConfiguration
 {
     public Vector2Configuration[] Vertices { get; init; } = [];
@@ -100,21 +118,21 @@ public sealed class PolygonDomainConfiguration
 // Composite domains
 // ============================================================
 
-public sealed class UnionDomainConfiguration
+public sealed record UnionDomainConfiguration
     : DomainConfiguration
 {
     public DomainConfiguration[] Domains { get; init; } = [];
 }
 
 
-public sealed class IntersectionDomainConfiguration
+public sealed record IntersectionDomainConfiguration
     : DomainConfiguration
 {
     public DomainConfiguration[] Domains { get; init; } = [];
 }
 
 
-public sealed class ComplementDomainConfiguration
+public sealed record ComplementDomainConfiguration
     : DomainConfiguration
 {
     public DomainConfiguration Domain { get; init; } = null!;
@@ -125,7 +143,7 @@ public sealed class ComplementDomainConfiguration
 // Supporting configurations
 // ============================================================
 
-public sealed class Vector2Configuration
+public sealed record Vector2Configuration
 {
     public double X { get; init; }
 
