@@ -1,4 +1,27 @@
-﻿using LawsLaboratory.Application.Execution.EngineGateway.Entry;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Build / Factories
+//
+// RequestControllerFactory.cs
+//
+// Creates and partitions the RequestControllers used by the request stage of
+// the simulation pipeline.
+//
+// The factory determines the number of controllers according to the number of
+// cells and distributes the grid traversal range among them. Each controller
+// receives a contiguous portion of the grid and the shared infrastructure
+// required to produce execution requests.
+//
+// RequestControllerFactory is an infrastructure component used by the
+// TaskCoordinator during pipeline execution. It is not part of the declarative
+// simulation configuration and is therefore not involved in configuration
+// deserialization or persistence.
+//
+// Controller construction is kept here so that the TaskCoordinator remains
+// responsible for orchestration rather than the details of controller setup.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Execution.EngineGateway.Entry;
 using LawsLaboratory.Application.Simulation.Observer;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
 using LawsLaboratory.Core.SpatialModel.Grid;

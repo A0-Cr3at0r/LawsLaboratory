@@ -10,6 +10,12 @@
 // The factory resolves concrete geometric and composite domain configurations
 // and converts configuration-level vector data into Core Vector2 values.
 //
+// Composite configurations are recursively converted into Core domains,
+// preserving their mathematical structure:
+// - Union: membership in at least one component domain;
+// - Intersection: membership in every component domain;
+// - Complement: membership outside the enclosed domain.
+//
 // Domain construction and validation are delegated to the corresponding Core
 // domain types; this factory is responsible only for translating configuration
 // into runtime objects.
@@ -31,12 +37,10 @@ internal sealed class DomainFactory
         if (configuration is null)
             return null;
 
-
         return configuration switch
         {
             BoxDomainConfiguration box =>
                 CreateBox(box),
-
 
             EllipseDomainConfiguration ellipse =>
                 new EllipseDomain(
@@ -44,13 +48,11 @@ internal sealed class DomainFactory
                     ToVector2(ellipse.Focus2),
                     ellipse.MajorAxis),
 
-
             HyperbolaDomainConfiguration hyperbola =>
                 new HyperbolaDomain(
                     ToVector2(hyperbola.Focus1),
                     ToVector2(hyperbola.Focus2),
                     hyperbola.DistanceDifference),
-
 
             ParabolaDomainConfiguration parabola =>
                 new ParabolaDomain(
@@ -60,48 +62,40 @@ internal sealed class DomainFactory
                     parabola.C,
                     parabola.IncludeCloserSide),
 
-
             HalfPlaneDomainConfiguration halfPlane =>
                 new HalfPlaneDomain(
                     halfPlane.A,
                     halfPlane.B,
                     halfPlane.C),
 
-
             PolygonDomainConfiguration polygon =>
                 new PolygonDomain(
-                    polygon.Vertices
-                        .Select(ToVector2)),
-
+                    polygon.Vertices.Select(ToVector2)),
 
             UnionDomainConfiguration union =>
                 new UnionDomain<Vector2>(
-                    union.Domains
-                        .Select(Create)
-                        .OfType<IDomain<Vector2>>()),
-
+                    union.Domains.Select(
+                        domain =>
+                            Create(domain)
+                            ?? throw new InvalidOperationException())),
 
             IntersectionDomainConfiguration intersection =>
                 new IntersectionDomain<Vector2>(
-                    intersection.Domains
-                        .Select(Create)
-                        .OfType<IDomain<Vector2>>()),
-
+                    intersection.Domains.Select(
+                        domain =>
+                            Create(domain)
+                            ?? throw new InvalidOperationException())),
 
             ComplementDomainConfiguration complement =>
                 new ComplementDomain<Vector2>(
                     Create(complement.Domain)
-                    ??
-                    throw new InvalidOperationException()),
-
+                    ?? throw new InvalidOperationException()),
 
             _ =>
                 throw new NotSupportedException(
                     $"Unsupported domain configuration: {configuration.GetType().Name}")
         };
     }
-
-
 
     private static BoxDomain CreateBox(
         BoxDomainConfiguration configuration)
@@ -112,8 +106,6 @@ internal sealed class DomainFactory
             configuration.MinimumY,
             configuration.MaximumY);
     }
-
-
 
     private static Vector2 ToVector2(
         Vector2Configuration configuration)
