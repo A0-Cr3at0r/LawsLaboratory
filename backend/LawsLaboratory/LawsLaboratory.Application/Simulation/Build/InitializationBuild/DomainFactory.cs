@@ -1,4 +1,21 @@
-﻿using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Build / InitializationBuild
+//
+// DomainFactory.cs
+//
+// Converts declarative DomainConfiguration objects into the corresponding
+// Core spatial domain objects used during initialization.
+//
+// The factory resolves concrete geometric and composite domain configurations
+// and converts configuration-level vector data into Core Vector2 values.
+//
+// Domain construction and validation are delegated to the corresponding Core
+// domain types; this factory is responsible only for translating configuration
+// into runtime objects.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
 using LawsLaboratory.Core.Mathematics.Domain;
 using LawsLaboratory.Core.Mathematics.Domain.CompositeDomain;
 using LawsLaboratory.Core.Mathematics.Domain.GeometricDomain;

@@ -1,4 +1,21 @@
-﻿using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Build / InitializationBuild
+//
+// RealDistributionFactory.cs
+//
+// Converts declarative real-valued distribution configurations into their
+// corresponding Core distribution objects.
+//
+// The factory resolves continuous and discrete distribution configurations
+// and supplies the shared random generator required by stochastic Core
+// distributions.
+//
+// Discrete distributions producing integral values are adapted to the
+// IDistribution<double> contract required by simulation initialization.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
 using LawsLaboratory.Core.Mathematics.Distributions;
 using LawsLaboratory.Core.Mathematics.Distributions.DiscreteDistributions;
 using LawsLaboratory.Core.Mathematics.Distributions.RealDistributions;

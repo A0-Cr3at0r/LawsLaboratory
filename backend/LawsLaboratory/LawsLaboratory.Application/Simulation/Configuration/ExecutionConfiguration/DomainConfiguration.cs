@@ -24,28 +24,6 @@ public abstract record DomainConfiguration
 }
 
 
-// ============================================================
-// Basic geometric domains
-// ============================================================
-
-public sealed record GridDomainConfiguration
-    : DomainConfiguration
-{
-    public int Width { get; init; }
-
-    public int Height { get; init; }
-}
-
-
-public sealed record IntervalDomainConfiguration
-    : DomainConfiguration
-{
-    public double Minimum { get; init; }
-
-    public double Maximum { get; init; }
-}
-
-
 public sealed record BoxDomainConfiguration
     : DomainConfiguration
 {

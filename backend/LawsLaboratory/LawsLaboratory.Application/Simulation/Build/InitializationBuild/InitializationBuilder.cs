@@ -1,4 +1,20 @@
-﻿using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Build / InitializationBuild
+//
+// InitializationBuilder.cs
+//
+// Builds the runtime InitializationRule from its declarative configuration.
+//
+// The builder delegates the construction of value distributions, spatial
+// distributions and initialization domains to their respective factories,
+// then assembles the resulting runtime objects into an InitializationRule.
+//
+// It translates configuration into runtime objects without duplicating the
+// validation rules enforced by the constructed Core types.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
 using LawsLaboratory.Core.Laws;
 using LawsLaboratory.Core.Mathematics.Distributions;
 using LawsLaboratory.Core.Mathematics.Domain;

@@ -1,4 +1,20 @@
-﻿namespace LawsLaboratory.Application.Simulation.Build;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Build
+//
+// LawsBuilder.cs
+//
+// Builds the runtime Laws model from the declarative ModelConfiguration.
+//
+// For each registered parameter, the builder resolves its runtime parameter
+// identifier, compiles its variation and transmission formulas, builds its
+// initialization rule and constructs the corresponding Core Law.
+//
+// This class translates configuration data into runtime objects and does not
+// implement simulation behavior itself.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Application.Simulation.Build;
 
 using LawsLaboratory.Application.FormulaCompiler;
 using LawsLaboratory.Application.Simulation.Build.InitializationBuild;

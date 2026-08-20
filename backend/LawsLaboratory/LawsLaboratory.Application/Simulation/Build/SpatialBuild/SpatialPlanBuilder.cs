@@ -1,4 +1,21 @@
-﻿using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Build / SpatialBuild
+//
+// SpatialPlanBuilder.cs
+//
+// Builds the precomputed spatial access plans used during simulation
+// execution.
+//
+// Variable references and transmission destinations expressed as relative
+// two-dimensional positions are converted into linear grid offsets using the
+// configured grid width.
+//
+// The resulting plans allow runtime readers and writers to access spatial
+// dependencies directly without recomputing offsets during execution.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
 using LawsLaboratory.Core.Laws;
 using LawsLaboratory.Core.SpatialModel.Position;
 

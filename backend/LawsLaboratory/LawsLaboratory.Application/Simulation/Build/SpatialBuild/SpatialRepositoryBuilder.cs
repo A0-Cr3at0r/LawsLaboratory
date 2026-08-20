@@ -1,4 +1,20 @@
-﻿using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Build / SpatialBuild
+//
+// SpatialRepositoryBuilder.cs
+//
+// Builds the SpatialRepository containing the precomputed spatial execution
+// plans required by the simulation engine.
+//
+// A spatial plan is created for each runtime Law and indexed by its target
+// parameter identifier. The resulting repository allows spatial dependencies
+// to be resolved without rebuilding execution plans during simulation.
+//
+// This class prepares runtime spatial data and contains no simulation logic.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Simulation.EnvironnementRepository.Spatial;
 using LawsLaboratory.Core.Laws;
 
 namespace LawsLaboratory.Application.Simulation.Build.SpatialBuild;

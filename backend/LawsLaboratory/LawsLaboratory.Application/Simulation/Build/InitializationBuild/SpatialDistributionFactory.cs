@@ -1,4 +1,21 @@
-﻿using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Build / InitializationBuild
+//
+// SpatialDistributionFactory.cs
+//
+// Converts declarative spatial distribution configurations into their
+// corresponding Core spatial distribution objects.
+//
+// The factory builds independent-axis, radial and mixture-based spatial
+// distributions and delegates real-valued distribution construction to the
+// RealDistributionFactory.
+//
+// Runtime distribution validation remains the responsibility of the Core
+// distribution implementations.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Simulation.Configuration.ExecutionConfiguration;
 using LawsLaboratory.Core.Mathematics.Distributions;
 using LawsLaboratory.Core.Mathematics.Distributions.SpatialDistribution;
 using LawsLaboratory.Core.Mathematics.RandomGenerators;
