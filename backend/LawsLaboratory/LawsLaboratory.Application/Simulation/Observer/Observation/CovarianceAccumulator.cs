@@ -1,4 +1,17 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Observer / Observation
+//
+// CovarianceAccumulator.cs
+//
+// Incrementally accumulates the covariance matrix of multivariate observations.
+//
+// Each pushed vector represents one completed simulation iteration, with one
+// component per observed parameter. The accumulator uses an online update so
+// that individual historical vectors do not need to be retained.
+// -----------------------------------------------------------------------------
+
+using MathNet.Numerics.LinearAlgebra;
 
 namespace LawsLaboratory.Application.Simulation.Observer.Observation;
 

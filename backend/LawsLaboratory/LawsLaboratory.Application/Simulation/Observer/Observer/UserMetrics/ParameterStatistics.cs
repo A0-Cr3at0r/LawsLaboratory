@@ -1,5 +1,20 @@
-﻿namespace LawsLaboratory.Application.Simulation.Observer.Observer.UserMetrics;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Observer / Observer / UserMetrics
+//
+// ParameterStatistics.cs
+//
+// Accumulates statistics for one parameter during simulation iterations.
+//
+// Spatial statistics are collected from the valid cell values of the current
+// iteration. At iteration completion, the spatial mean is recorded as one
+// temporal observation and the spatial accumulator is reset.
+//
+// Dead values are counted as received cells but are excluded from numerical
+// spatial statistics.
+// -----------------------------------------------------------------------------
 
+namespace LawsLaboratory.Application.Simulation.Observer.Observer.UserMetrics;
 
 public sealed class ParameterStatistics
 {

@@ -1,4 +1,22 @@
-﻿using LawsLaboratory.Application.Simulation.Observer.Observation;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Observer / Observer / UserMetrics
+//
+// UserMetricObserver.cs
+//
+// Collects user-facing statistics from parameter observations produced during
+// simulation execution.
+//
+// Observations are accumulated per parameter and per simulation iteration.
+// Completed iterations provide temporal statistics, while the vector of
+// parameter means is accumulated to compute covariance and correlation between
+// parameters.
+//
+// The observer does not control simulation execution; it only consumes the
+// observations emitted by the simulation.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Simulation.Observer.Observation;
 using MathNet.Numerics.LinearAlgebra;
 
 namespace LawsLaboratory.Application.Simulation.Observer.Observer.UserMetrics;

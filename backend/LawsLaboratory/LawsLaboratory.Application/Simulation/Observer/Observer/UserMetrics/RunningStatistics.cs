@@ -1,4 +1,18 @@
-﻿namespace LawsLaboratory.Application.Simulation.Observer.Observer.UserMetrics;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Observer / Observer / UserMetrics
+//
+// RunningStatistics.cs
+//
+// Maintains numerical statistics incrementally without storing individual
+// observations.
+//
+// Mean and variance are updated using Welford's online algorithm. Minimum and
+// maximum are tracked alongside the accumulated count, allowing snapshots to be
+// produced without retaining the underlying data.
+// -----------------------------------------------------------------------------
+
+namespace LawsLaboratory.Application.Simulation.Observer.Observer.UserMetrics;
 
 public sealed class RunningStatistics
 {

@@ -1,78 +1,49 @@
-﻿using LawsLaboratory.Application.Simulation.Observer.Observation;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation / Observer
+//
+// ObservationDispatcher.cs
+//
+// Distributes user-metric observations to the registered observers.
+//
+// The dispatcher is a synchronous fan-out mechanism. It does not control
+// simulation execution, synchronize simulation phases, buffer observations, or
+// perform asynchronous processing.
+//
+// User-metric observations are emitted while simulation data is read and are
+// forwarded to every registered observer in subscription order.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Simulation.Observer.Observation;
 
 namespace LawsLaboratory.Application.Simulation.Observer;
 
-public enum ObserverChannel
-{
-    RequestBuffer,
-    ResultBuffer,
-    GatewayExit,
-    GatewayEntry,
-}
-
 internal sealed class ObservationDispatcher
 {
-    private readonly List<IDataObserver<FlowObservation>> _flowObservers = [];
-    private readonly List<IDataObserver<UserMetricObservation>> _metricObservers = [];
+    private readonly List<IDataObserver<UserMetricObservation>> _observers = [];
 
-    private FlowObservation _flowObservation;
-    private UserMetricObservation _userMetricObservation;
-
-    public ObservationDispatcher()
-    {
-        _flowObservation = new FlowObservation(
-            ObserverChannel.RequestBuffer,
-            FlowDirection.Enter);
-
-        _userMetricObservation = new UserMetricObservation(
-            parameterId: 1000,
-            value: null);
-    }
+    private UserMetricObservation _observation;
 
 
-    public void Subscribe(IDataObserver<FlowObservation> observer)
+    public void Subscribe(
+        IDataObserver<UserMetricObservation> observer)
     {
         ArgumentNullException.ThrowIfNull(observer);
 
-        _flowObservers.Add(observer);
+        _observers.Add(observer);
     }
 
-    public void Subscribe(IDataObserver<UserMetricObservation> observer)
-    {
-        ArgumentNullException.ThrowIfNull(observer);
-
-        _metricObservers.Add(observer);
-    }
-
-    public void EmitFlow(
-        ObserverChannel channel,
-        FlowDirection direction,
-        ushort? parameterId = null)
-    {
-        
-        _flowObservation.Channel = channel;
-        _flowObservation.Direction = direction;
-        _flowObservation.ParameterId = parameterId;
-
-        foreach (var observer in _flowObservers)
-        {
-            observer.Notify(_flowObservation);
-        }
-    }
 
     public void EmitMetric(
         ushort parameterId,
         double? value)
     {
-        _userMetricObservation.ParameterId = parameterId;
-        _userMetricObservation.Value = value;
+        _observation.ParameterId = parameterId;
+        _observation.Value = value;
 
-        foreach (var observer in _metricObservers)
+        foreach (var observer in _observers)
         {
-            observer.Notify(_userMetricObservation);
+            observer.Notify(_observation);
         }
     }
-
-    
 }
-
