@@ -17,7 +17,7 @@
 namespace LawsLaboratory.Application.Simulation.Configuration.RuntimeConfigurationPack;
     public sealed record TimeConfiguration
     {
-        public int? MaxCycles { get; init; }
+        public long? MaxCycles { get; init; }
 
         public int? DelayMsPerCycle { get; init; }
     }

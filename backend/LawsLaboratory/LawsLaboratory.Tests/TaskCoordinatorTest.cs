@@ -4,7 +4,7 @@ using LawsLaboratory.Application.Execution.ExecutionRequestStage;
 using LawsLaboratory.Application.Simulation.Build.Factories;
 using LawsLaboratory.Application.Simulation.Observer;
 using LawsLaboratory.Application.Simulation.SpatialManagement.Traversal;
-using LawsLaboratory.Application.Simulation.TaskCoordinator;
+using LawsLaboratory.Application.Simulation.TaskCoordinatorNameSpace;
 using LawsLaboratory.Core.Formula;
 using LawsLaboratory.Core.Formula.Element;
 using LawsLaboratory.Core.Laws;
@@ -49,7 +49,7 @@ public class TaskCoordinatorTest
             CreateParameterRegistry();
 
         Laws laws =
-            CreateLaws();
+            CreateLaws(cellCount);
 
         SpatialRepository spatialRepository =
             CreateSpatialRepository(
@@ -201,7 +201,7 @@ public class TaskCoordinatorTest
             CreateParameterRegistry();
 
         Laws laws =
-            CreateLaws();
+            CreateLaws(cellCount);
 
         SpatialRepository spatialRepository =
             CreateSpatialRepository(
@@ -332,7 +332,7 @@ public class TaskCoordinatorTest
 
 
 
-    private static Laws CreateLaws()
+    private static Laws CreateLaws(int targetCellCount)
     {
         CompiledExpression variationExpression =
             new CompiledExpression(
@@ -379,7 +379,7 @@ public class TaskCoordinatorTest
 
         InitializationRule initializationRule =
             new InitializationRule(
-                (IDistribution<double>)null!);
+                (IDistribution<double>)null!, targetCellCount);
 
 
         Law law =

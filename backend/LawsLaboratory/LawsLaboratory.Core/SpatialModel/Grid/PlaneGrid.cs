@@ -23,10 +23,11 @@ internal sealed class PlaneGrid : IGrid<PlanePosition>
     private readonly int _width;
     private readonly int _height;
 
-    public int Dimension => 2;
+    public int Width => _width;
+
+    public int Height => _height;
 
     public int Size => _cells.Length;
-
 
     public PlaneGrid(
         int width,
@@ -36,9 +37,7 @@ internal sealed class PlaneGrid : IGrid<PlanePosition>
         _width = width;
         _height = height;
 
-
         _cells = new Cell[width * height];
-
 
         for (int i = 0; i < _cells.Length; i++)
         {
@@ -46,19 +45,52 @@ internal sealed class PlaneGrid : IGrid<PlanePosition>
         }
     }
 
-    public IValue GetParameterValue(int cellId, ushort parameterId)
+    public IValue GetParameterValue(
+        int cellId,
+        ushort parameterId)
     {
-        return _cells[Resolve(cellId)].GetParameterValue(parameterId);
+        return _cells[Resolve(cellId)]
+            .GetParameterValue(parameterId);
     }
 
-    public void SetCellParameterValue(int cellId, ushort parameterId, IValue value)
+    public void SetCellParameterValue(
+        int cellId,
+        ushort parameterId,
+        IValue value)
     {
-        _cells[Resolve(cellId)].SetParameterValue(parameterId, value);
+        _cells[Resolve(cellId)]
+            .SetParameterValue(parameterId, value);
     }
 
-    public void SetCellParameterValue(int cellId, ushort parameterId, double value)
+    public void SetCellParameterValue(
+        int cellId,
+        ushort parameterId,
+        double value)
     {
-        _cells[Resolve(cellId)].SetParameterValue(parameterId, value);
+        _cells[Resolve(cellId)]
+            .SetParameterValue(parameterId, value);
+    }
+
+    public void CopyParameterValues(
+        ushort parameterId,
+        Span<double> destination)
+    {
+        if (destination.Length < Size)
+        {
+            throw new ArgumentException(
+                "The destination span is too small.",
+                nameof(destination));
+        }
+
+        for (int cellId = 0; cellId < Size; cellId++)
+        {
+            IValue value =
+                _cells[cellId]
+                    .GetParameterValue(parameterId);
+
+            destination[cellId] =
+                value.Get() ?? double.NaN;
+        }
     }
 
     private int Resolve(int cellId)
@@ -68,10 +100,8 @@ internal sealed class PlaneGrid : IGrid<PlanePosition>
             return cellId;
         }
 
-        return cellId < 0 ? cellId % Size + Size : cellId % Size;
-
+        return cellId < 0
+            ? cellId % Size + Size
+            : cellId % Size;
     }
-
 }
-
-

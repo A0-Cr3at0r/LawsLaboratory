@@ -54,7 +54,7 @@ using LawsLaboratory.Core.Laws;
 using LawsLaboratory.Application.Simulation.EnvironnementRepository.LawsRepository;
 using LawsLaboratory.Application.Simulation.EnvironnementRepository.Parameter;
 
-namespace LawsLaboratory.Application.Simulation.TaskCoordinator;
+namespace LawsLaboratory.Application.Simulation.TaskCoordinatorNameSpace;
 
 
 internal enum TaskCoordinatorState
