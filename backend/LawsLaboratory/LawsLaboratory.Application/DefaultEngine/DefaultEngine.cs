@@ -37,14 +37,14 @@ using Program = List<ExpressionInstruction>;
 
 internal sealed class DefaultEngine
 {
-    private readonly Program _expression;
+    internal Program Expression { private get; set; }
 
     private readonly Stack<double> _stack = new();
     public DefaultEngine(Program  expression)
     {
         ArgumentNullException.ThrowIfNull(expression);
 
-        _expression = expression;
+        Expression = expression;
     }
 
     public double Evaluate(double?[] values)
@@ -53,7 +53,7 @@ internal sealed class DefaultEngine
 
         _stack.Clear();
 
-        foreach (var entry in _expression)
+        foreach (var entry in Expression)
         {
             switch (entry.Kind)
             {

@@ -113,4 +113,14 @@ public sealed class ParameterRegistry : IParameterRegistry
 
         return _parameterNames[parameterId];
     }
+
+    public IEnumerable<ushort> GetParameterIds()
+    {
+        for (ushort parameterId = 0;
+             parameterId < _parameterNames.Length;
+             parameterId++)
+        {
+            yield return parameterId;
+        }
+    }
 }

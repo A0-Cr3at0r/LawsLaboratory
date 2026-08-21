@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Identity\" />
     <Folder Include="ProjectManagement\" />
+    <Folder Include="Simulation\Logs\" />
   </ItemGroup>
 
   <ItemGroup>

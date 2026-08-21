@@ -22,7 +22,7 @@ using MathNet.Numerics.LinearAlgebra;
 namespace LawsLaboratory.Application.Simulation.Observer.Observer.UserMetrics;
 
 
-public sealed class UserMetricObserver
+public sealed class UserMetricObserver : IDataObserver<UserMetricObservation>
 {
     private readonly Dictionary<ushort, ParameterStatistics> _parameters;
 

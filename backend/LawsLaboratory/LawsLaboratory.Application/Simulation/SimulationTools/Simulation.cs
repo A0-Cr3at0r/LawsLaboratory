@@ -1,22 +1,56 @@
-﻿using LawsLaboratory.Application.Simulation.Configuration.RuntimeConfigurationPack;
+﻿// -----------------------------------------------------------------------------
+// LawsLaboratory
+// Application / Simulation
+//
+// Simulation.cs
+//
+// Represents the runtime simulation and orchestrates the execution of
+// simulation cycles.
+//
+// The Simulation is responsible for:
+//   1. maintaining the lifecycle state of the simulation;
+//   2. executing variation and transmission phases for each cycle;
+//   3. applying the configured delay between simulation cycles;
+//   4. enforcing the configured maximum number of cycles when one is defined;
+//   5. coordinating pause and resume operations;
+//   6. exposing user metrics through snapshots;
+//   7. exposing the current grid state through a binary grid view.
+//
+// The Simulation delegates the execution of variation and transmission to the
+// TaskCoordinator. It does not directly perform spatial operations, law
+// evaluation, or engine communication.
+//
+// The simulation lifecycle is represented by SimulationState, including the
+// initialization, running, paused, and completed states.
+//
+// A simulation may run for a configured maximum number of cycles or continue
+// indefinitely when no maximum cycle count is specified.
+//
+// GridObserver and UserMetricObserver provide read-only observation of the
+// simulation state and metrics without participating in the execution pipeline.
+// -----------------------------------------------------------------------------
+
+using LawsLaboratory.Application.Simulation.Configuration.RuntimeConfigurationPack;
 using LawsLaboratory.Application.Simulation.Observer.Observer.UserMetrics;
 using LawsLaboratory.Application.Simulation.TaskCoordinatorNameSpace;
 using LawsLaboratory.Core.SpatialModel.Position;
 using LawsLaboratory.Application.Simulation.GridObservation;
+using LawsLaboratory.Application.Execution.Gateway;
 
 
-namespace LawsLaboratory.Application.Simulation;
+namespace LawsLaboratory.Application.Simulation.SimulationTools;
 
 enum SimulationState
 {
     Initiating,
     Initiated,
+    InitializationFailed,
     Running,
     Paused,
     Completed,
 }
 
-internal sealed class Simulation
+internal sealed class SimulationRuntime
 {
     private long? MaxCycle;
 
@@ -27,19 +61,23 @@ internal sealed class Simulation
 
     private GridObserver<PlanePosition> GridObserver { get; }
 
+    private EngineGateway EngineGateway { get; }
+
     public SimulationState SimulationState { get; private set; }
 
-    public Simulation(  
+    public SimulationRuntime(  
                         GridObserver<PlanePosition> gridObserver,
                         TaskCoordinator taskCoordinator,
                         UserMetricObserver userMetricObserver,
-                        TimeConfiguration timeConfiguration)
+                        TimeConfiguration timeConfiguration,
+                        EngineGateway engineGateway)
     {
         GridObserver = gridObserver;
         TaskCoordinator = taskCoordinator;
         UserMetricObserver = userMetricObserver;
         MaxCycle = timeConfiguration.MaxCycles;
         DelayMsPerCycle = timeConfiguration.DelayMsPerCycle;
+        EngineGateway = engineGateway;
 
         SimulationState = SimulationState.Initiated;
     }

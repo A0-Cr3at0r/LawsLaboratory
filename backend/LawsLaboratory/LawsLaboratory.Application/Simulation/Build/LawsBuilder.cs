@@ -13,7 +13,6 @@
 // This class translates configuration data into runtime objects and does not
 // implement simulation behavior itself.
 // -----------------------------------------------------------------------------
-
 namespace LawsLaboratory.Application.Simulation.Build;
 
 using LawsLaboratory.Application.FormulaCompiler;

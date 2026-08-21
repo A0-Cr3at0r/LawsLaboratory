@@ -29,4 +29,6 @@ public interface IParameterRegistry
 
     string GetParameterName(
         ushort parameterId);
+
+    public IEnumerable<ushort> GetParameterIds();
 }

@@ -23,9 +23,13 @@
 // used and only positions belonging to the domain are initialized.
 //
 // A parameter is considered initialized only after its complete initialization
-// succeeds. The builder performs its work synchronously and supports
-// cooperative cancellation through the provided CancellationToken. Timeout
-// policy and execution strategy belong to the caller.
+// succeeds. The builder tracks the number of completely initialized
+// parameters through InitializedParameterCount. This value is safely exposed
+// for concurrent observation while grid construction is in progress.
+//
+// Grid construction is synchronous and supports cooperative cancellation
+// through the provided CancellationToken. Timeout policy and execution
+// strategy belong to the caller.
 //
 // A GridBuilder instance is intended for a single grid construction.
 // -----------------------------------------------------------------------------
@@ -47,11 +51,18 @@ internal sealed class GridBuilder
     private readonly Vector2RoundDiscretizer _discretizer =
         new Vector2RoundDiscretizer();
 
-    public int InitializedParameterCount { get; private set; }
+    private int _initializedParameterCount;
+    private ushort _currentParameterId;
+
+    public int InitializedParameterCount =>
+        Volatile.Read(ref _initializedParameterCount);
+
+    public ushort CurrentParameterId =>
+        Volatile.Read(ref _currentParameterId);
 
     public PlaneGrid Build(
         GridConfiguration gridConfiguration,
-        Law[] laws,
+        IReadOnlyList<Law> laws,
         CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(gridConfiguration);
@@ -62,7 +73,7 @@ internal sealed class GridBuilder
         PlaneGrid grid = new PlaneGrid(
             gridConfiguration.Width,
             gridConfiguration.Height,
-            laws.Length);
+            laws.Count);
 
         ValidateLaws(laws, grid.Size);
 
@@ -74,6 +85,10 @@ internal sealed class GridBuilder
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            Volatile.Write(
+                ref _currentParameterId,
+                law.TargetParameterId);
+
             InitializeParameter(
                 law,
                 grid,
@@ -82,7 +97,7 @@ internal sealed class GridBuilder
                 gridConfiguration.Height,
                 cancellationToken);
 
-            InitializedParameterCount++;
+            Interlocked.Increment(ref _initializedParameterCount);
         }
 
         return grid;
@@ -429,10 +444,10 @@ internal sealed class GridBuilder
 
 
     private static void ValidateLaws(
-        Law[] laws,
+        IReadOnlyList<Law> laws,
         int gridSize)
     {
-        if (laws.Length == 0)
+        if (laws.Count == 0)
         {
             throw new ArgumentException(
                 "At least one law must be provided.",
@@ -440,13 +455,13 @@ internal sealed class GridBuilder
         }
 
         bool[] initializedParameters =
-            new bool[laws.Length];
+            new bool[laws.Count];
 
         foreach (Law law in laws)
         {
             ushort parameterId = law.TargetParameterId;
 
-            if (parameterId >= laws.Length)
+            if (parameterId >= laws.Count)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(laws),

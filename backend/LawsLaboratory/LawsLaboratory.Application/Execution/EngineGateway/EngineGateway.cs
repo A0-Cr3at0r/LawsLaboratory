@@ -116,6 +116,8 @@ internal class EngineGateway
     {
         if (UseInternalMotor)
         {
+            _defaultEngine.Expression = EntryBuffer.Expression;
+
             ExecuteInternalCalculation();
             return;
         }

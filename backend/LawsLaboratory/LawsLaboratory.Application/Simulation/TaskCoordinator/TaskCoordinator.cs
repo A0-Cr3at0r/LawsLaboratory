@@ -100,7 +100,7 @@ internal sealed class TaskCoordinator
 
     private readonly GatewayExitBuffer _gatewayExit;
 
-    private readonly ParameterRegistry _parameterRegistry;
+    private readonly IParameterRegistry _parameterRegistry;
 
     private readonly Laws _laws;
 
@@ -133,7 +133,7 @@ internal sealed class TaskCoordinator
         ResultControllerFactory resultControllerFactory,
         GatewayEntryBuffer gatewayEntryBuffer,
         GatewayExitBuffer gatewayExit,
-        ParameterRegistry parameterRegistry,
+        IParameterRegistry parameterRegistry,
         Laws laws,
         int cellCount)
     {

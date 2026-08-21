@@ -32,4 +32,21 @@ internal static class GridBinaryFormat
      * Total: 18 bytes
      */
     public const int HeaderSize = 18;
+
+    public static int GetBufferSize(
+        int cellCount,
+        int parameterCount)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(
+            cellCount);
+
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(
+            parameterCount);
+
+        return checked(
+            HeaderSize
+            + cellCount
+            * parameterCount
+            * ElementSize);
+    }
 }
