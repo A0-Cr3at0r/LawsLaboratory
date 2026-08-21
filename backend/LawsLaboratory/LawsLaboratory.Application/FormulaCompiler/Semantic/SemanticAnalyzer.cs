@@ -67,7 +67,7 @@ internal sealed class SemanticAnalyzer
                 {   "log",
                     new FunctionDefinition(
                         OperatorType.Log,
-                        1)
+                        2)
                 },
 
                 {   "floor",
