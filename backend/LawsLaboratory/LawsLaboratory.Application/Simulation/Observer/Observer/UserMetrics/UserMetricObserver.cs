@@ -6,21 +6,12 @@
 //
 // Collects user-facing statistics from parameter observations produced during
 // simulation execution.
-//
-// Observations are accumulated per parameter and per simulation iteration.
-// Completed iterations provide temporal statistics, while the vector of
-// parameter means is accumulated to compute covariance and correlation between
-// parameters.
-//
-// The observer does not control simulation execution; it only consumes the
-// observations emitted by the simulation.
 // -----------------------------------------------------------------------------
 
 using LawsLaboratory.Application.Simulation.Observer.Observation;
 using MathNet.Numerics.LinearAlgebra;
 
 namespace LawsLaboratory.Application.Simulation.Observer.Observer.UserMetrics;
-
 
 public sealed class UserMetricObserver : IDataObserver<UserMetricObservation>
 {
@@ -37,19 +28,17 @@ public sealed class UserMetricObserver : IDataObserver<UserMetricObservation>
         IEnumerable<ushort> parameterIds,
         int cellCount)
     {
-        _parameterOrder = parameterIds.ToArray();
-
+        _parameterOrder =
+            parameterIds.ToArray();
 
         _parameters =
             _parameterOrder.ToDictionary(
                 id => id,
                 _ => new ParameterStatistics(cellCount));
 
-
         _covariance =
             new CovarianceAccumulator(
                 _parameterOrder.Length);
-
 
         _completedParameters = 0;
     }
@@ -60,19 +49,16 @@ public sealed class UserMetricObserver : IDataObserver<UserMetricObservation>
     {
         ParameterStatistics parameter =
             _parameters[observation.ParameterId];
-    
-        parameter.ObserveCell(observation.Value);
 
         bool completed =
-            parameter.CompleteIterationIfReady();
+            parameter.ObserveCell(observation.Value);
 
+        if (!completed)
+            return;
 
-        if (completed)
-        {
-            _completedParameters++;
+        _completedParameters++;
 
-            TryUpdateCovariance();
-        }
+        TryUpdateCovariance();
     }
 
 
@@ -81,17 +67,15 @@ public sealed class UserMetricObserver : IDataObserver<UserMetricObservation>
         if (_completedParameters != _parameters.Count)
             return;
 
-
         Vector<double> vector =
             Vector<double>.Build.Dense(
                 _parameterOrder.Length);
-
 
         for (int i = 0; i < _parameterOrder.Length; i++)
         {
             vector[i] =
                 _parameters[_parameterOrder[i]]
-                .CurrentTemporalMean;
+                    .CurrentTemporalMean;
         }
 
         _covariance.Push(vector);
@@ -104,11 +88,10 @@ public sealed class UserMetricObserver : IDataObserver<UserMetricObservation>
     {
         var parameters =
             _parameters
-            .Select(pair =>
-                pair.Value.CreateSnapshot(pair.Key))
-            .ToDictionary(
-                x => x.ParameterId);
-
+                .Select(pair =>
+                    pair.Value.CreateSnapshot(pair.Key))
+                .ToDictionary(
+                    x => x.ParameterId);
 
         return new UserMetricSnapshot(
             parameters,

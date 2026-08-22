@@ -114,7 +114,7 @@ internal sealed class SimulationRuntime
 
         await TaskCoordinator.StartTransmission();
 
-        Task.Delay(delayMs).Wait();
+         await Task.Delay(delayMs);
     }
 
     public void Pause() 
