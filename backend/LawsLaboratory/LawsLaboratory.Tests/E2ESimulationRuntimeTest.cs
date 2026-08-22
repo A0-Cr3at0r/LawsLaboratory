@@ -466,13 +466,13 @@ public sealed class InitializerSimulationTests
             data,
             valuesOffset,
             0,
-            100.0);
+            101.0);
 
         AssertParameterValues(
             data,
             valuesOffset,
             1,
-            5051.0);
+            5152.0);
 
 
         AssertParameterValues(
@@ -532,7 +532,7 @@ public sealed class InitializerSimulationTests
 
 
     private static void AssertFinalMetrics(
-        SimulationRuntime runtime)
+      SimulationRuntime runtime)
     {
         UserMetricSnapshot snapshot =
             runtime.GetUserMetric();
@@ -544,28 +544,41 @@ public sealed class InitializerSimulationTests
         AssertParameterMetric(
             snapshot,
             parameterId: 0,
-            expectedMean: 100.0);
+            expectedCount: 201,
+            expectedMean: 50.24875621890547,
+            expectedMinimum: 0.0,
+            expectedMaximum: 100.0);
 
         AssertParameterMetric(
             snapshot,
             parameterId: 1,
-            expectedMean: 5051.0);
+            expectedCount: 201,
+            expectedMean: 1709.4577114427864,
+            expectedMinimum: 1.0,
+            expectedMaximum: 5051.0);
 
         AssertParameterMetric(
             snapshot,
             parameterId: 2,
-            expectedMean: Math.E);
+            expectedCount: 201,
+            expectedMean: 2.704758038267705,
+            expectedMinimum: 0,
+            expectedMaximum: Math.E);
 
         AssertParameterMetric(
             snapshot,
             parameterId: 3,
-            expectedMean: Math.E);
+            expectedCount: 201,
+            expectedMean: 2.6912342480763685,
+            expectedMinimum: 0,
+            expectedMaximum: 2.71828182845905);
 
         AssertParameterHasNoValidTemporalObservations(
             snapshot,
             parameterId: 4);
     }
 
+    
     private static void AssertParameterHasNoValidTemporalObservations(
     UserMetricSnapshot snapshot,
     ushort parameterId)
@@ -584,9 +597,12 @@ public sealed class InitializerSimulationTests
 
 
     private static void AssertParameterMetric(
-      UserMetricSnapshot snapshot,
-      ushort parameterId,
-      double expectedMean)
+        UserMetricSnapshot snapshot,
+        ushort parameterId,
+        int expectedCount,
+        double expectedMean,
+        double expectedMinimum,
+        double expectedMaximum)
     {
         Assert.True(
             snapshot.Parameters.ContainsKey(parameterId),
@@ -596,7 +612,7 @@ public sealed class InitializerSimulationTests
             snapshot.Parameters[parameterId];
 
         Assert.Equal(
-            CycleCount,
+            expectedCount,
             parameter.Temporal.Count);
 
         Assert.Equal(
@@ -605,12 +621,12 @@ public sealed class InitializerSimulationTests
             12);
 
         Assert.Equal(
-            expectedMean,
+            expectedMinimum,
             parameter.Temporal.Minimum,
             12);
 
         Assert.Equal(
-            expectedMean,
+            expectedMaximum,
             parameter.Temporal.Maximum,
             12);
     }

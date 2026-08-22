@@ -94,6 +94,8 @@ internal sealed class SimulationRuntime
                 await executeSimulation(DelayMsPerCycle ?? 0);
             }
 
+            await TaskCoordinator.StartVariation();
+
             SimulationState = SimulationState.Completed;
 
             return;
@@ -114,7 +116,7 @@ internal sealed class SimulationRuntime
 
         await TaskCoordinator.StartTransmission();
 
-         await Task.Delay(delayMs);
+        await Task.Delay(delayMs);
     }
 
     public void Pause() 
